@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="34px" height="42px" viewBox="0 0 34 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12072) - http://www.bohemiancoding.com/sketch -->
+    <title>value bg</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Empresa---Ficha-del-proveedor-(vista-previa)" sketch:type="MSArtboardGroup" transform="translate(-163.000000, -1220.000000)" fill="#4389CA">
+            <g id="proveedor2" sketch:type="MSLayerGroup" transform="translate(60.000000, 921.000000)">
+                <g id="habilidades" transform="translate(0.000000, 299.000000)" sketch:type="MSShapeGroup">
+                    <g id="slider-notched-pressed">
+                        <g id="value" transform="translate(100.076712, 0.500000)">
+                            <path d="M19.7041096,41.0666667 C10.4526027,41.0666667 3,33.495 3,24.1266667 C3,19.3783333 5.56986301,14.3733333 12.38,7.57166667 L19.7041096,0.128333333 L27.1567123,7.57166667 C33.8383562,14.5016667 36.4082192,19.5066667 36.4082192,24.1266667 C36.4082192,33.495 28.9556164,41.0666667 19.7041096,41.0666667 L19.7041096,41.0666667 L19.7041096,41.0666667 Z" id="value-bg" transform="translate(19.704110, 20.597500) rotate(-180.000000) translate(-19.704110, -20.597500) "></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

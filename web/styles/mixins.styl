@@ -1,0 +1,107 @@
+
+user-select()
+    -webkit-backface-visibility: hidden
+    -webkit-touch-callout: arguments
+    -webkit-user-select: arguments
+    -khtml-user-select: arguments
+    -moz-user-select: arguments
+    -ms-user-select: arguments
+    user-select: arguments
+
+animation()
+    -webkit-animation: arguments
+    -moz-animation: arguments
+    -ms-animation: arguments
+    -o-animation: arguments
+    animation: arguments
+
+box-sizing()
+    -webkit-box-sizing: border-box
+    -moz-box-sizing: border-box
+    box-sizing: border-box
+
+border-radius()
+    -webkit-border-radius: arguments
+    -moz-border-radius: arguments
+    border-radius: arguments
+
+box-shadow()
+    -webkit-box-shadow: arguments
+    -moz-box-shadow: arguments
+    box-shadow: arguments
+
+transition()
+    -webkit-transition: arguments
+    -moz-transition: arguments
+    -ms-transition: arguments
+    -o-transition: arguments
+    transition: arguments
+
+transition-delay()
+    -webkit-transition-delay: arguments
+    -moz-transition-delay: arguments
+    -o-transition-delay: arguments
+    transition-delay: arguments
+
+background-size()
+    -webkit-background-size: arguments
+    background-size: arguments
+
+background-linear-gradient(color1, color2)
+    background: color1
+    background: -moz-linear-gradient(left, color1 0%, color2 100%)
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, color1), color-stop(100%, color2))
+    background: -webkit-linear-gradient(left, color1 0%, color2 100%)
+    background: -o-linear-gradient(left, color1 0%, color2 100%)
+    background: -ms-linear-gradient(left, color1 0%, color2 100%)
+    background: linear-gradient(to right, color1 0%, color2 100%)
+    // filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='color1', endColorstr='color2',GradientType=0)
+
+background-linear-middle-gradient(color1, color2, color3, color4)
+    background: color1
+    background: -moz-linear-gradient(top,  color1 0%,  color2 50%,  color3 51%,  color4 100%)
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,color1), color-stop(50%, color2), color-stop(51%, color3), color-stop(100%, color4))
+    background: -webkit-linear-gradient(top,  color1 0%, color2 50%, color3 51%, color4 100%)
+    background: -o-linear-gradient(top,  color1 0%, color2 50%, color3 51%, color4 100%)
+    background: -ms-linear-gradient(top,  color1 0%, color2 50%, color3 51%, color4 100%)
+    background: linear-gradient(to bottom,  color1 0%, color2 50%, color3 51%, color4 100%)
+    //filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='color1', endColorstr='color4',GradientType=0 )
+
+perspective()
+    -webkit-perspective: arguments
+    -moz-perspective: arguments
+    -o-perspective: arguments
+    perspective: arguments
+
+transform()
+    -webkit-transform: arguments
+    -moz-transform: arguments
+    -o-transform: arguments
+    transform: arguments
+
+transform-origin()
+    -webkit-transform-origin: arguments
+    -moz-transform-origin: arguments
+    -o-transform-origin: arguments
+    transform-origin: arguments
+
+transform-style()
+    -webkit-transform-style: arguments
+    -moz-transform-style: arguments
+    -o-transform-style: arguments
+    transform-style: arguments
+
+backface-visibility()
+    -webkit-backface-visibility: arguments
+    -moz-backface-visibility: arguments
+    -o-backface-visibility: arguments
+    // backface-visibility: arguments
+
+clearfix()
+    &:before
+    &:after
+        content: ""
+        display: table
+    &:after
+        clear: both
+    zoom: 1

@@ -1,0 +1,2750 @@
+@import '../components/jquery-ui/themes/smoothness/jquery-ui.css'
+@import '../components/semantic-ui/dist/semantic.css'
+@import '../components/quill/dist/quill.snow.css'
+@import '../components/pickadate/lib/themes/default.css'
+@import '../components/pickadate/lib/themes/default.date.css'
+
+@import mixins
+
+body
+    font-family: 'Roboto', sans-serif
+    -webkit-font-smoothing: subpixel-antialiased
+
+a
+    color: #4085c5
+    transition: color .5s ease
+    &:hover
+        color: #4c9eeb
+
+.hide
+    display: none !important
+
+.notopmargin
+    margin-top: 0 !important
+
+// ==========
+// = Header =
+// ==========
+
+.ui.fixed.menu + *
+    margin-top: 47px !important
+
+.ui.primary.header
+    font-family: 'Helvetica Neue', Helvetica, sans-serif
+    margin: 0
+    position: relative;
+    width: 100%
+    z-index: 11
+    padding: 1em 0
+
+.ui.providers.app .ui.primary.header
+    background-color: #00bcd4
+.ui.projects.app .ui.primary.header
+    background-color: #4389ca
+.ui.users.app .ui.primary.header
+    background-color: #4389ca
+.ui.projects.app .ui.primary.header.assigned
+    background-color: #a4d771
+.ui.timeline.app .ui.primary.header
+.ui.profile.app .ui.primary.header
+    background-color: #00b5ad
+
+.ui.primary.header .title
+    position: absolute
+    bottom: 28px
+
+.ui.primary.header .ui.form
+    position: absolute
+    bottom: 28px
+    width: 100%
+
+.ui.primary.header h2
+    font-size: 24px
+    color: #fff
+    letter-spacing: 1px
+    line-height: 24px
+    font-weight: normal
+    margin: 0
+
+.ui.projects.app .ui.primary.header h2 small
+    display: block
+    font-size: 12px
+    color: #2c5a84
+
+.ui.primary.header .ui.stackable.grid h2
+    margin: .8em 0
+
+.ui.primary.header p
+    font-size: 13px
+    color: #004C56
+    letter-spacing: 0.54px
+    font-weight: normal
+    line-height: 24px
+    margin: 0
+
+.ui.primary.header .moment.column + .column .ui.button
+    margin: 1em 0
+
+.ui.primary.header > .ui.container
+    position: relative
+
+.ui.primary.header .ui.circular.button
+    position: absolute;
+    right: 0
+    z-index: 1
+    &.large
+        bottom: -45px
+    &.small
+        bottom: -38px
+
+.ui.primary.header .ui.large.circular.button > .icon
+    margin: 5px 0
+
+.ui.provider.header
+    background-color: #FAFAFA
+    box-shadow: 0 2px 2px rgba(0, 0, 0 .24), 0 0 2px rgba(0, 0, 0 .12)
+    padding: 2em 0 0 0
+    margin: 0
+    width: 100%
+    position: relative
+    z-index: 10
+
+.ui.header .provider .picture
+    border-radius: 50%
+    height: 99px
+    overflow: hidden
+    width: 99px
+    float: left
+    margin-right: 40px
+.ui.app.scroll .ui.header .provider .picture img
+    width: 100%
+
+.ui.header .provider .name
+    font-family: 'Helvetica Neue', Helvetica, sans-serif
+    font-size: 19px
+    color: #707070
+    letter-spacing: 0.68px
+    line-height: 29px
+    padding: 20px 0 0 0
+
+.ui.header .provider .position
+    font-family: 'Montserrat'
+    font-size: 12px
+    color: #AAAAAA
+    letter-spacing: 0.43px
+    line-height: 29px
+    text-transform: uppercase
+    display: inline-block
+    margin-right: 40px
+.ui.header .provider .rating
+    display: inline-block
+
+.ui.provider.header .ui.circular.button
+    margin: 20px 0 0 10px
+
+.ui.provider.header > .ui.divider
+.ui.project.header > .ui.divider
+    margin: 0
+    position: absolute
+    bottom: 60px
+    left: 0
+    right: 0
+
+.ui.provider.header .provider
+    min-height: 100px
+    margin-bottom: 2em
+
+.ui.project.header
+    background-color: #FAFAFA
+    box-shadow: 0 2px 2px rgba(0, 0, 0 .24), 0 0 2px rgba(0, 0, 0 .12)
+    padding: 2em 0 0 0
+    font-weight: normal
+    margin: 0
+    width: 100%
+    position: relative
+
+.ui.project.header p
+    font-family: 'Helvetica Neue', Helvetica, sans-serif
+    font-size: 14px
+    color: #909090
+    line-height: 29px
+
+.ui.skills .skill
+.ui.multiple.dropdown > .label
+    background-color: transparent
+    border: 1px solid #294F66
+    border-radius: 20px
+    box-shadow: none
+    display: inline-block
+    font-weight: normal
+    font-size: 14px
+    color: #294F66
+    line-height: 14px
+    padding: 7px 20px
+    height: 30px
+
+.status .moment
+    font-family: 'Montserrat'
+    text-transform: uppercase
+.status .moment .label
+    border-bottom: 1px solid #2C5A84
+    display: inline-block
+    font-size: 10px
+    color: #2C5A84
+    line-height: 15px
+    padding-bottom: 2px
+    margin-bottom: 10px
+.ui.primary.header.assigned .status .moment .label
+    color: #417505
+.status .moment .date
+    font-size: 14px
+    color: #fff
+    letter-spacing: 1px
+    line-height: 18px
+
+.ui.header .box
+    position: relative
+    height: 180px
+    width: 100%
+
+.ui.project.header .ui.basic.button
+    position: relative
+    top: -10px
+
+.ui.header .ui.skills
+    padding-bottom: 2em
+
+@media only screen and (max-width: 480px)
+    .ui.projects.app .ui.primary.header .ui.three.column.grid > .column
+        width: 100%
+    .ui.projects.app .ui.primary.header .ui.three.column.grid > .moment.column
+        width: 50%
+
+@media only screen and (max-width: 767px)
+    .ui.header .provider .name
+        padding-top: 10px
+    .ui.header .provider .rating
+        display: block
+    .ui.header .provider .picture
+        margin: 20px 20px 20px 0
+        height: 50px
+        width: 50px
+    .ui.header .provider .ui.huge.avatar
+        font-size: 26px
+        line-height: 46px
+        height: 48px
+        width: 48px
+    .ui.header .provider .position
+        margin: 0
+    form .ui.header .box
+        height: 220px
+
+@media only screen and (max-width: 991px)
+    .ui.projects.app .ui.primary.header h2
+        text-align: center
+    .ui.projects.app .project.status
+        position: static
+        left: 0
+        width: 100%
+    .ui.projects.app.scroll .ui.primary.header:not(.static) .title
+        text-align: left
+        margin: 0
+        position: absolute
+    .ui.projects.app.scroll .ui.primary.header:not(.static) .box .project.status
+        position: absolute
+        left: auto
+        width: auto
+        bottom: 25px
+    .ui.projects.app.scroll .project.status .moment
+        display: none
+
+// =====================
+// = Header con scroll =
+// =====================
+
+.ui.app.scroll .ui.primary.header:not(.static)
+    height: 70px
+
+.ui.app.scroll .ui.primary.header:not(.static) .box
+    height: 70px
+.ui.app.scroll .ui.primary.header:not(.static) .box .project.status
+    bottom: 10px
+
+.ui.app.scroll .ui.primary.header:not(.static) .title
+    bottom: 10px
+
+.ui.app.scroll .ui.primary.header:not(.static) .ui.circular.button.small
+    top: 15px
+
+.ui.app.scroll .ui.primary.header:not(.static) .ui.circular.button.large
+    top: 40px
+
+.ui.app.scroll .ui.provider.header
+    top: 117px
+    padding: 0 0 80px 0
+    height: 160px
+
+.ui.app.scroll .ui.header .provider .picture
+    margin-top: 20px
+    height: 50px
+    width: 50px
+
+.ui.app.scroll .ui.provider.header .ui.circular.button
+    position: relative
+    top: -75px
+    right: 50px
+
+.ui.app.scroll .ui.provider.header .ui.secondary.pointing.menu
+    bottom: -22px
+
+.ui.app.scroll .ui.project.header
+    top: 110px
+    height: 60px
+    padding: 0
+    overflow: hidden
+
+.ui.app.scroll .ui.project.header p
+    display: none
+
+.ui.app.scroll .ui.project.header .ui.skills
+    position: relative
+    top: 15px
+
+// =============
+// = Container =
+// =============
+
+.ui.header + .ui.content.container
+    margin-top: 3em
+
+.ui.provider.header + .ui.content.container
+.ui.project.header + .ui.content.container
+.ui.project.header + form
+    transition: margin-top .5s ease
+
+.ui.primary.header:not(.static) + form
+    margin-top: 3em
+
+.ui.app.scroll .ui.header:not(.static) + .ui.content.container
+.ui.app.scroll .ui.header:not(.static) + form
+    margin-top: 160px
+
+.ui.app.scroll .ui.project.header:not(.static) + .ui.content.container
+.ui.app.scroll .ui.project.header:not(.static) + form
+    margin-top: 220px
+
+.ui.app.scroll .ui.provider.header + .ui.content.container
+    margin-top: 320px
+
+.ui.top.fixed.menu + .ui.form
+    margin-top: 90px
+
+.ui.empty.content.container
+    margin-bottom: 50px
+
+// .ui.provider.header > .ui.container
+// .ui.project.header > .ui.container
+//     position: relative
+//     transition: height .5s ease
+// .ui.provider.header > .ui.container
+//     height: 220px
+// .ui.project.header > .ui.container
+//     height: 240px
+// .ui.app.scroll .ui.provider.header > .ui.container
+//     height: 138px
+// .ui.app.scroll .ui.project.header > .ui.container
+//     height: 60px
+
+// =========
+// = Empty =
+// =========
+
+.ui.empty.content.container > .icon
+    font-size: 64px
+    display: block
+    margin: 0 auto
+
+.ui.empty.content.container h3
+    text-align: center
+    margin: 20px 0
+    font-size: 24px
+
+.ui.empty.content.container p
+    text-align: center
+    font-size: 16px
+    margin: 20px auto
+    width: 60%
+
+// ========
+// = Menu =
+// ========
+
+.app > .menu
+    height: 47px
+
+.ui.provider.header .ui.secondary.pointing.menu
+.ui.project.header .ui.secondary.pointing.menu
+    background-color: #fafafa
+    border-color: #fafafa
+    margin: 0
+
+.ui.secondary.pointing.menu > .item
+    font-family: 'Montserrat'
+    font-size: 11px
+    color: #aaa
+    letter-spacing: 0.78px
+    line-height: 14px
+    text-transform: uppercase
+    padding: 22px 0
+    border-color: #fafafa
+    &:hover
+        color: #2C5A84
+    &.active
+        color: #2C5A84
+        border-color: #2C5A84
+    &.labeled
+        padding: 20px 0
+
+.ui.secondary.pointing.menu > .dropdown.item.active
+.ui.secondary.pointing.menu > .dropdown.item:hover
+    color: #aaa
+
+.ui.mini.label
+    padding: 4px 0 !important
+.ui.red.label
+    background-color: #ed1c24
+
+.ui.menu > .icon.item > .icon
+    font-size: 21px
+    cursor: pointer
+
+.ui.menu .item[data-trigger="sidebar"]
+    display: none
+
+.ui.menu > .header.item img
+    height: 21px
+    width: auto
+
+@media only screen and (max-width: 767px)
+    .ui.menu .item[data-trigger="sidebar"]
+        display: block
+    .ui.menu .item[data-trigger="sidebar"] ~ .item
+        display: none
+    .ui.compactable.menu > .item
+        display: none
+        &.active
+            display: inherit
+            width: 70%
+        &.dropdown
+            display: inherit
+            width: 30%
+
+// ===================
+// = Providers table =
+// ===================
+
+.ui.providers.table
+.ui.contacts.table
+.ui.projects.table
+.ui.users.table
+.ui.budgets.table
+.ui.conversations.table
+    border: none
+    margin-bottom: 50px
+
+.ui.conversations.table
+    margin-bottom: 60px
+
+.ui.contacts.table
+    margin-top: 50px
+
+.ui.providers.table tbody tr
+.ui.contacts.table tbody tr
+.ui.projects.table tbody tr
+.ui.users.table tbody tr
+.ui.budgets.table tbody tr
+.ui.conversations.table tbody tr
+    background-color: #f9f9f9
+    &[href]
+        cursor: pointer
+    &:nth-child(2n)
+    &[data-remove]
+    &.empty
+        background-color: transparent
+
+.ui.table tbody tr[href]:hover
+.ui.table tbody tr[href]:hover
+    background-color: #eefcf9
+
+.ui.providers.table th
+.ui.projects.table th
+.ui.users.table th
+.ui.budgets.table th
+.ui.conversations.table th
+    background-color: transparent
+    border: none
+    text-align: center
+    font-family: 'Montserrat'
+    font-size: 10px
+    color: #707070
+    letter-spacing: 0.71px
+    line-height: 13px
+    text-transform: uppercase
+    padding-bottom: 18px
+    &:first-child
+        text-align: left
+
+.ui.providers.table th img
+.ui.projects.table th img
+.ui.budgets.table th img
+    vertical-align: middle
+
+.ui.providers.table tr td
+.ui.contacts.table tr td
+.ui.projects.table tr td
+.ui.users.table tr td
+.ui.budgets.table tr td
+.ui.conversations.table tr td
+    border: none
+    border-right: 1px solid #f1f1f1
+    &:first-child
+    &:last-child
+        border-right: none
+.ui.projects.table tr td:first-child
+    border-right: 1px solid #f1f1f1
+
+.ui.choices.table tr td
+    border-right: none
+    &:last-child
+        border-left: 1px solid #f1f1f1
+
+.ui.projects.table td
+.ui.users.table td
+    padding-top: 30px
+    padding-bottom: 30px
+
+.ui.budgets.table tr.assigned
+.ui.budgets.table tr.assigned td
+.ui.budgets.table tr.checked td
+    background-color: #eff9ff !important
+.ui.budgets.table tr.assigned td.choice .icon
+    background-color: #00b9e6
+    border-radius: 4px
+    color: #fff
+    height: 21px
+    width: 21px
+    padding: 2px 0 0 0
+
+.ui.providers.table .picture
+.ui.budgets.table .picture
+    width: 80px
+    max-width: 80px
+
+
+.ui.providers.table .picture img
+.ui.contacts.table .picture img
+.ui.skill .author .picture img
+.ui.budgets .picture img
+.ui.conversations .picture img
+    border-radius: 50%
+    height: 60px
+    width: 60px
+
+.ui.users.table .picture img
+    border-radius: 50%
+    height: 40px
+    width: 40px
+
+.ui.providers.table .name strong
+.ui.contacts.table .person strong
+.ui.budgets.table .name strong
+.ui.conversations.table .name strong
+    display: block
+    font-size: 14px
+    color: #707070
+    letter-spacing: 0.5px
+    line-height: 21px
+    font-weight: 500
+
+.ui.providers.table .name a
+.ui.budgets.table .name a
+.ui.conversations.table .name a
+    display: block
+    font-size: 14px
+    color: #2C5A84
+    letter-spacing: 1px
+    line-height: 29px
+    font-weight: 300
+.ui.providers.table .name a
+    display: inline-block
+
+.ui.contacts.table .person em
+    display: block
+    font-size: 14px
+    color: #aaa
+    letter-spacing: 1px
+    line-height: 29px
+    font-weight: 300
+    font-style: normal
+
+.ui.contacts.table .email
+    text-align: center
+
+.ui.contacts.table .email a
+    font-family: 'Montserrat'
+    font-size: 11px
+    color: #2C5A84
+    letter-spacing: 0.4px
+    line-height: 14px
+    text-decoration: underline
+
+.ui.contacts.table .phone
+    font-family: 'Montserrat'
+    color: #707070
+    font-size: 11px
+    letter-spacing: 0.4px
+    line-height: 14px
+    text-align: center
+
+.ui.contacts.table .actions
+.ui.skill .header .actions
+    text-align: center
+.ui.contacts.table .actions a
+.ui.skill .header .actions a
+    color: #aaa
+    font-size: 21px
+    opacity: .5
+
+.ui.providers.table .hour.rate
+
+.ui.content .metrics .hour.rate
+.ui.content .timing .amount
+.ui.budgets.table .amount
+.ui.skill .hour.rate
+.ui.projects.table .amount
+    font-family: 'Montserrat'
+    color: #000
+    text-align: center
+
+.ui.users.table .roles
+.ui.users.table .created
+.ui.users.table .phones
+.ui.users.table .picture
+    text-align: center
+
+.ui.providers.table .hour.rate big
+.ui.budgets.table .amount big
+.ui.projects.table .amount big
+.ui.content .metrics .hour.rate big
+.ui.content .timing .amount big
+.ui.skill .hour.rate big
+    display: block
+    font-size: 26px
+    color: #000000
+    letter-spacing: 1px
+    line-height: 32px
+
+.ui.providers.table .hour.rate small
+.ui.budgets.table .amount small
+.ui.projects.table .amount small
+.ui.content .metrics .hour.rate small
+.ui.content .timing .amount small
+.ui.skill .hour.rate small
+    display: block
+    font-size: 9px
+    color: #000000
+    letter-spacing: 0.89px
+    line-height: 11px
+    text-transform: uppercase
+
+.ui.providers.table .skills
+.ui.projects.table .skills
+    text-align: center
+.ui.providers.table .skills .skill
+.ui.projects.table .skills .skill
+    border: 1px solid #aaa
+    border-radius: 20px
+    display: inline-block
+    font-size: 12px
+    color: #aaa
+    line-height: 14px
+    padding: 7px 20px
+    height: 30px
+    margin: 2px
+
+.ui.providers.table .rating
+.ui.budgets.table .rating
+    text-align: center
+
+.ui.projects.table .name
+.ui.projects.table .id
+    font-family: 'Montserrat';
+    font-size: 12px
+    color: #000
+    letter-spacing: 0.46px
+    line-height: 15px
+    text-transform: uppercase
+    float: left
+.ui.projects.table .id
+    color: #aaa
+    margin-left: 16px
+    &:before
+        content: '·'
+        position: relative
+        left: -8px
+
+.ui.projects.table .name small
+    display: block
+    color: #aaa
+
+.ui.projects.table .status
+    font-size: 14px
+    letter-spacing: 0.5px
+    line-height: 29px
+    clear: left
+    &.rejected
+        color: #BD10E0
+    &.progress
+        color: #4A90E2
+    &.completed
+        color: #B8E986
+
+.ui.projects.table .date
+.ui.providers.table .status
+    font-size: 13px
+    color: #aaa
+    letter-spacing: 0.92px
+    line-height: 15px
+    text-align: center
+
+.ui.choices.table th:first-child
+.ui.choices.table .choice
+    padding-left: 40px
+    width: 100px
+    max-width: 100px
+
+.ui.choices.providers.table th:first-child + th
+    text-align: left
+
+.ui.providers.table .metrics .metric
+    width: 33%
+.ui.budgets.table .timing .date
+    width: 50%
+
+.ui.conversations.table .counter
+    font-family: 'Montserrat'
+    font-size: 26px
+    color: #000000
+    letter-spacing: 1px
+    line-height: 32px
+    text-align: center
+
+.ui.conversations.table .message
+    font-family: 'Helvetica Neue', Helvetica, sans-serif
+    font-size: 11px
+    color: #aaa
+    line-height: 20px
+    width: 40%
+.ui.conversations.table .center
+    text-align: center
+
+.ui.table th .sort
+    color: #707070
+.ui.table th .sort img
+    display: none
+.ui.table th .sort.asc img.up
+    display: inline-block
+.ui.table th .sort.desc img.down
+    display: inline-block
+
+
+@media only screen and (max-width: 767px)
+    .ui.projects.table .name
+    .ui.projects.table .id
+        float: none
+    .ui.projects.table .id:before
+        display: none
+    .ui.providers.table th
+    .ui.projects.table th
+    .ui.users.table th
+    .ui.budgets.table th
+    .ui.conversations.table th
+    .ui.providers.table .skills
+    .ui.projects.table .name
+    .ui.projects.table .skills
+    .ui.providers.table .hour.rate
+    .ui.budgets.table .name
+    .ui.budgets.table .amount
+    .ui.projects.table .id
+    .ui.projects.table .amount
+    .ui.projects.table .date
+    .ui.projects.table .status
+    .ui.providers.table .name
+    .ui.providers.table .rating
+    .ui.providers.table .status
+    .ui.budgets.table .rating
+    .ui.users.table .name
+    .ui.users.table .roles
+    .ui.users.table .created
+    .ui.users.table .phones
+    .ui.users.table .picture
+    .ui.contacts.table .person
+    .ui.contacts.table .email
+    .ui.contacts.table .phone
+    .ui.contacts.table .actions
+    .ui.conversations.table .name
+    .ui.conversations.table .message
+        text-align: center
+    .ui.users.table .ui.avatar
+    .ui.table td.picture .ui.avatar
+        margin: 0
+    .ui.table:not(.unstackable) thead
+        display: none
+    .ui.providers.table .picture
+    .ui.budgets.table .picture
+    .ui.conversations.table .picture
+    .ui.contacts.table .picture
+    .ui.users.table .picture
+        max-width: 100%
+        text-align: center
+    .ui.providers.table .picture .avatar
+    .ui.budgets.table .picture .avatar
+    .ui.conversations.table .picture .avatar
+    .ui.contacts.table .picture .avatar
+    .ui.users.table .picture .avatar
+        display: inline-block
+
+// ==========
+// = Button =
+// ==========
+
+.ui.button
+    background-color: #E2E2E2
+    border-radius: 2px
+    box-shadow: 0 2px 2px rgba(0, 0, 0 .24)
+    box-shadow: 0 2px 2px rgba(0, 0, 0 .24), 0 0 2px rgba(0, 0, 0 .12)
+    font-family: 'Montserrat'
+    font-size: 12px
+    color: #FFFFFF
+    letter-spacing: 0.4px
+    line-height: 15px
+    padding: 16px 30px
+    font-weight: normal
+    &.large
+        padding: 18px 30px
+        font-size: 12px
+        text-transform: uppercase
+    &.grey
+        background-color: #909090
+        box-shadow: 0 2px 2px rgba(0, 0, 0 .24)
+        box-shadow: 0 2px 2px rgba(0, 0, 0 .24), 0 0 2px rgba(0, 0, 0 .12)
+    &.blue
+        background-color: #2C5A84
+        box-shadow: 0 2px 2px rgba(0, 0, 0 .24)
+        box-shadow: 0 2px 2px rgba(0, 0, 0 .24), 0 0 2px rgba(0, 0, 0 .12)
+    &.green
+    &.positive
+        background-color: #A4D771 !important
+        box-shadow: 0 2px 2px rgba(0, 0, 0 .24)
+        box-shadow: 0 2px 2px rgba(0, 0, 0 .24), 0 0 2px rgba(0, 0, 0 .12)
+    &.basic
+        background: #fff !important
+        box-shadow: 0 2px 3px rgba(0, 0, 0, .15)
+        border-radius: 2px
+    &.circular.basic
+        border-radius: 50%
+    &.floated.right
+        float: right
+    &.transparent
+        background-color: transparent
+        border: 1px solid #fff
+        border-radius: 38px
+        color: #fff
+        box-shadow: none
+        height: 38px
+        text-transform: uppercase
+        padding: 11px 20px
+    &.image
+        background: none
+        padding: 0
+        box-shadow: none
+
+.project.status .ui.button
+    margin-left: 80px
+    float: right
+    position: relative
+    top: 10px
+
+.ui.button.large .ui.label
+    margin-left: 10px
+
+.ui.providers.app .ui.button.basic
+    color: #00bcd4 !important
+.ui.projects.app .ui.button.basic
+    color: #4389ca !important
+
+.ui.single.action
+    padding: 48px 0
+    text-align: center
+
+.ui.divider + .ui.single.action
+    padding: 34px 0 48px
+
+.ui.massive.divider
+    margin: 5em 0
+
+.ui.circular.huge.button
+    -webkit-background-size: cover
+    background-size: cover
+    background-position: center center
+    box-shadow: none
+    padding: 28px 16px
+    height: 80px
+    width: 80px
+
+.ui.circular.large.button
+    font-family: 'Montserrat'
+    font-size: 26px
+    font-weight: 500
+    padding: 18px 16px
+    height: 56px
+    width: 56px
+
+.ui.circular.small.button
+    padding: 11px
+    height: 40px
+    width: 40px
+
+.ui.action .back
+.ui.modal .actions .back
+    font-family: 'Montserrat'
+    text-transform: uppercase
+    border-bottom: 1px solid #fff
+    padding: 6px 0
+    font-size: 12px
+    letter-spacing: 0.42px
+    line-height: 15px
+    display: inline-block
+    color: #fff
+.ui.modal .actions .back
+    color: #9B9B9B
+    border-color: #9B9B9B
+    margin-right: 40px
+
+.ui.single.action .back
+    margin-top: 10px
+.ui.double.action .back
+    margin-right: 100px
+
+.ui.action .back img
+    margin-right: 5px
+
+@media only screen and (max-width: 767px)
+    .ui.double.action
+        height: auto
+    .ui.double.action .back
+        margin: 0 10% 40px 10%
+
+// ===========
+// = Content =
+// ===========
+
+.ui.content h2
+    font-family: 'Helvetica Neue', Helvetica, sans-serif
+    font-size: 19px
+    color: #707070
+    letter-spacing: 0.67px
+    line-height: 29px
+    font-weight: 500
+
+.ui.content h3
+    font-size: 17px
+    color: #707070
+    letter-spacing: 0.6px
+    line-height: 29px
+    font-weight: 500
+
+.ui.content p
+    font-size: 14px
+    color: #909090
+    line-height: 29px
+
+.ui.content .metrics
+.ui.content .timing
+    background-color: #F9F9F9
+    padding: 40px 0
+    height: 120px
+.ui.content .ui.table .metrics
+.ui.content .ui.table .timing
+    background-color: transparent
+    padding: 0
+
+.ui.content .metrics .hour.rate
+.ui.content .timing .amount
+    float: left
+    width: 34%
+.ui.content .timing .amount
+    width: 33%
+
+.ui.content .timing
+    height: auto
+    margin-bottom: 40px
+.ui.content .timing .notes
+    border-top: 1px solid #e7e7e7
+    font-family: 'Helvetica Neue', Helvetica, sans-serif
+    font-size: 14px
+    color: #909090
+    line-height: 29px
+    font-weight: 300
+    font-style: italic
+    clear: left
+    padding: 30px 10px 0 10px
+    margin: 80px 30px 0 30px
+
+.ui.content .metrics .metric
+.ui.content .timing .date
+.ui.skill .header .metric
+    color: #aaa
+    text-align: center
+    float: left
+    width: 22%
+.ui.content .timing .date
+    width: 33%
+
+.ui.content .metrics .metric big
+.ui.content .timing .date big
+.ui.skill .header .metric big
+    display: block
+    font-family: 'Montserrat'
+    font-size: 22px
+    letter-spacing: 0.84px
+    line-height: 27px
+    margin-bottom: 5px
+.ui.content .timing .date big
+    font-size: 14px
+    margin-bottom: 0
+
+.ui.content .metrics .metric small
+.ui.content .timing .date small
+.ui.skill .header .metric small
+    display: block
+    font-family: 'Helvetica Neue', Helvetica, sans-serif
+    font-size: 9px
+    letter-spacing: 0.89px
+    line-height: 11px
+
+.ui.grid .column > .picture img
+    max-width: 100%
+.picture img
+    border-radius: 50%
+.picture:not(.upload) img
+    height: 48px
+    width: 48px
+    &.big
+        height: 60px
+        width: 60px
+    &.huge
+        height: 99px
+        width: 99px
+
+.ui.upload.picture.uploaded img
+    opacity: 0
+    transition: opacity .3s ease
+.ui.upload.picture.uploaded:hover img
+    opacity: 1
+
+.ui.provider.navigation
+    height: 40px
+    width: 100%
+    margin-bottom: 40px
+.ui.provider.navigation .right.left
+    margin-left: 20px
+.ui.provider.navigation .floated.left
+    margin-right: 20px
+
+.ui.provider.navigation .conversation
+    background: url('../images/conversation.svg') no-repeat center center
+    margin: 0 auto
+    height: 45px
+    width: 150px
+
+.ui.provider.navigation .conversation img
+.ui.provider.navigation .conversation .ui.avatar
+    border-radius: 50%
+    &:first-child
+        float: left
+    &:last-child
+        float: right
+
+// ==========
+// = Rating =
+// ==========
+
+.ui.star.rating .icon
+    color: #E1E1E1
+    &.active
+        color: #FFDE00 !important
+        text-shadow: none !important
+
+.ui.skill.rating
+    height: 3px
+    width: 100%
+
+.ui.skill.rating .icon
+    background-color: #bdbdbd
+    height: 3px
+    width: 20%
+    &.active
+        background-color: #4389CA
+    &:first-child:after
+    &:before
+        content: ''
+        background: #000 !important
+        height: 3px
+        width: 3px
+        display: block
+        border-radius: 50%
+    &:before
+        float: right
+
+.rating.column .value[data-rating]
+    background: url('../images/value.svg')
+    font-family: 'Montserrat'
+    font-size: 14.39px
+    color: #fff
+    line-height: 18px
+    text-align: center
+    height: 41px
+    padding-top: 10px
+    width: 34px
+    margin-left: -18px
+    position: relative
+.rating.column .value[data-rating="1"]
+        left: 20%
+.rating.column .value[data-rating="2"]
+        left: 40%
+.rating.column .value[data-rating="3"]
+        left: 60%
+.rating.column .value[data-rating="4"]
+        left: 80%
+.rating.column .value[data-rating="5"]
+        left: 80%
+
+.rating.column .competence
+    font-family: 'Montserrat'
+    font-size: 10px
+    color: #2C5A84
+    letter-spacing: 0.35px
+    line-height: 29px
+    text-transform: uppercase
+    margin-top: 10px
+    text-align: center
+
+.banned.rating.column .value[data-rating]
+    background: url('../images/value.banned.svg')
+.banned.rating.column .competence
+    color: #D0021B
+.banned.rating.column .ui.skill.rating .icon.active
+    background-color: #D0021B
+
+// ============
+// = Comments =
+// ============
+
+.ui.comments
+    max-width: 100%
+
+.ui.comments .comment
+    padding: 40px 0
+    &.your
+        background-color: rgba(80, 227, 194, .09)
+    &:first-child
+        padding-top: 40px
+
+.ui.comments .comment .avatar
+    height: 60px
+    width: 60px
+    margin: 0
+
+.ui.comments .comment .avatar img
+    border-radius: 50%
+    height: 60px
+    width: 60px
+
+.ui.comments .comment .avatar ~ .content
+    margin-left: 100px
+
+.ui.comments .comment .content .author
+    font-size: 15px
+    color: #707070
+    letter-spacing: 0.53px
+    line-height: 29px
+    font-weight: 500
+
+.ui.comments .comment .content .metadata
+    font-size: 12px
+    font-style: italic
+    color: #78ACCB
+    text-transform: lowercase
+
+.ui.comments .comment .content .text
+    font-size: 13.91px
+    color: #909090
+    line-height: 29px
+
+// ==========
+// = Skills =
+// ==========
+
+// .ui.skill
+//     margin-top: 50px
+
+.ui.skill .header
+    background-color: #F9F9F9
+    height: 100px
+
+.ui.skill .header .container
+    padding: 0 40px
+
+.ui.skill .header .name
+.ui.skill .header .project
+    font-family: 'Montserrat'
+    font-size: 12px
+    color: #000000
+    letter-spacing: 0.46px
+    line-height: 15px
+    text-transform: uppercase
+    float: left
+    padding: 43px 0
+    width: 40%
+.ui.skill .header .project
+    width: 100%
+
+.ui.skill .header .container > .rating
+    border-left: 1px solid #f1f1f1
+    float: left
+    padding: 43px 0
+    height: 100px
+    text-align: center
+    width: 20%
+
+.ui.skill .header .hour.rate
+    border-left: 1px solid #f1f1f1
+    float: left
+    height: 100px
+    padding: 28px 0
+    width: 10%
+
+.ui.skill .header .metric
+    float: left
+    height: 100px
+    padding: 28px 0
+    width: 10%
+    &.first
+        border-left: 1px solid #f1f1f1
+
+.ui.skill .header .actions
+    border-left: 1px solid #f1f1f1
+    padding: 43px 0
+    height: 100px
+    float: left
+    text-align: right
+    width: 6%
+
+.ui.skill .notes
+    border-bottom: 1px solid rgba(0, 0, 0, .12)
+    clear: left
+    font-size: 13.92px
+    color: #909090
+    line-height: 29px
+    padding: 30px 40px
+
+.ui.skill .author .banned
+    color: #D0021B
+    font-weight: bold
+    float: left
+
+.ui.skill .author > .avatar
+    float: left
+    margin-right: 10px
+.ui.skill .author > .name
+    padding: 0 10px
+
+.ui.skill .author .log
+.ui.skill .author .files
+    float: right
+    font-size: 13px
+    color: #2C5A84
+    letter-spacing: 0.92px
+    line-height: 29px
+    font-weight: 300
+    text-decoration: underline
+    text-transform: lowercase
+
+.ui.skill .author .log
+    margin-left: 20px
+.ui.skill .author .files
+    margin-right: 20px
+.ui.skill .author .files + .files
+    &:before
+        content: '·'
+        float: right
+        position: relative
+        right: -20px
+
+.ui.skill .author .picture
+    float: left
+    margin-right: 40px
+
+.ui.skill .author
+    padding: 30px 40px
+    min-height: 100px
+
+.ui.skill .author .name
+    font-size: 13.91px
+    color: #909090
+    letter-spacing: 0.5px
+    line-height: 22px
+.ui.skill .author .name strong
+    color: #707070
+    font-weight: 500
+
+.ui.skill .author .date
+    color: #78ACCB
+    font-style: italic
+    font-size: 11.93px
+
+.ui.skill .ratings
+    clear: left
+    padding: 30px 40px 0 40px
+.ui.skill .ratings .competence
+    font-family: 'Montserrat'
+    font-size: 12px
+    color: #000000
+    letter-spacing: 0.46px
+    margin-bottom: 10px
+    text-transform: uppercase
+
+@media only screen and (max-width: 767px)
+    .ui.skill .header
+        height: auto
+        min-height: 100px
+    .ui.skill .header .container
+        padding: 0 20px
+    .ui.skill .header .name
+        float: left
+        display: block
+        width: auto
+        padding-right: 10px
+    .ui.skill .header .container > .rating
+        float: left
+        display: block
+        width: auto
+        padding: 43px 10px
+    .ui.skill .header .hour.rate
+        float: left
+        display: block
+        width: auto
+        padding: 28px 10px
+    .ui.skill .header .metric
+        float: left
+        display: block
+        width: auto
+        padding: 28px 5px
+    .ui.skill .header .actions
+        float: left
+        display: block
+        width: auto
+        padding: 43px 10px
+    .ui.skill .notes
+    .ui.skill .author
+        padding: 20px
+    .ui.skill .author .log
+    .ui.skill .author .files
+        float: none
+        margin-right: 20px
+        margin-left: 0
+
+@media only screen and (max-width: 480px)
+    .ui.skill .header
+        min-height: 200px
+    .ui.skill .header .metric.first
+        clear: left
+        border-left: none
+
+// ==========
+// = Rating =
+// ==========
+
+.ui.rating.evolution
+    width: 100%
+    display: block
+    position: relative
+
+.ui.rating.evolution .header
+    background-color: #F9F9F9
+    height: 100px
+    padding: 45px 40px
+    width: 100%
+
+.ui.rating.evolution .header .competence
+    font-family: 'Montserrat'
+    font-size: 12px
+    color: #000
+    letter-spacing: 0.46px
+    line-height: 15px
+    text-transform: uppercase
+    float: left
+
+.ui.rating.evolution .header .competence img
+    margin-left: 20px
+    vertical-align: middle
+
+.ui.rating.evolution .header .rating
+    float: right
+
+.ui.rating.evolution .chart
+    height: 160px
+    width: 100%
+    margin: 20px 0
+    position: relative
+
+.ui.huge.rating.evolution
+    width: 60%
+    height: 250px
+    margin: 0 auto 60px auto
+    text-align: center
+
+.ui.huge.evolution .chart
+    height: 250px
+
+.chart .line
+    stroke: #f5a623
+    fill: none
+    stroke-width: 2px
+
+.chart .point
+    stroke: #fff
+    fill: #ffde00
+    stroke-width: 2px
+
+.chart .tick text
+    font-family: 'Roboto';
+    font-size: 11.58px
+    color: #666
+    line-height: 24px
+    font-weight: 300
+
+.chart .y.axis
+    transform: translate(-10px, 0)
+.chart .x.axis .tick text
+    display: none
+
+.ui.huge.rating.evolution .chart .tick line
+    stroke: #eee
+    stroke-width: 0.5px
+    fill: none
+.ui.huge.rating.evolution .chart .y.axis .tick text
+    display: none
+
+.evolution.value
+    background: url('../images/evolution-value.svg')
+    font-family: 'Montserrat'
+    font-size: 14.39px
+    color: #fff
+    line-height: 18px
+    text-align: center
+    height: 40px
+    padding-top: 9px
+    width: 32px
+    margin: -30px 0 0 -13px
+    position: absolute
+    display: none
+.ui.huge.rating.evolution .evolution.value
+    margin-top: -25px
+
+@media only screen and (max-width: 992px)
+    .ui.rating.evolution .header
+        height: auto
+        padding-bottom: 35px
+    .ui.rating.evolution .header .competence
+        float: none
+        margin-bottom: 5px
+    .ui.rating.evolution .header .rating
+        float: none
+
+@media only screen and (max-width: 767px)
+    .ui.huge.rating.evolution
+        width: 100%
+    .ui.rating.evolution .header
+        height: 100px
+        padding-bottom: 40px
+    .ui.rating.evolution .header .competence
+        float: left
+        margin-bottom: 0
+    .ui.rating.evolution .header .rating
+        float: right
+
+@media only screen and (max-width: 480px)
+    .ui.rating.evolution .header
+        height: auto
+        padding-bottom: 35px
+    .ui.rating.evolution .header .competence
+        float: none
+        margin-bottom: 5px
+    .ui.rating.evolution .header .rating
+        float: none
+
+// ========
+// = Form =
+// ========
+
+.ui.form .ui.header
+    background-color: #F9F9F9
+    height: 100px
+    padding: 45px 40px
+    position: relative
+
+.ui.form .ui.header h3
+    text-transform: uppercase
+    font-family: 'Montserrat'
+    font-size: 12px
+    color: #000000
+    letter-spacing: 0.46px
+    line-height: 15px
+
+.ui.form .ui.header > .ui.button
+.ui.form .ui.header > .ui.checkbox
+.ui.form .ui.header > .ui.dropdown
+    position: absolute
+    right: 40px
+    top: 45px
+.ui.form .ui.header > .ui.long.checkbox
+    max-width: 50%
+    top: 25px
+.ui.form .ui.header > .ui.button
+.ui.form .ui.header > .ui.dropdown
+    top: 25px
+.ui.form .ui.user.header > .ui.dropdown
+    top: 40px
+.ui.form .ui.header > .ui.dropdown + .ui.dropdown
+    right: 300px
+.ui.form .ui.header > .ui.checkbox label
+    opacity: 0.69
+    font-family: 'Helvetica Neue', Helvetica, sans-serif
+    font-size: 14px
+    color: #707070
+    font-weight: 400
+    text-transform: none
+
+@media only screen and (max-width: 767px)
+    .ui.form .ui.header
+        height: auto
+    .ui.form .ui.header > .ui.dropdown
+    .ui.form .ui.header > .ui.checkbox
+        position: static
+    .ui.form .ui.header > .ui.long.checkbox
+        max-width: 100%
+    .ui.form .ui.header > .ui.top.right.pointing.dropdown
+        position: absolute
+
+.ui.form > .ui.grid
+.ui.form > .ui.content > .ui.grid
+    padding: 24px 38px
+
+
+.ui.form .fields > .field
+.ui.form .fields .wide.field
+    padding-left: 20px
+    padding-right: 20px
+
+.ui.form .field > label
+    font-family: 'Montserrat'
+    font-size: 10px
+    color: #00B9E6
+    letter-spacing: 0.71px
+    line-height: 13px
+    text-transform: uppercase
+    margin: 40px 0 0 0
+
+.ui.form .ui.grid > .first.column .field label
+    margin-top: 0
+
+.ui.form > .ui.grid > .column > .fields > .field > label
+    margin: 0
+
+.ui.form .fields .wide.field.first
+    padding-left: 0
+
+.ui.form .field > .ui.checkbox
+    padding: 20px 0
+.ui.form .grouped.fields .field > .ui.checkbox
+    padding: 0
+
+.ui.form .field > label + .ui.rating
+    margin-top: 20px
+.ui.form .field > label + .ui.selection.dropdown
+    margin-top: 20px
+
+.ui.user.header .ui.top.right.pointing.dropdown > .menu
+    right: -10px
+
+.ui.form input:not([type])
+.ui.form input[type="date"]
+.ui.form input[type="datetime-local"]
+.ui.form input[type="email"]
+.ui.form input[type="number"]
+.ui.form input[type="password"]
+.ui.form input[type="search"]
+.ui.form input[type="tel"]
+.ui.form input[type="time"]
+.ui.form input[type="text"]
+.ui.form input[type="url"]
+.ui.form textarea:not([rows])
+.ui.form textarea
+    background: transparent !important
+    border: none
+    border-bottom: 2px solid #ddd
+    border-radius: 0
+    font-size: 13px
+    padding: 20px 0
+    min-height: 58px
+    height: 58px
+    &:focus
+        border-color: #4a90e2
+        border-radius: 0
+
+.ui.form .field.error input:not([type])
+.ui.form .field.error input[type="date"]
+.ui.form .field.error input[type="datetime-local"]
+.ui.form .field.error input[type="email"]
+.ui.form .field.error input[type="number"]
+.ui.form .field.error input[type="password"]
+.ui.form .field.error input[type="search"]
+.ui.form .field.error input[type="tel"]
+.ui.form .field.error input[type="time"]
+.ui.form .field.error input[type="text"]
+.ui.form .field.error input[type="url"]
+.ui.form .field.error textarea:not([rows])
+.ui.form .field.error textarea
+    border-color: #e60000
+    color: #e60000
+    &:focus
+        color: #e60000
+        border-color: #e60000
+
+.ui.form textarea
+.ui.form textarea:not([rows])
+    min-height: 90px
+    height: 90px
+
+.ui.primary.header .ui.form label
+    font-family: 'Montserrat'
+    font-size: 10px
+    color: #294F66
+    letter-spacing: 0.71px
+    line-height: 13px
+    text-transform: uppercase
+    margin: 0
+
+.ui.primary.header .ui.form .ui.input input[type="text"]
+    font-family: 'Montserrat'
+    color: #fff
+    border-color: #fff
+    letter-spacing: 1px
+.ui.primary.header .ui.form .error.field .ui.input input[type="text"]
+    border-color: #e60000
+
+.ui.form .ui.huge.input input[type="text"]
+    font-size: 24px
+.ui.form .ui.large.input input[type="text"]
+    font-size: 14px
+
+.ui.form textarea + .counter
+.ui.form .editor + .counter
+    font-size: 12px
+    color: rgba(0,0,0,0.54)
+    line-height: 14px
+    margin-top: 16px
+
+.ui.form .ui.drop
+    background: #F9F9F9
+    font-family: 'Helvetica Neue', Helvetica, sans-serif
+    font-weight: 500
+    font-size: 13px
+    color: #4C7E9C
+    letter-spacing: 0.54px
+    line-height: 21px
+    padding: 30px
+
+.ui.form .ui.drop.files
+    height: 80px
+    text-align: center
+    margin: 30px 0
+
+.ui.form .ui.drop img
+    vertical-align: middle
+    margin-right: 20px
+.ui.form .ui.drop a
+    color: #78ACCB
+    cursor: pointer
+    font-weight: 400
+
+.ui.form .ui.large.drop
+    height: 150px
+.ui.form .ui.large.drop img
+    display: block
+    margin: 10px auto
+.ui.form .ui.large.drop a
+    display: block
+
+.ui.form .ui.drop.files input
+.ui.form .ui.upload.button + input
+    display: none
+
+.ui.form .ui.drop.file + .ui.file:not(.drop)
+    background-color: rgba(28, 165, 248, .1)
+    background-image: none
+    margin: -20px 0 0 0
+    padding: 10px 20px
+    height: 40px
+
+.ui.labeled.input > .basic.label
+    border: none
+    border-bottom: 2px solid #ddd
+    border-radius: 0
+    font-family: 'Montserrat'
+    color: #E1E1E1
+    letter-spacing: 0.38px
+    line-height: 23px
+    font-size: 13px
+    font-weight: 400
+    padding: 15px 0
+    height: 58px
+    transition: border-color 0.1s ease
+.ui.labeled.input > .basic.label strong
+    font-weight: 400
+    font-size: 19px
+
+.error.field .ui.labeled.input > .basic.label
+    border-color: #e60000
+
+.ui.labeled.date.input > .basic.label
+    cursor: pointer
+
+.ui.labeled.input > input:focus + .basic.label
+    border-color: #4a90e2
+
+.ui.label > img
+    width: 20px !important
+
+.ui.icon.input img.icon
+    position: absolute
+    left: 1px
+
+.ui.search:not(.dropdown)
+    margin: 40px
+.ui.search .ui.icon.input
+    padding-left: 100px
+
+.ui.search.provider
+.ui.search.project
+    margin: 0 0 60px 0
+.ui.search.provider .ui.icon.input
+.ui.search.project .ui.icon.input
+    padding: 20px 60px
+    border-bottom: 1px solid #ECECEC
+    transition: border-color 0.1s ease
+    &.focus
+        border-color: #4a90e2
+
+@media only screen and (max-width: 767px)
+    .ui.search.provider .ui.icon.input
+    .ui.search.project .ui.icon.input
+        width: 100%
+
+    .ui.form .ui.drop.file + .ui.file:not(.drop)
+        height: auto
+
+.ui.search.provider + .ui.dropdown
+.ui.search.provider + .ui.filters
+.ui.search.project + .ui.dropdown
+.ui.search.project + .ui.filters
+    float: right
+    position: relative
+    top: -110px
+
+.ui.search.open
+    margin-bottom: 0
+
+.ui.search .open
+    float: right
+    margin: 20px 0
+.ui.search .open .up.icon
+    display: none
+.ui.search.open .open .down.icon
+    display: none
+.ui.search.open .open .up.icon
+    display: inline-block
+
+.ui.advanced.search
+    display: none
+
+.ui.advanced.search .close
+    margin-left: 20px
+
+.ui.advanced.search .top.abilities
+    margin-top: 9px
+.ui.advanced.search .ui.top.abilities.grid > .row
+    padding-bottom: 0
+
+.ui.search.provider + .ui.filters > .ui.dropdown
+.ui.search.project + .ui.filters > .ui.dropdown
+    margin-left: 10px
+
+.ui.search.dropdown > input.search
+    height: auto
+    min-height: auto
+.ui.search.selection.dropdown > input.search
+    margin-top: 10px
+
+.ui.advanced.search .slider.value
+    float: right
+    color: #999
+    margin: -10px 0 0 0
+
+.ui.advanced.search .ui.checkbox
+    margin-right: 20px
+
+.ui.reply.form .ui.image.button
+    position: absolute
+    right: 0
+    top: 20px
+
+@media only screen and (max-width: 767px)
+    .ui.search.provider .ui.icon.input
+    .ui.search.project .ui.icon.input
+        width: 100%
+
+    .ui.search.provider + .ui.filters
+    .ui.search.project + .ui.filters
+        float: none
+        top: -40px
+
+    .ui.search.provider + .ui.filters .ui.dropdown
+    .ui.search.project + .ui.filters .ui.dropdown
+        margin-left: 0
+        width: 100%
+
+    .ui.search.provider + .ui.two.filters .ui.dropdown
+    .ui.search.project + .ui.two.filters .ui.dropdown
+        width: 49%
+        &:last-child
+            float: right
+
+@media only screen and (max-width: 430px)
+    .ui.search.provider + .ui.two.filters .ui.dropdown
+    .ui.search.project + .ui.two.filters .ui.dropdown
+        width: 100%
+        margin-bottom: 10px
+        float: none
+
+// ===========
+// = Briefing =
+// ===========
+
+.ui.briefing
+    font-family: 'Helvetica Neue', Helvetica, sans-serif
+
+.ui.briefing h2
+.ui.form h2
+    font-size: 19px
+    color: #707070
+    letter-spacing: 0.67px
+    line-height: 29px
+    margin: 0 0 60px 0
+.ui.form h2
+    margin: 0 0 20px 0
+
+.ui.briefing p
+.ui.briefing ul
+.ui.briefing ol
+.ui.briefing div
+    font-size: 14px
+    color: #909090
+    line-height: 29px
+    margin: 0 0 40px 0
+
+.ui.briefing ul
+.ui.briefing ol
+    padding-left: 100px
+
+.ui.briefing li
+    margin: 0 0 30px 0
+
+.ui.briefing p strong
+.ui.briefing div b
+    font-weight: 500
+
+.ui.briefing ol
+    counter-reset: item
+.ui.briefing ol li
+    display: block
+    &:before
+        content: counter(item) '-. '
+        counter-increment: item
+        color: #4A90E2
+        font-weight: 500
+        margin-right: 10px
+
+// =========
+// = Files =
+// =========
+
+.ui.files
+    background: rgba(28, 165, 248, .1)
+    padding: 0 60px
+    &.basic
+        background: transparent
+        padding: 0
+        margin: 20px 0
+
+.ui.files .file
+    background: url('../images/file.svg') no-repeat left center
+    font-family: 'Helvetica Neue', Helvetica, sans-serif
+    padding: 60px
+    display: inline-block
+    &.image
+        background-image: url('../images/image.svg')
+
+.ui.basic.files .file
+    display: block
+    padding: 20px 0 20px 60px
+
+.ui.files .file .name
+    font-family: HelveticaNeue-Medium
+    font-size: 13px
+    color: #4C7E9C
+    letter-spacing: 0.54px
+    line-height: 16px
+    font-weight: 500
+
+.ui.files .file .name img
+    vertical-align: middle
+    margin-left: 20px
+
+.ui.files .file .meta
+    font-family: HelveticaNeue-Italic
+    font-size: 12px
+    color: #78ACCB
+    letter-spacing: 0.5px
+    line-height: 14px
+    font-style: italic
+
+.ui.comments .ui.files
+    background: #F9F9F9
+    padding: 0 40px
+    margin: 20px 0
+
+.ui.comments .ui.files .file
+    -webkit-background-size: 20px
+    background-size: 20px
+    display: block
+    padding: 20px 0 20px 40px
+    height: 60px
+
+.ui.comments .ui.files .file .name
+    float: left
+    font-size: 11px
+.ui.comments .ui.files .file .meta
+    float: right
+    margin: 4px 0
+    font-size: 11px
+
+.ui.lite.files
+    background: none
+    padding: 0
+
+.ui.lite.files .ui.file
+    background: #F9F9F9
+    font-family: 'Helvetica Neue', Helvetica, sans-serif
+    font-weight: 500
+    font-size: 13px
+    color: #4C7E9C
+    letter-spacing: 0.54px
+    line-height: 21px
+    padding: 30px
+    display: block
+
+.ui.lite.files .ui.error.file
+    border-bottom: 2px solid #e60000
+
+.ui.lite.files .ui.file
+    background-image: url('../images/file.svg')
+    background-repeat: no-repeat
+    background-position: 20px center
+    height: 60px
+    padding: 20px 20px 20px 70px
+    text-align: right
+    margin: 20px 0
+
+.ui.lite.files .ui.file label
+.ui.lite.files .ui.file .meta
+    float: left
+    font-size: 13px
+    color: #BABABA
+    letter-spacing: 0.54px
+    line-height: 21px
+    font-weight: 300
+.ui.lite.files .ui.file .meta
+    float: none
+.ui.lite.files .ui.file .name
+    float: left
+.ui.lite.files .ui.file .name img
+    vertical-align: middle
+    margin-left: 10px
+
+.ui.lite.files .ui.file label + .name
+    margin: 2px 0 0 20px
+
+.ui.drop.file input
+    display: none
+
+@media only screen and (max-width: 767px)
+    .ui.files .file
+        display: block
+        padding: 60px 0 60px 60px
+    .ui.form .ui.drop.files
+        height: auto
+    .ui.lite.files .ui.file
+        height: auto
+        text-align: left
+    .ui.lite.files .ui.file label
+        display: block
+        float: none
+    .ui.form .ui.drop img
+        margin-right: 10px !important
+    .ui.lite.files .ui.file .name
+        float: none
+
+
+@media only screen and (max-width: 480px)
+    .ui.files
+        padding: 0 20px
+    .ui.files .file
+        padding: 20px 0 20px 60px
+
+// ========
+// = Info =
+// ========
+
+.ui.info
+    background-color: #DDF2FE
+    min-height: 120px
+    margin-top: 80px
+
+.ui.contact.grid .column > div
+    background-repeat: no-repeat
+    background-position: left center
+    padding: 25px 0 25px 60px
+    &.person
+        background-image: url('../images/contact-person.svg')
+    &.phone
+        background-image: url('../images/contact-phone.svg')
+    &.email
+        background-image: url('../images/contact-email.svg')
+    &.address
+        background-image: url('../images/contact-address.svg')
+
+.ui.contact.grid .column strong
+    display: block
+    font-size: 14px
+    color: #707070
+    letter-spacing: 0.58px
+    line-height: 16px
+    font-weight: 500
+    margin: 0 0 5px
+
+.ui.contact.grid .column em
+    display: block
+    font-size: 14px
+    color: #909090
+    letter-spacing: 0.58px
+    line-height: 19px
+    font-style: normal
+
+.ui.contact.grid .column a
+    font-size: 13px
+    color: #346089
+    letter-spacing: 1px
+    line-height: 15px
+    font-style: italic
+    text-decoration: underline
+    display: block
+    padding: 10px 0
+    word-break: break-all
+
+// ==========
+// = Footer =
+// ==========
+
+.ui.footer
+    height: 147px
+    padding: 48px 0
+    text-align: center
+    margin-top: 50px
+
+.ui.info ~ .ui.footer
+    margin-top: 0
+
+.ui.providers.app .ui.footer
+    background-color: #00bcd4
+.ui.users.app .ui.footer
+    background-color: #4389CA
+.ui.projects.app .ui.footer
+    background-color: #4389CA
+.ui.profile.app .ui.footer
+    background-color: #00b5ad
+
+.ui.copyright
+    background-color: #F2F2F2
+    height: 60px
+    font-family: 'Helvetica Neue', Helvetica, sans-serif
+    font-size: 12px
+    color: rgba(186, 186, 186, 0.87)
+    line-height: 24px
+    padding: 20px 0
+    text-align: right
+
+// =========
+// = Modal =
+// =========
+
+.ui.inverted.dimmer
+    background-color: rgba(238, 238, 238, .9)
+
+.ui.inverted.dimmer > .ui.modal
+    box-shadow: 0 40px 80px rgba(0, 0, 0, .4)
+
+.ui.modal .header
+    border: none
+    font-size: 23px
+    color: #2C5A84
+    letter-spacing: 0.5px
+    line-height: 33px
+    font-weight: 500
+    text-align: center
+    padding: 40px 60px 20px 60px
+.ui.modal .header img
+    display: block
+    margin: 0 auto 20px auto
+
+.ui.modal .content
+    font-size: 14px
+    color: #909090
+    padding: 20px 60px 40px 60px
+.ui.modal .content p
+    line-height: 29px
+.ui.modal .content strong
+    color: #4389CA
+    font-weight: 500
+
+.ui.modal .content .contacts
+    text-align: center
+    margin: 40px 0 0 0
+.ui.modal .content .contacts img
+    border-radius: 50%
+    display: inline-block
+    height: 60px
+    margin: 0 20px
+    width: 60px
+.ui.modal .content .contacts .ui.avatar
+    display: inline-block
+
+.ui.modal .actions
+    background-color: #F9F9F9
+    border: none
+    padding: 40px
+    text-align: center
+
+.ui.provider.modal > .content
+    padding: 0
+
+.ui.provider.modal .ui.content.container
+    padding: 2em
+
+.ui.provider.modal .ui.provider.navigation
+    position: absolute
+    top: 10px
+    right: 10px
+    width: auto
+
+.ui.provider.modal .ui.info
+    padding: 0 2em
+    margin-top: 0
+
+.ui.provider.modal .ui.header
+    text-align: left
+    padding: 0 0 20px 0
+    margin: 0 0 20px 0
+
+// ===============
+// = Text editor =
+// ===============
+
+.editor
+    position: relative
+
+.editor > input
+    display: none
+
+.editor .ql-toolbar
+    padding: 0
+    height: 22px
+    position: absolute
+    right: 0
+    top: 20px
+    z-index: 10
+
+.ql-toolbar button
+    background-color: transparent
+    background-repeat: no-repeat
+    background-position: center center
+    border: none
+    opacity: .5
+    transition: opacity .3s ease
+    outline: none
+    height: 22px
+    width: 22px
+    margin: 0 10px
+    float: left
+    &.ql-active
+        opacity: 1
+    &.ql-bold
+        background-image: url('../images/bold.svg')
+    &.ql-italic
+        background-image: url('../images/italic.svg')
+    &.ql-underline
+        background-image: url('../images/underline.svg')
+
+.ql-container
+    padding: 0 !important
+    min-height: 58px
+    height: 58px
+.ql-container .ql-editor
+    border-bottom: 2px solid #ddd
+    border-radius: 0
+    font-size: 13px
+    padding: 20px 200px 20px 0
+    &:focus
+        border-color: #4A90E2
+        border-radius: 0
+
+.field.error .ql-container .ql-editor
+    border-color: #e60000
+
+.ql-picker.ql-color
+    float: left
+    margin: 0 10px
+.ql-picker.ql-color .ql-picker-label
+.ql-snow.ql-toolbar .ql-picker.ql-color-picker .ql-picker-label
+    background-image: url('../images/color.svg') !important
+    -webkit-background-size: 43px 22px
+    background-size: 43px 22px
+    width: 43px
+    height: 22px
+
+.ql-snow.ql-toolbar .ql-picker.ql-color-picker .ql-picker-options
+    margin-left: -109px
+
+@media only screen and (max-width: 767px)
+    .ql-container .ql-editor
+        padding-right: 0
+    .editor .ql-toolbar
+        top: -20px
+
+// ============
+// = Dropdown =
+// ============
+
+.ui.selection.dropdown
+.ui.selection.dropdown:hover
+    background: #FAFAFA
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 2px 2px 0px rgba(0,0,0,0.24);
+    border: none
+    border-radius: 2px
+    padding: 15px 20px
+    height: 50px
+
+.ui.multiple.dropdown
+    padding: 10px 15px
+    &.selection
+        padding: 7px 45px 7px 15px
+
+.ui.multiple.dropdown > .text
+.ui.multiple.search.dropdown > .text
+    margin: 9px 0
+
+.ui.filters .ui.dropdown
+    float: left
+
+.ui.header .ui.selection.dropdown
+    background: #fff
+
+.ui.selection.dropdown .text
+    font-size: 13px
+    color: rgba(0,0,0,0.87)
+    line-height: 20px
+    font-weight: 300
+
+.ui.selection.active.dropdown .menu
+    border: none
+
+.ui.selection.dropdown > .dropdown.icon
+    padding: 13px 20px
+
+.ui.selection.dropdown .menu > .item
+    background-color: #FAFAFA
+    color: #737373
+    font-size: 13px
+    font-weight: 300
+    padding: 15px 20px !important
+    &.selected
+    &.selected
+        background-color: #eee
+
+.ui.header .ui.selection.dropdown .menu > .item
+    background-color: #fff
+
+.ui.menu .ui.dropdown.item.active
+.ui.menu .ui.dropdown.item.active:hover
+    background-color: #fff
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 2px 2px 0px rgba(0,0,0,0.24)
+
+.ui.inverted.menu .ui.dropdown.item.active
+.ui.inverted.menu .ui.dropdown.item.active:hover
+    background-color: #1b1c1d
+
+.ui.menu .dropdown.item .icon
+    color: #5A5A5A
+    font-size: 21px
+    margin-right: 0
+
+.ui.menu .dropdown.item .menu
+    background: #FFFFFF
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 2px 2px 0px rgba(0,0,0,0.24)
+.ui.inverted.menu .dropdown.item .menu
+    background-color: #333
+.ui.secondary.menu .dropdown.item > .menu
+    border-radius: 0 0 2px 2px
+    margin-top: 2px
+    border: none
+.ui.menu .ui.dropdown .menu > .item
+    font-family: 'Roboto'
+    font-size: 14px !important
+    color: #909090 !important
+    letter-spacing: 0.4px !important
+    line-height: 16px !important
+    font-weight: 300 !important
+    padding: 16px 20px !important
+    &:hover
+        background-color: #eee !important
+        color: #707070 !important
+
+.ui.inverted.menu .dropdown.item .menu > .active.item
+.ui.inverted.menu .dropdown.item .menu > .item:hover
+    background-color: #444 !important
+    color: #fff !important
+
+.ui.menu .ui.brand
+    font-family: 'Helvetica Neue', Helvetica, sans-serif
+    font-size: 18px
+    color: #898989
+    line-height: 22px
+    padding: 8px
+
+.ui.menu .ui.brand img
+    margin-right: 20px
+
+.ui.menu .dropdown.item > img:not(.ui)
+.ui.menu .dropdown.item img
+    width: 20px
+
+// .ui.menu .dropdown.item .label
+//     position: absolute
+//     left: 0
+//     bottom: 4px
+//     z-index: 1
+
+.ui.dropdown .moar
+    font-size: 24px
+
+.ui.dropdown .notifications.menu
+    width: 300px
+    margin-left: -160px !important
+.ui.pointing.dropdown > .notifications.menu:after
+    left: 183px
+
+.ui.dropdown .notifications.menu > *
+    white-space: normal
+
+.ui.menu .ui.dropdown .notifications.menu > .item .icon:not(.dropdown)
+    float: left
+
+.ui.dropdown .notifications.menu > .item > .title
+    margin: 0 0 10px 40px
+    color: rgba(255, 255, 255, 0.8)
+
+.ui.dropdown .notifications.menu > .item > .description
+    margin: 0 0 0 40px
+    float: none
+    color: rgba(255, 255, 255, 0.4)
+
+.ui.dropdown .notifications.menu > .item
+    border-top: 1px solid rgba(34, 36, 38, 0.1)
+    &:first-child
+        border-top: none
+
+div[data-prototype]
+    display: none
+
+.ui-slider
+    margin: 20px 0
+
+.ui-widget-header
+    background: #ddd
+
+.ui-widget-content
+    border: none
+    background: #fafafa
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 2px 2px 0px rgba(0,0,0,0.24)
+
+.ui-state-default
+.ui-widget-content .ui-state-default
+    background: #fff
+
+.ui-slider-handle
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 2px 2px 0px rgba(0,0,0,0.24)
+    outline: none
+.ui-slider-horizontal .ui-slider-handle
+    top: -0.2em
+
+// ============
+// = Messages =
+// ============
+
+.ui.red.message
+    background-color: #e92828
+    border-radius: 0
+    box-shadow: none
+    color: #fff
+
+.ui.red.message .header
+    color: #fff
+    font-family: 'Roboto', sans-serif
+    font-size: 14px
+    font-weight: normal
+
+.ui.error.popup
+    background: #e92828
+    color: #fff
+    border: none
+    border-radius: 0
+    box-shadow: none
+    font-size: 12px
+    &:before
+        background: #e92828
+        border: none
+        box-shadow: none
+
+.ui.icon.label .icon
+    margin: 0
+
+// ============
+// = Timeline =
+// ============
+
+.app .ui.timeline
+    position: relative
+    margin-bottom: 50px
+    padding: 10px 0
+    &:before
+        background: #f2f2f2
+        content: ''
+        position: absolute
+        top: 0
+        height: 100%
+        width: 4px
+        left: 25px
+        margin-left: -2px
+
+.ui.timeline .event
+    position: relative
+    padding-left: 70px
+    margin: 20px 0
+    &:after
+        content: ''
+        display: table
+        clear: both
+
+.ui.timeline .event > .ui.avatar
+.ui.timeline .event > .ui.label
+    position: absolute
+    left: 0
+
+.ui.timeline .event > .moment
+    position: absolute
+    bottom: 0
+    font-style: italic
+    font-size: 13px
+    line-height: 40px
+    right: 10px
+
+.ui.timeline .ui.message
+    box-shadow: none
+    border-radius: 0
+    position: relative
+    margin: 0
+    font-weight: 300
+    &:before
+        border: 7px solid transparent
+        border-right: 7px solid #f8f8f9
+        content: ''
+        height: 0
+        right: 100%
+        position: absolute
+        top: 18px
+        width: 0
+        border-color: transparent
+        border-right-color: #f8f8f9
+
+.ui.timeline .ui.message strong
+    font-weight: 400
+
+.ui.message > .right.icon
+    margin-right: 0
+    margin-left: 0.6em
+
+.ui.timeline .ui.icon.message .left.icon
+    display: none
+
+.ui.timeline .event .links
+    width: 100%
+    padding-right: 100px
+
+.ui.timeline .event .links a
+    display: inline-block
+    padding: 10px
+    opacity: .6
+    transition: opacity 1s ease
+    color: #00bcd4
+    &:hover
+        color: #00bcd4
+        opacity: 1
+
+.ui.timeline .ui.button
+    position: relative
+    left: 50%
+    margin-left: -80px
+    top: 10px
+
+@media screen and (min-width: 991px)
+    .app .ui.timeline:before
+        left: 50%
+
+    .ui.timeline .event
+        padding-left: 0
+
+    .ui.timeline .event > .ui.avatar
+    .ui.timeline .event > .ui.label
+        left: 50%
+        margin: 0 0 0 -24px
+
+    .ui.timeline .event > .moment
+        left: 55%
+        line-height: 48px
+        top: 0
+
+    .ui.timeline .event&:nth-child(even) > .moment
+        left: auto
+        right: 55%
+
+    .ui.timeline .ui.message
+        width: 45%
+        &:before
+            border-color: transparent
+            border-left-color: #f8f8f9
+            left: 100%
+
+    .ui.timeline .event&:nth-child(even) .ui.message
+        float: right
+        &:before
+            border-color: transparent
+            border-right-color: #f8f8f9
+            left: auto
+            right: 100%
+
+    .ui.timeline .ui.icon.message .left.icon
+        display: block
+    .ui.timeline .ui.icon.message .right.icon
+        display: none
+    .ui.timeline .event&:nth-child(even) .ui.icon.message .right.icon
+        display: block
+    .ui.timeline .event&:nth-child(even) .ui.icon.message .left.icon
+        display: none
+
+    .ui.timeline .event .links
+        margin-left: 0
+        padding-right: 0
+    .ui.timeline .event&:nth-child(even) .links
+        float: right
+        padding-left: 55%
+
+// ==========
+// = Avatar =
+// ==========
+
+.ui.avatar
+    background: #e2e2e2
+    border-radius: 50%
+    color: #fff
+    text-align: center
+
+.ui.avatar i
+    margin-right: 0 !important
+
+.ui.avatar
+.ui.medium.avatar
+.ui.app.scroll .ui.header .provider .ui.huge.avatar
+    font-size: 26px
+    line-height: 46px
+    height: 48px
+    width: 48px
+
+.ui.small.avatar
+    font-size: 24px
+    line-height: 38px
+    height: 40px
+    width: 40px
+
+.ui.big.avatar
+    font-size: 32px
+    line-height: 58px
+    height: 60px
+    width: 60px
+
+.ui.modal.contacts .ui.big.avatar
+    display: inline-block
+
+.ui.huge.avatar
+    font-size: 64px
+    line-height: 90px
+    height: 99px
+    width: 99px
+
+td.picture .ui.avatar
+    margin: 0 auto
+
+// =========
+// = Login =
+// =========
+
+.ui.login.app
+    background-color: #00bcd4
+    color: #fff
+    padding: 100px 0
+    height: 100%
+
+.ui.login.app .ui.login.container
+    width: 300px
+
+.ui.login.app a
+    color: #fff
+    text-decoration: underline
+
+.ui.login.app h2
+    color: #fff
+
+.ui.login.app input
+    color: #fff
+    border-color: #fff
+
+.ui.login.app .ui.checkbox label
+    color: #fff
+
+.ui.login.app input::-webkit-input-placeholder
+   color: #fff
+   opacity: .7
+.ui.login.app input:-moz-placeholder
+   color: #fff
+   opacity: .7
+.ui.login.app input::-moz-placeholder
+   color: #fff
+   opacity: .7
+.ui.login.app input:-ms-input-placeholder
+   color: #fff
+   opacity: .7
+
+.ui.login.app .ui.form + .ui.segment
+    text-align: center
+
+.ui.input > .ui.remote.list
+    border: 1px solid rgba(34, 36, 38, 0.3)
+    position: absolute
+    display: none
+    left: 0
+    top: 100%
+    margin: 0
+    width: 100%
+.ui.input > .ui.remote.list > .item
+    padding: .8em
+    background: #fff
+    font-weight: bold
+    color: rgba(0, 0, 0, 0.87)
+    &:hover
+        background: #eefcf9
+
+.ui.user.form .ui.selection.dropdown
+    background: transparent
+    box-shadow: none
+    border-radius: 0
+    color: #fff
+    padding-left: 0
+    padding-right: 0
+    border-bottom: 2px solid #fff
+.ui.user.form .ui.selection.dropdown > .dropdown.icon
+    padding-right: 0
+.ui.user.form .ui.selection.dropdown .text
+    color: #fff
+
+// ======================
+// = Responsive helpers =
+// ======================
+
+@media only screen and (max-width: 767px)
+    .mobile.hidden
+    .tablet.only
+    .small.monitor.only
+    .large.monitor.only
+        display: none !important
+
+@media only screen and (min-width: 768px) and (max-width: 991px)
+    .mobile.only
+    .tablet.hidden
+    .small.monitor.only
+    .large.monitor.only
+        display: none !important
+
+@media only screen and (min-width: 992px) and (max-width: 1199px)
+    .mobile.only
+    .tablet.only
+    .small.monitor.hidden
+    .large.monitor.only
+        display: none !important
+
+@media only screen and (min-width: 1200px)
+    .mobile.only
+    .tablet.only
+    .small.monitor.only
+    .large.monitor.hidden
+        display: none !important

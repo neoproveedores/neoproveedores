@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="32px" height="21px" viewBox="0 0 32 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12072) - http://www.bohemiancoding.com/sketch -->
+    <title>icon-upload</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Empresa---Nuevo-proveedor-(datos)" sketch:type="MSArtboardGroup" transform="translate(-124.000000, -463.000000)">
+            <g id="img" sketch:type="MSLayerGroup" transform="translate(100.000000, 434.000000)">
+                <g id="icon-upload" transform="translate(40.071602, 39.468099) scale(1, -1) translate(-40.071602, -39.468099) translate(24.856157, 24.252653)" sketch:type="MSShapeGroup">
+                    <path d="M30.4308912,0 L0,0 L0,30.4308912 L30.4308912,30.4308912 L30.4308912,0 Z" id="bounds"></path>
+                    <path d="M24.5983037,17.7513532 C23.7107361,22.0623961 19.9068747,25.359076 15.2154456,25.359076 C11.5383796,25.359076 8.36849508,23.3303499 6.84695052,20.2872608 C2.91629374,19.7800793 0,16.6101948 0,12.679538 C0,8.49529046 3.42347526,5.0718152 7.6077228,5.0718152 L24.0911222,5.0718152 C27.6413928,5.0718152 30.4308912,7.86131356 30.4308912,11.4115842 C30.4308912,14.7082641 27.7681882,17.4977624 24.5983037,17.7513532 L24.5983037,17.7513532 Z M17.7513532,13.9474918 L17.7513532,8.8756766 L12.679538,8.8756766 L12.679538,13.9474918 L8.8756766,13.9474918 L15.2154456,20.2872608 L21.5552146,13.9474918 L17.7513532,13.9474918 L17.7513532,13.9474918 Z" id="Shape" fill="#FFFFFF"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

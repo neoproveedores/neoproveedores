@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="10px" height="9px" viewBox="0 0 10 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12072) - http://www.bohemiancoding.com/sketch -->
+    <title>close</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Empresa---Ficha-del-proveedor-(vista-previa)" sketch:type="MSArtboardGroup" transform="translate(-279.000000, -1844.000000)" fill="#FFFFFF">
+            <g id="bloque-botones" sketch:type="MSLayerGroup" transform="translate(-1.250000, 1775.500000)">
+                <g id="link_cerrar" transform="translate(280.546448, 65.000000)" sketch:type="MSShapeGroup">
+                    <g id="close" transform="translate(0.000000, 3.000000)">
+                        <path d="M9.52613075,1.39393939 L8.6228562,0.492424242 L5.009758,4.09848485 L1.39665981,0.492424242 L0.493385258,1.39393939 L4.10648345,5 L0.493385258,8.60606061 L1.39665981,9.50757576 L5.009758,5.90151515 L8.6228562,9.50757576 L9.52613075,8.60606061 L5.91303255,5 L9.52613075,1.39393939 Z" id="Shape"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

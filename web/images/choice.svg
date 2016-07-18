@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="16px" height="12px" viewBox="0 0 16 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12072) - http://www.bohemiancoding.com/sketch -->
+    <title>Shape</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Empresa---Seleccion-de-proveedores" sketch:type="MSArtboardGroup" transform="translate(-102.000000, -649.000000)" fill="#808080">
+            <g id="tabla-proveedores" sketch:type="MSLayerGroup" transform="translate(60.000000, 559.000000)">
+                <g id="submenú-proveedores" sketch:type="MSShapeGroup">
+                    <g>
+                        <g transform="translate(38.000000, 85.000000)">
+                            <g id="button-select" transform="translate(0.900000, 0.000000)">
+                                <g id="check-copy" transform="translate(2.788889, 3.666667)">
+                                    <path d="M5.74241983,10.8232963 L2.1814341,7.26231054 L0.99443885,8.44930579 L5.74241983,13.1972868 L15.9166648,3.02304181 L14.7296696,1.83604656 L5.74241983,10.8232963 Z" id="Shape"></path>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

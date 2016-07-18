@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="29px" height="28px" viewBox="0 0 29 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12072) - http://www.bohemiancoding.com/sketch -->
+    <title>icon envelope</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Empresa---Nuevo-proveedor-(confirmación)" sketch:type="MSArtboardGroup" transform="translate(-625.000000, -390.000000)" fill="#E0E0E0">
+            <g id="Dialog" sketch:type="MSLayerGroup" transform="translate(319.000000, 352.000000)">
+                <path d="M311.663923,39.1052632 L329.318231,39.1052632 L329.318231,50.3796842 L330.433615,50.3796842 L330.433615,38 L310.548538,38 L310.548538,50.4541053 L311.663923,50.4541053 L311.663923,39.1052632 L311.663923,39.1052632 Z M332.323821,45.4295789 L331.659795,46.3174737 L333.521744,47.6857895 L326.973692,54.9996842 L325.380179,52.9873684 L315.561077,52.9873684 L313.911795,54.9562105 L307.383077,47.6887368 L309.358795,46.2629474 L308.702205,45.3698947 L306,47.3203158 L306,65.6735789 L334.900359,65.6735789 L334.900359,47.3232632 L332.323821,45.4295789 L332.323821,45.4295789 Z M307.115385,49.0533684 L313.203154,55.8301053 L307.115385,63.5212632 L307.115385,49.0533684 L307.115385,49.0533684 Z M307.705051,64.5683158 L314.392154,56.1196842 L314.388436,56.1174737 L316.084564,54.0926316 L324.837359,54.0926316 L326.508949,56.2029474 L333.130615,64.5683158 L307.705051,64.5683158 L307.705051,64.5683158 Z M333.784974,63.6045263 L327.674154,55.8831579 L333.784974,49.0570526 L333.784974,63.6045263 L333.784974,63.6045263 Z" id="icon-envelope" sketch:type="MSShapeGroup"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="34px" height="42px" viewBox="0 0 34 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <title>value-bg</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="value.banned" fill="#D0011B">
+            <g id="Page-1">
+                <g id="Empresa---Ficha-del-proveedor-(vista-previa)">
+                    <g id="proveedor2">
+                        <g id="habilidades">
+                            <g id="slider-notched-pressed">
+                                <g id="value" transform="translate(0.076712, 0.500000)">
+                                    <path d="M7.99999995e-07,24.1266667 C7.99999995e-07,19.3783333 2.56986381,14.3733333 9.3800008,7.57166664 L16.7041104,0.1283333 L24.1567131,7.57166664 C30.838357,14.5016667 33.40822,19.5066667 33.40822,24.1266667 C33.40822,33.495 25.9556172,41.0666667 16.7041104,41.0666667 C7.4526035,41.0666667 7.99999995e-07,33.495 7.99999995e-07,24.1266667 Z" id="value-bg" transform="translate(16.704110, 20.597500) rotate(180.000000) translate(-16.704110, -20.597500) "></path>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="10px" height="10px" viewBox="0 0 10 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12072) - http://www.bohemiancoding.com/sketch -->
+    <title>arrow down copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Empresa---Nuevo-proveedor-(notas)" sketch:type="MSArtboardGroup" transform="translate(-322.000000, -984.000000)" fill="#FFFFFF">
+            <g id="bloque-botones" sketch:type="MSLayerGroup" transform="translate(0.000000, 916.000000)">
+                <g id="link_cerrar" transform="translate(320.000000, 65.000000)" sketch:type="MSShapeGroup">
+                    <g id="arrow-down-copy" transform="translate(7.000000, 8.500000) scale(1, -1) rotate(-180.000000) translate(-7.000000, -8.500000) translate(2.000000, 3.000000)">
+                        <path d="M5.2,0.4 L4.36,1.24 L7.72,4.6 L0.4,4.6 L0.4,5.8 L7.72,5.8 L4.36,9.16 L5.2,10 L10,5.2 L5.2,0.4 Z" id="Shape"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

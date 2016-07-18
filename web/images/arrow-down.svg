@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12072) - http://www.bohemiancoding.com/sketch -->
+    <title>arrow down copy 4</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Empresa---Lista-de-proveedores" sketch:type="MSArtboardGroup" transform="translate(-165.000000, -428.000000)">
+            <g id="tabla-proveedores" sketch:type="MSLayerGroup" transform="translate(60.000000, 288.000000)">
+                <g id="submenú-proveedores" transform="translate(39.000000, 138.000000)" sketch:type="MSShapeGroup">
+                    <g id="arrow-down-copy-4" transform="translate(72.242857, 8.323810) scale(1, -1) rotate(-90.000000) translate(-72.242857, -8.323810) translate(64.242857, 0.323810)">
+                        <rect id="bounds" x="-4.4408921e-16" y="0" width="15.7714286" height="15.7714286"></rect>
+                        <path d="M7.88571429,2.62857143 L6.96571429,3.54857143 L10.6457143,7.22857143 L2.62857143,7.22857143 L2.62857143,8.54285714 L10.6457143,8.54285714 L6.96571429,12.2228571 L7.88571429,13.1428571 L13.1428571,7.88571429 L7.88571429,2.62857143 Z" id="Shape" fill="#707070"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

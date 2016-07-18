@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="11px" height="13px" viewBox="0 0 11 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12072) - http://www.bohemiancoding.com/sketch -->
+    <title>Shape</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Empresa---Formulario-creación-proyecto" sketch:type="MSArtboardGroup" transform="translate(-1050.000000, -300.000000)" fill="#000000" opacity="0.539999962">
+            <g id="breve-descripción" sketch:type="MSLayerGroup" transform="translate(59.000000, 267.500000)">
+                <g id="style" transform="translate(985.000000, 29.000000)" sketch:type="MSShapeGroup">
+                    <g id="bold">
+                        <path d="M14.1947368,9.9 C15.1105263,9.25833333 15.7515789,8.25 15.7515789,7.33333333 C15.7515789,5.225 14.1947368,3.66666667 12.0884211,3.66666667 L6.41052632,3.66666667 L6.41052632,16.5 L12.8210526,16.5 C14.7442105,16.5 16.2094737,14.9416667 16.2094737,13.0166667 C16.2094737,11.6416667 15.3852632,10.45 14.1947368,9.9 L14.1947368,9.9 Z M9.06631579,5.95833333 L11.8136842,5.95833333 C12.5463158,5.95833333 13.1873684,6.6 13.1873684,7.33333333 C13.1873684,8.06666667 12.5463158,8.70833333 11.8136842,8.70833333 L9.06631579,8.70833333 L9.06631579,5.95833333 L9.06631579,5.95833333 Z M12.2715789,14.2083333 L9.06631579,14.2083333 L9.06631579,11.4583333 L12.2715789,11.4583333 C13.0042105,11.4583333 13.6452632,12.1 13.6452632,12.8333333 C13.6452632,13.5666667 13.0957895,14.2083333 12.2715789,14.2083333 L12.2715789,14.2083333 Z" id="Shape"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

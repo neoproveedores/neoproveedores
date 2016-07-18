@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="37px" height="23px" viewBox="0 0 37 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12072) - http://www.bohemiancoding.com/sketch -->
+    <title>fill</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Empresa---Formulario-creación-proyecto" sketch:type="MSArtboardGroup" transform="translate(-1175.000000, -296.000000)">
+            <g id="breve-descripción" sketch:type="MSLayerGroup" transform="translate(59.000000, 267.500000)">
+                <g id="style" transform="translate(985.000000, 29.000000)" sketch:type="MSShapeGroup">
+                    <g id="fill" transform="translate(131.873684, 0.000000)">
+                        <g id="fill-icon">
+                            <rect id="Rectangle-path" x="0" y="0" width="21.9789474" height="22"></rect>
+                            <path d="M15.1105263,8.15833333 L6.96,0 L5.67789474,1.28333333 L7.87578947,3.48333333 L3.20526316,8.15833333 C2.65578947,8.70833333 2.65578947,9.53333333 3.20526316,10.0833333 L8.24210526,15.125 C8.51684211,15.4 8.88315789,15.4916667 9.24947368,15.4916667 C9.61578947,15.4916667 9.98210526,15.4 10.2568421,15.125 L15.2936842,10.0833333 C15.66,9.625 15.66,8.70833333 15.1105263,8.15833333 L15.1105263,8.15833333 Z M4.67052632,9.16666667 L9.06631579,4.76666667 L13.4621053,9.16666667 L4.67052632,9.16666667 L4.67052632,9.16666667 Z M17.3084211,10.5416667 C17.3084211,10.5416667 15.4768421,12.5583333 15.4768421,13.75 C15.4768421,14.7583333 16.3010526,15.5833333 17.3084211,15.5833333 C18.3157895,15.5833333 19.14,14.7583333 19.14,13.75 C19.14,12.5583333 17.3084211,10.5416667 17.3084211,10.5416667 L17.3084211,10.5416667 Z" id="Shape" opacity="0.539999962" fill="#000000"></path>
+                        </g>
+                        <rect id="color-bar" opacity="0.539999962" fill="#000000" x="0" y="18.3333333" width="21.9789474" height="3.66666667"></rect>
+                        <g id="arrow-drop-down" transform="translate(31.147368, 11.000000) scale(1, -1) translate(-31.147368, -11.000000) translate(20.147368, 0.000000)">
+                            <path d="M21.9789474,0 L0,0 L0,22 L21.9789474,22 L21.9789474,0 Z" id="bounds"></path>
+                            <path d="M6.41052632,12.8333333 L10.9894737,8.25 L15.5684211,12.8333333 L6.41052632,12.8333333 Z" id="Shape" opacity="0.539999962" fill="#000000"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
