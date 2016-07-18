@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="ui container">
+        <div class="ui hidden massive divider"></div>
+
+        <h1 class="ui icon center aligned header">
+            <i class="{{ icon }} icon"></i>
+            <div class="content">
+                {{ title }}
+
+                <div class="sub header">
+                    {{ body }}
+                </div>
+            </div>
+        </h1>
+
+        <div class="ui hidden massive divider"></div>
+    </div>
+{% endblock %}

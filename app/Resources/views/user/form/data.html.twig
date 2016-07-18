@@ -1,0 +1,81 @@
+{% extends 'user/form/base.html.twig' %}
+
+{% block section %}
+<form class="ui form" method="post" enctype="multipart/form-data">
+    <div class="ui content container users" >
+        <div class="ui header">
+            <h3>Datos del usuario</h3>
+        </div>
+
+        {{ form_errors(form) }}
+
+        <div class="ui grid">
+            <div class="two wide column">
+                <div class="ui circular huge upload picture icon button">
+                    <img src="{{ asset('images/upload.svg') }}">
+                </div>
+                {{ form_widget(form.contact.avatar.upload) }}
+            </div>
+
+            <div class="fourteen wide column">
+                <div class="two fields">
+                    <div class="twelve wide field">
+                        <label>Nombre y apellidos</label>
+                        <div class="two fields">
+                            <div class="six wide field">
+                                {{ form_widget(form.contact.firstName) }}
+                            </div>
+                            <div class="ten wide field">
+                                {{ form_widget(form.contact.lastName) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="three fields">
+                        <div class="eight wide field">
+                            {{ form_widget(form.email) }}
+                        </div>
+                        <div class="four wide field">
+                            {{ form_widget(form.contact.phone) }}
+                        </div>
+                        <div class="four wide field">
+                            {{ form_widget(form.contact.alternatePhone) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Contraseña</label>
+                    <div class="two fields">
+                        <div class="field">
+                            {{ form_widget(form.plainPassword.first) }}
+                        </div>
+                        <div class="field">
+                            {{ form_widget(form.plainPassword.second) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="six wide field first">
+                    <label>Rol</label>
+                    {{ form_widget(form.role) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui double action footer">
+        <a href="{{ url('users') }}" class="back">
+            <img src="{{ asset('images/back-action.svg') }}">
+            Cancelar creación de usuario
+        </a>
+        <button type="submit" class="ui large basic button">
+            Crear usuario
+        </button>
+    </div>
+
+    {{ form_widget(form._token) }}
+</form>
+{% endblock %}

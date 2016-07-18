@@ -1,0 +1,237 @@
+{% extends 'provider/form/base.html.twig' %}
+
+{% block section %}
+<form class="ui form" method="post" enctype="multipart/form-data">
+    <div class="ui content container">
+        <div class="ui header">
+            <h3>Datos del proveedor</h3>
+
+            {{ form_widget(form.kind) }}
+
+            {% if provider.status != constant('DRAFT', provider) %}
+                {{ form_widget(form.status) }}
+            {% endif %}
+        </div>
+
+        {% if not form.vars.valid %}
+        <div class="ui red message">
+            <i class="close icon"></i>
+            <div class="header">Revisa los campos del formulario, tienen errores.</div>
+            {{ form_errors(form) }}
+        </div>
+        {% endif %}
+
+        <div class="ui stackable grid">
+            <div class="two wide column">
+                <div class="ui circular huge upload picture icon button {% if provider.contact.avatar %}uploaded" style="background-image:url('{{ provider.contact.avatarUrl }}')"{% else %}"{% endif %}>
+                    <img src="{{ asset('images/upload.svg') }}">
+                </div>
+                {{ form_widget(form.contact.avatar.upload) }}
+            </div>
+
+            <div class="fourteen wide column">
+                <div class="two fields">
+                    <div class="twelve wide field {% if provider.kind != constant('FREELANCE', provider) %}hide{% endif %}" data-kind="freelance">
+                        <label>Nombre y apellidos</label>
+                        <div class="two fields">
+                            {% if form.contact.firstName.vars.errors|length > 0 %}
+                            <div class="six wide field error"
+                                 data-content="{{ form.contact.firstName.vars.errors }}">
+                            {% else %}
+                            <div class="six wide field">
+                            {% endif %}
+                                {{ form_widget(form.contact.firstName) }}
+                            </div>
+
+                            {% if form.contact.lastName.vars.errors|length > 0 %}
+                            <div class="ten wide field error"
+                                 data-content="{{ form.contact.lastName.vars.errors }}">
+                            {% else %}
+                            <div class="ten wide field">
+                            {% endif %}
+                                {{ form_widget(form.contact.lastName) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="twelve wide field first {% if provider.kind != constant('COMPANY', provider) %}hide{% endif %}" data-kind="company">
+                        <label>Razón social</label>
+                        {% if form.contact.businessName.vars.errors|length > 0 %}
+                        <div class="field error"
+                             data-content="{{ form.contact.businessName.vars.errors }}">
+                        {% else %}
+                        <div class="field">
+                        {% endif %}
+                            {{ form_widget(form.contact.businessName) }}
+                        </div>
+                    </div>
+
+                    {% if form.billing.taxIdent.vars.errors|length > 0 %}
+                    <div class="four wide field error"
+                         data-content="{{ form.billing.taxIdent.vars.errors }}">
+                    {% else %}
+                    <div class="four wide field">
+                    {% endif %}
+                        <label>NIF</label>
+                        {{ form_widget(form.billing.taxIdent) }}
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Dirección</label>
+                    <div class="two fields">
+                        {% if form.address.street.vars.errors|length > 0 %}
+                        <div class="twelve wide field error"
+                             data-content="{{ form.address.street.vars.errors }}">
+                        {% else %}
+                        <div class="twelve wide field">
+                        {% endif %}
+                            {{ form_widget(form.address.street) }}
+                        </div>
+
+                        {% if form.address.postalCode.vars.errors|length > 0 %}
+                        <div class="four wide field error"
+                             data-content="{{ form.address.postalCode.vars.errors }}">
+                        {% else %}
+                        <div class="four wide field">
+                        {% endif %}
+                            {{ form_widget(form.address.postalCode) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="three fields">
+                    {% if form.address.city.vars.errors|length > 0 %}
+                    <div class="field error"
+                         data-content="{{ form.address.city.vars.errors }}">
+                    {% else %}
+                    <div class="field">
+                    {% endif %}
+                        {{ form_widget(form.address.city) }}
+                    </div>
+
+                    {% if form.address.region.vars.errors|length > 0 %}
+                    <div class="field error"
+                         data-content="{{ form.address.region.vars.errors }}">
+                    {% else %}
+                    <div class="field">
+                    {% endif %}
+                        {{ form_widget(form.address.region) }}
+                    </div>
+
+                    {% if form.address.country.vars.errors|length > 0 %}
+                    <div class="field error"
+                         data-content="{{ form.address.country.vars.errors }}">
+                    {% else %}
+                    <div class="field">
+                    {% endif %}
+                        {{ form_widget(form.address.country) }}
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Contacto</label>
+                    <div class="three fields">
+                        {% if form.contact.email.vars.errors|length > 0 %}
+                        <div class="eight wide field error"
+                             data-content="{{ form.contact.email.vars.errors }}">
+                        {% else %}
+                        <div class="eight wide field">
+                        {% endif %}
+                            {{ form_widget(form.contact.email) }}
+                        </div>
+
+                        {% if form.contact.phone.vars.errors|length > 0 %}
+                        <div class="eight wide field error"
+                             data-content="{{ form.contact.phone.vars.errors }}">
+                        {% else %}
+                        <div class="eight wide field">
+                        {% endif %}
+                            {{ form_widget(form.contact.phone) }}
+                        </div>
+
+                        {% if form.contact.alternatePhone.vars.errors|length > 0 %}
+                            <div class="four wide field error"
+                                 data-content="{{ form.contact.alternatePhone.vars.errors }}">
+                            {% else %}
+                            <div class="four wide field">
+                            {% endif %}
+                            {{ form_widget(form.contact.alternatePhone) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="three fields">
+                    {% if form.contact.web.vars.errors|length > 0 %}
+                    <div class="field error"
+                         data-content="{{ form.contact.web.vars.errors }}">
+                    {% else %}
+                    <div class="field">
+                    {% endif %}
+                        {{ form_widget(form.contact.web) }}
+                    </div>
+
+                    {% if form.contact.facebook.vars.errors|length > 0 %}
+                    <div class="field error"
+                         data-content="{{ form.contact.facebook.vars.errors }}">
+                    {% else %}
+                    <div class="field">
+                    {% endif %}
+                        {{ form_widget(form.contact.facebook) }}
+                    </div>
+
+                    {% if form.contact.twitter.vars.errors|length > 0 %}
+                    <div class="field error"
+                         data-content="{{ form.contact.twitter.vars.errors }}">
+                    {% else %}
+                    <div class="field">
+                    {% endif %}
+                        {{ form_widget(form.contact.twitter) }}
+                    </div>
+                </div>
+
+                <div class="sixteen wide field">
+                    <label>Tarifa hora</label>
+                    {% if form.hourRate.value.vars.errors|length > 0 %}
+                    <div class="field error"
+                         data-content="{{ form.hourRate.value.vars.errors }}">
+                    {% else %}
+                    <div class="field">
+                    {% endif %}
+                        <div class="ui right labeled input">
+                            {{ form_widget(form.hourRate.value) }}
+                            <div class="ui basic label">
+                                <strong>€/</strong>hora
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if provider.status == constant('DRAFT', provider) %}
+        {% if is_granted('ROLE_VIEW_PROVIDERS') %}
+        <div class="ui double action footer">
+            <a href="providers.html" class="back">
+                <img src="{{ asset('images/back-action.svg') }}">
+                Cancelar creación de proveedor
+            </a>
+        {% else %}
+        <div class="ui single action footer">
+        {% endif %}
+            <button type="submit" class="ui large basic button">
+                Continuar a datos de contacto
+            </button>
+        </div>
+    {% else %}
+    <div class="ui single action footer">
+        <button type="submit" class="ui large basic button">
+            Guardar datos
+        </button>
+    </div>
+    {% endif %}
+
+    {{ form_widget(form._token) }}
+</form>
+{% endblock %}

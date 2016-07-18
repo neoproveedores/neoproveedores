@@ -1,0 +1,34 @@
+{% for user in pagination.items %}
+<tr href="{{ url('edit_user', {'id': user.id}) }}">
+    <td class="picture">
+        {{ user.contact.getAvatarImage('small')|raw }}
+    </td>
+    <td class="name">
+        <div class="name">{{ user.contact }}</div>
+        <div class="email">{{ user.email }}</div>
+    </td>
+    <td class="phones">
+        {% if user.contact and user.contact.phone %}
+            <i class="mobile icon"></i>
+            {{ user.contact.phone }}<br>
+            {{ user.contact.alternatePhone }}
+        {% endif %}
+    </td>
+    <td class="roles">
+        {{ user.role|trans }}
+    </td>
+    <td class="created">
+        {{ user.created|date('d M Y') }}
+    </td>
+</tr>
+{% endfor %}
+
+{% if pagination.more %}
+<tr data-remove>
+    <td colspan="5" class="ui single action">
+        <a href="{{ next_url }}" class="ui grey button" data-async="append">
+            Mostrar {{ pagination.more }} más
+        </a>
+    </td>
+</tr>
+{% endif %}

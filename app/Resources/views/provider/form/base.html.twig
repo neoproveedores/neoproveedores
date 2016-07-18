@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="ui primary header">
+        <div class="ui container">
+            <h2>Proveedores</h2>
+            {% if provider.status == constant('DRAFT', provider) %}
+            <p>Nuevo proveedor</p>
+            {% else %}
+            <p>Editar proveedor</p>
+            {% endif %}
+
+            {% if is_granted('ROLE_VIEW_PROVIDERS') %}
+            <a href="{{ url('providers') }}"
+               class="ui circular small basic button right floated">
+                <img src="{{ asset('images/close.svg') }}">
+            </a>
+            {% endif %}
+        </div>
+    </div>
+
+    {% block section %}{% endblock %}
+{% endblock %}

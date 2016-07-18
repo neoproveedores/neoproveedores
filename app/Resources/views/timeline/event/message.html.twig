@@ -1,0 +1,27 @@
+
+{{ event.provider.contact.getAvatarImage()|raw }}
+
+<div class="moment">{{ event.created|ago }}</div>
+
+<div class="ui icon message">
+    <i class="mail left icon"></i>
+    <div class="content">
+        {{ event.message.name }}
+        ha añadido un <strong>nuevo mensaje</strong> en
+        {{ event.project }} sobre
+        <em>{{ event.message.body|e[0:48] }}...</em>
+    </div>
+    <i class="mail right icon"></i>
+</div>
+
+<div class="links">
+    <a href="{{ url('project_messages', {'id': event.project.id, 'provider': event.provider.id}) }}#{{ event.message.id }}">
+        Ver mensaje
+    </a>
+    <a href="{{ url('project_briefing', {'id': event.project.id}) }}">
+        Ver proyecto
+    </a>
+    <a href="{{ url('provider_preview', {'id': event.provider.id}) }}">
+        Ver proveedor
+    </a>
+</div>

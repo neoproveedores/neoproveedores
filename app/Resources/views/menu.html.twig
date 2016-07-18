@@ -1,0 +1,47 @@
+
+{% if is_granted('ROLE_MANAGER') %}
+<a href="{{ url('timeline') }}"
+   class="{% if area == 'timeline' %}active {% endif %}item">
+    Actividad
+</a>
+{% endif %}
+
+{% if is_granted('ROLE_VIEW_PROJECTS') %}
+<a href="{{ url('projects') }}"
+   class="{% if area == 'projects' %}active {% endif %}item">
+    Proyectos
+</a>
+{% endif %}
+
+{% if is_granted('ROLE_VIEW_PROVIDERS') %}
+<a href="{{ url('providers') }}"
+   class="{% if area == 'providers' %}active {% endif %}item">
+   Proveedores
+</a>
+{% endif %}
+
+{% if is_granted('ROLE_VIEW_USERS') %}
+    <a href="{{ url('users') }}"
+       class="{% if area == 'users' %}active {% endif %}item">
+        Usuarios
+    </a>
+{% endif %}
+
+{% if is_granted('ROLE_PROVIDER') %}
+<a href="{{ url('provider_edit_data', {'id': app.user.provider.id}) }}"
+   class="{% if area == 'providers' and section == 'data' %}active {% endif %}item">
+    Proveedor
+</a>
+<a href="{{ url('provider_edit_contacts', {'id': app.user.provider.id}) }}"
+   class="{% if area == 'providers' and section == 'contacts' %}active {% endif %}item">
+    Contactos
+</a>
+<a href="{{ url('provider_edit_skills', {'id': app.user.provider.id}) }}"
+   class="{% if area == 'providers' and section == 'skills' %}active {% endif %}item">
+    Habilidades
+</a>
+<a href="{{ url('provider_edit_billing', {'id': app.user.provider.id}) }}"
+   class="{% if area == 'providers' and section == 'billing' %}active {% endif %}item">
+    Datos administrativos
+</a>
+{% endif %}

@@ -1,0 +1,56 @@
+imports:
+    - { resource: repositories.yml }
+    - { resource: factories.yml }
+    - { resource: listeners.yml }
+
+services:
+    doctrine_mongodb_param_converter:
+        class: Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DoctrineParamConverter
+        arguments: [@doctrine_mongodb]
+        tags: [{ name: request.param_converter }]
+
+    app.search.providers:
+        class: AppBundle\SearchEngine\ProvidersSearchEngine
+        arguments: [@persistence.provider_repository]
+    app.search.projects:
+        class: AppBundle\SearchEngine\ProjectsSearchEngine
+        arguments: [@persistence.project_repository]
+    app.search.users:
+        class: AppBundle\SearchEngine\UsersSearchEngine
+        arguments: [@persistence.user_repository]
+
+    app.array_paginator:
+        class: Component\Pagination\ArrayPaginator
+        arguments: [@router]
+    app.document_paginator:
+        class: Component\Pagination\DocumentPaginator
+        arguments: [@router]
+
+    app.twig.file_size:
+        class: Component\Twig\FileSizeExtension
+        tags: [{ name: twig.extension }]
+
+    app.form.type_extension.not_required:
+        class: AppBundle\Form\TypeExtension\NotRequiredTypeExtension
+        tags: [{ name: form.type_extension, alias: form }]
+
+    app.mailer:
+        class: Component\Mailer\Mailer
+        arguments: [@mailer, @templating, %mailer%]
+
+    app.form.registration:
+        class: AppBundle\Form\RegistrationType
+        arguments: [Persistence\Model\User]
+        tags:
+            - { name: form.type, alias: app_user_registration }
+
+    app.search.indexer.providers:
+        class: AppBundle\SearchEngine\Indexer\ProviderIndexer
+        arguments:
+            - @doctrine.odm.mongodb.document_manager
+            - @persistence.provider_repository
+    app.search.indexer.projects:
+        class: AppBundle\SearchEngine\Indexer\ProjectIndexer
+        arguments:
+            - @doctrine.odm.mongodb.document_manager
+            - @persistence.project_repository

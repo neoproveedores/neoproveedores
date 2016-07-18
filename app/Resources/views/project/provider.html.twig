@@ -1,0 +1,17 @@
+{% extends 'project/base.html.twig' %}
+
+{% set section = 'providers' %}
+{% block section %}
+
+{% include 'project/provider_content.html.twig' %}
+
+<div class="ui double action footer">
+    <a href="{{ url('project_providers', {'id': project.id}) }}" class="back">
+        <img src="{{ asset('images/close-action.svg') }}">
+        Cerrar y ver la lista de proovedores
+    </a>
+    <a href="{{ url('project_invite', {'id': project.id}) }}?providers[]={{ provider.id }}" class="ui large basic button">
+        Invitar a este proyecto
+    </a>
+</div>
+{% endblock %}

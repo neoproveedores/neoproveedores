@@ -1,0 +1,54 @@
+{% for project in pagination.items %}
+<tr href="{{ url('project_briefing', {'id': project.id}) }}">
+    <td>
+        <div class="name">
+            {{ project }}
+            <small>{{ project.code }}</small>
+        </div>
+    </td>
+    <td class="skills">
+    {% for ability in project.abilities[0:2] %}
+        <div class="skill">{{ ability }}</div>
+    {% endfor %}
+    {% if project.abilities|length > 2 %}
+        <div class="skill">+{{ project.abilities|length - 2 }}</div>
+    {% endif %}
+    </td>
+    <td class="amount">
+    {% if project.budget %}
+        <big>{{ project.budget.amount.value|number_format(0, ',' , '.') }}</big>
+        <small>€/Proyecto</small>
+    {% endif %}
+    </td>
+    {% set status_key = 'project.status.' ~ project.status %}
+    <td class="date">{{ status_key|trans }}</td>
+    <td class="date">{{ project.timing.end|date('d/m/Y') }}</td>
+</tr>
+{% endfor %}
+
+{% if pagination.more %}
+<tr data-remove>
+    <td colspan="5" class="ui single action">
+        <a href="{{ next_url }}" class="ui grey button" data-async="append">
+            Mostrar {{ pagination.more }} más
+        </a>
+    </td>
+</tr>
+{% endif %}
+
+{% if not pagination.items|length %}
+<tr class="empty">
+    <td colspan="5">
+        <div class="ui hidden divider"></div>
+        <h2 class="ui center aligned icon header">
+            <i class="info icon"></i>
+            <div class="content">
+                No hay resultados
+                <div class="sub header">
+                    No se han encontrado proyectos con los criterios de búsqueda utilizados
+                </div>
+            </div>
+        </h2>
+    </td>
+</tr>
+{% endif %}

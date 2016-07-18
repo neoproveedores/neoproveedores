@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="ui container">
+        <h2>Neoproveedores</h2>
+
+        <h3>Gestor</h3>
+        <ul>
+            {% for manager in managers %}
+            <li><a href="{{ url('test_manager', {'id': manager.id}) }}">Probar como gestor <strong>{{ manager.name }}</strong></a></li>
+            {% endfor %}
+        </ul>
+
+        <h3>Gestor de proyectos</h3>
+        <ul>
+            {% for manager in project_managers %}
+            <li><a href="{{ url('test_manager', {'id': manager.id}) }}">Probar como gestor de proyectos <strong>{{ manager.name }}</strong></a></li>
+            {% endfor %}
+        </ul>
+
+        <h3>Proveedores</h3>
+        <ul>
+            {% for provider in providers %}
+            <li><a href="{{ url('test_provider', {'id': provider.id}) }}">Probar como proveedor <strong>{{ provider }}</strong></a></li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

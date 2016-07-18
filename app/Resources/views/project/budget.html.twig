@@ -1,0 +1,141 @@
+{% extends 'project/base.html.twig' %}
+
+{% set section = 'budgets' %}
+{% block section %}
+<div class="ui content container">
+    <div class="ui provider navigation">
+        <a href="{{ url('project_budgets', {'id': project.id}) }}"
+           class="ui circular small basic button right floated">
+            <img src="{{ asset('images/close.svg') }}">
+        </a>
+
+        {% if previous %}
+        <a href="{{ url('project_budget', {'id': project.id, 'provider': previous.id}) }}"
+            class="ui circular small basic button left floated">
+            <img src="{{ asset('images/arrow-left.svg') }}">
+        </a>
+        {% endif %}
+
+        {% if next %}
+        <a href="{{ url('project_budget', {'id': project.id, 'provider': next.id}) }}"
+           class="ui circular small basic button left floated">
+            <img src="{{ asset('images/arrow-right.svg') }}">
+        </a>
+        {% endif %}
+    </div>
+
+    <div class="ui grid">
+        <div class="two wide column">
+            <div class="picture">
+                {{ provider.contact.getAvatarImage('huge')|raw }}
+            </div>
+        </div>
+
+        <div class="fourteen wide column">
+            <div class="ui header">
+                <div class="provider">
+                    <div class="name">{{ provider.contact }}</div>
+                    <div class="position">{{ provider.contact.position }}</div>
+                    <div class="rating">
+                        <div class="ui star rating" data-rating="{{ provider.metrics.averageRating }}"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui grid">
+                <div class="ten wide column">
+                    <p>{{ provider.notes }}</p>
+
+                    {% set download_url = url('download_budget', {
+                        'id': project.id,
+                        'provider': provider.id,
+                        'index': 'index'
+                    }) %}
+                    {% include 'common/files.html.twig' with {
+                        'class': 'basic',
+                        'files': budget.files
+                    } %}
+                </div>
+
+                <div class="six wide column">
+                    <div class="timing">
+                        <div class="amount">
+                            <big>{{ budget.amount.value|number_format(0, ',' , '.') }}</big>
+                            <small>€/Proyecto</small>
+                        </div>
+                        <div class="date">
+                            <big>{{ budget.timing.start|date('d/m/Y') }}</big>
+                            <small>inicio</small>
+                        </div>
+                        <div class="date">
+                            <big>{{ budget.timing.end|date('d/m/Y') }}</big>
+                            <small>fin</small>
+                        </div>
+
+                        <div class="notes">
+                            {{ budget.notes }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui very relaxed grid">
+                {% for skill in provider.skills[0:4] %}
+                <div class="four wide rating column">
+                    <div class="value" data-rating="{{ skill.rating }}">{{ skill.rating }}</div>
+                    <div class="ui skill rating" data-rating="{{ skill.rating }}"></div>
+                    <div class="competence">{{ skill.ability }}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ui info">
+    <div class="ui container">
+        <div class="ui contact grid">
+            <div class="four wide column">
+                <div class="person">
+                    <strong>{{ provider.contact }}</strong>
+                    <em>{{ provider.contact.position }}</em>
+                </div>
+            </div>
+            <div class="four wide column">
+                <div class="phone">
+                    <strong>{{ provider.contact.phone }}</strong>
+                    <em>{{ provider.contact.alternatePhone }}</em>
+                </div>
+            </div>
+            <div class="four wide column">
+                <div class="email">
+                    <a href="#">{{ provider.contact.email }}</a>
+                </div>
+            </div>
+            <div class="four wide column">
+                <div class="address">
+                    <strong>{{ provider.address.street }}.</strong>
+                    <em>
+                        {{ provider.address.city }}.
+                        {{ provider.address.region }}.
+                        {{ provider.address.postalCode }}.
+                        {{ provider.address.country }}.
+                    </em>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ui double action footer">
+    <a href="{{ url('project_budgets', {'id': project.id}) }}" class="back">
+        <img src="{{ asset('images/close-action.svg') }}">
+        Volver a la lista de presupuestos
+    </a>
+    {% if not project.assigned %}
+    <a href="{{ url('project_assign', {'id': project.id, 'provider': provider.id}) }}" class="ui large basic button">
+        Adjudicar el proyecto al proveedor
+    </a>
+    {% endif %}
+</div>
+{% endblock %}

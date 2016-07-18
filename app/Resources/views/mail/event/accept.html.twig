@@ -1,0 +1,21 @@
+<p class="lead">
+    <strong>{{ event.provider }}</strong>
+    ha aceptado presupuestar
+    <strong>{{ event.project }}</strong>.
+</p>
+
+<table class="callout" bgcolor="#ECF8FF">
+    <tr>
+        <td>
+            <a href="{{ url('project_briefing', {'id': event.project.id}) }}">
+                Ver proyecto
+            </a>
+        </td>
+
+        <td>
+            <a href="{{ url('provider_preview', {'id': event.provider.id}) }}">
+                Ver proveedor
+            </a>
+        </td>
+    </tr>
+</table>

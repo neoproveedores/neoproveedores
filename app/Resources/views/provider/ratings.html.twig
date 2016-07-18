@@ -1,0 +1,77 @@
+{% extends 'provider/base.html.twig' %}
+
+{% set section = 'rating' %}
+{% block section %}
+<div class="ui content container">
+    {% if ratings|length > 0 %}
+    <h3>Todas las valoraciones</h3>
+
+    {% for rating in ratings %}
+        <div class="ui skill">
+            <div class="header">
+                <div class="container">
+                    <div class="project">
+                        {% if rating.project %}
+                            {{ rating.project }}
+                        {% else %}
+                            Proyecto desconocido
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="ratings">
+                <div class="ui stackable very relaxed four column grid">
+                {% for item in rating.competences %}
+                    <div class="column">
+                        <div class="competence">
+                            {{ item.competence.name }}
+                        </div>
+
+                        <div class="ui star rating" data-rating="{{ item.rating }}"></div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+
+            <div class="notes">
+                {{ rating.notes }}
+            </div>
+
+            {% if rating.author %}
+            <div class="author">
+                {{ rating.author.contact.avatarImage('small')|raw }}
+                <div class="name">
+                    {{ rating.author.contact }}
+                </div>
+                <div class="date">
+                    {{ rating.created|date('d/m/Y') }}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+    {% else %}
+        <h2 class="ui icon center aligned header">
+            <i class="info icon"></i>
+            <div class="content">
+                Sin valoraciones
+                <div class="sub header">
+                        Este proveedor todavía no tiene valoraciones
+                </div>
+            </div>
+        </h2>
+    {% endif %}
+</div>
+
+<div class="ui double action footer">
+    <a href="{{ url('providers') }}" class="back">
+        <img src="{{ asset('images/close-action.svg') }}">
+        Cerrar y ver la lista de proovedores
+    </a>
+    <a href="{{ url('provider_rating', {'id': provider.id}) }}" class="ui basic button">
+        Ver evolución de las valoraciones
+    </a>
+</div>
+{% endblock %}

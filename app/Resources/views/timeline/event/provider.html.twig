@@ -1,0 +1,20 @@
+
+{{ event.user.contact.getAvatarImage()|raw }}
+
+<div class="moment">{{ event.created|ago }}</div>
+
+<div class="ui icon message">
+    <i class="shipping left icon"></i>
+    <div class="content">
+        {{ event.user.name }}
+        ha <strong>creado</strong> el proveedor
+        {{ event.provider }}
+    </div>
+    <i class="shipping right icon"></i>
+</div>
+
+<div class="links">
+    <a href="{{ url('provider_preview', {'id': event.provider.id}) }}">
+        Ver proveedor
+    </a>
+</div>

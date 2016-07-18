@@ -1,0 +1,11 @@
+{% for event in pagination.items %}
+    <div id="{{ event.id }}" class="{{ event.kind }} event">
+        {% include 'timeline/event/' ~ event.kind ~ '.html.twig' %}
+    </div>
+{% endfor %}
+
+{% if pagination.more %}
+    <a href="{{ next_url }}" class="ui button" data-async="append">
+        Mostrar {{ pagination.more }} más
+    </a>
+{% endif %}

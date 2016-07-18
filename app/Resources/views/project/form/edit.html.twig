@@ -1,0 +1,168 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    <div class="ui primary static header">
+        <div class="ui container">
+            <div class="ui box">
+                <div class="ui form stackable grid">
+                    <div class="left floated eight wide column">
+                        {% if form.name.vars.errors|length > 0 %}
+                        <div class="field error"
+                             data-content="{{ form.name.vars.errors }}">
+                        {% else %}
+                        <div class="field">
+                        {% endif %}
+                            <label>Título del proyecto</label>
+                            <div class="ui huge input">
+                                {{ form_widget(form.name) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right floated three wide column">
+                        {% if form.code.vars.errors|length > 0 %}
+                        <div class="field error"
+                             data-content="{{ form.code.vars.errors }}">
+                        {% else %}
+                        <div class="field">
+                        {% endif %}
+                            <label>Código</label>
+                            <div class="ui large input">
+                                {{ form_widget(form.code) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui content container">
+        <div class="ui form">
+            {{ form_errors(form) }}
+
+            {% if form.description.vars.errors|length > 0 %}
+            <div class="field error"
+                 data-content="{{ form.description.vars.errors }}">
+            {% else %}
+            <div class="field">
+            {% endif %}
+                <label>Breve descripción</label>
+                {{ form_widget(form.description) }}
+                <div class="counter"
+                     data-behavior="count"
+                     data-target="project_description">
+                     {{ project.description|length }} / 500
+                </div>
+            </div>
+
+            {% if form.abilities.vars.errors|length > 0 %}
+            <div class="field error"
+                 data-content="{{ form.abilities.vars.errors }}">
+            {% else %}
+            <div class="field">
+            {% endif %}
+                <label>Etiquetas</label>
+                {{ form_widget(form.abilities) }}
+            </div>
+
+            <div class="two fields">
+                {% if form.timing.start.vars.errors|length > 0 %}
+                <div class="field error"
+                     data-content="{{ form.timing.start.vars.errors }}">
+                {% else %}
+                <div class="field">
+                {% endif %}
+                    <label>Inicio de proyecto</label>
+                    <div class="ui right labeled date input">
+                        <input type="text"
+                               name="project[timing][start]"
+                               {% if project.timing %}
+                               data-value="{{ project.timing.start|date('Y-m-d') }}"
+                               {% endif %}
+                               placeholder="Selecciona fecha">
+                        <div class="ui basic label">
+                            <img src="{{ asset('images/calendar.svg') }}">
+                        </div>
+                    </div>
+                </div>
+
+                {% if form.timing.end.vars.errors|length > 0 %}
+                <div class="field error"
+                     data-content="{{ form.timing.end.vars.errors }}">
+                {% else %}
+                <div class="field">
+                {% endif %}
+                    <label>Entrega de proyecto</label>
+                    <div class="ui right labeled date input">
+                        <input type="text"
+                               name="project[timing][end]"
+                               {% if project.timing %}
+                               data-value="{{ project.timing.end|date('Y-m-d') }}"
+                               {% endif %}
+                               placeholder="Selecciona fecha">
+                        <div class="ui basic label">
+                            <img src="{{ asset('images/calendar.svg') }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% if form.briefing.vars.errors|length > 0 %}
+            <div class="field error"
+                 data-content="{{ form.briefing.vars.errors }}">
+            {% else %}
+            <div class="field">
+            {% endif %}
+                <label>Briefing</label>
+
+                {% embed 'common/editor.html.twig' with {
+                    'placeholder': 'Escribe el brief del proyecto lo más completo posible',
+                    'content': project.briefing
+                } %}
+                    {% block input %}
+                        {{ form_widget(form.briefing) }}
+                    {% endblock %}
+                {% endembed %}
+            </div>
+
+            <div class="field">
+                <label>Documentos adjuntos</label>
+
+                {% include 'common/files.html.twig' with {
+                    'class': 'lite',
+                    'files': project.files
+                } %}
+
+                {% include 'common/drop.files.html.twig' with {
+                    'input': "project[files][#{project.files|length}][upload]"
+                } %}
+            </div>
+        </div>
+    </div>
+
+    {% if project.hasStatus(constant('DRAFT', project)) %}
+    <div class="ui double action footer">
+        <a href="{{ url('projects') }}" class="back">
+            <img src="{{ asset('images/close-action.svg') }}">
+            Cancelar creación de proyecto
+        </a>
+        <button type="submit" class="ui large basic button">
+            Crear proyecto y seleccionar candidatos
+        </button>
+    </div>
+    {% else %}
+    <div class="ui double action footer">
+        <a href="{{ url('project_briefing', {'id': project.id}) }}" class="back">
+            <img src="{{ asset('images/close-action.svg') }}">
+            Cancelar y volver al proyecto
+        </a>
+        <button type="submit" class="ui large basic button">
+            Guardar proyecto
+        </button>
+    </div>
+    {% endif %}
+
+    {{ form_widget(form._token) }}
+</form>
+{% endblock %}

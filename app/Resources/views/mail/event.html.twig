@@ -1,0 +1,30 @@
+{% extends 'mail/base.html.twig' %}
+
+{% block header %}
+    <h6 class="collapse">
+        Notificación
+    </h6>
+{% endblock %}
+
+{% block content %}
+    <table>
+        <tr>
+            <td>
+                <h3>Hi, {{ receiver.name }}</h3>
+
+                {% include 'mail/event/' ~ event.kind ~ '.html.twig' %}
+
+            </td>
+        </tr>
+    </table>
+{% endblock %}
+
+{% block footer %}
+    {% if disableNotificationsToken is defined %}
+        <a href="{{ url('disable_notifications', {'disableNotificationsToken': receiver.disableNotificationsToken}) }}">
+            <unsubscribe>
+                Desactivar notificaciones
+            </unsubscribe>
+        </a>
+    {% endif %}
+{% endblock %}

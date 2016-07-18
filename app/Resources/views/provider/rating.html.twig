@@ -1,0 +1,102 @@
+{% extends 'provider/base.html.twig' %}
+
+{% set section = 'rating' %}
+{% block section %}
+<div class="ui content container">
+    {% if competences|length > 0 %}
+    <h3>Valoración</h3>
+
+    <div class="ui very relaxed stackable grid">
+        {% for competence, ratings in competences %}
+            <div class="eight wide column">
+                <div class="ui rating evolution">
+                    <div class="header">
+                        <div class="competence">
+                            {{ competence }}
+                            {% if ratings|last > ratings[ratings|length - 2] %}
+                                <img src="{{ asset('images/evolution-up.svg') }}">
+                            {% elseif ratings|last < ratings[ratings|length - 2] %}
+                                <img src="{{ asset('images/evolution-down.svg') }}">
+                            {% else %}
+                                <img src="{{ asset('images/evolution-equal.svg') }}">
+                            {% endif %}
+                        </div>
+                        <div class="ui star rating" data-rating="{{ ratings|last }}"></div>
+                    </div>
+                    <div class="chart" data="{{ ratings|join(',') }}">
+                        <div class="evolution value">0</div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if last_ratings|length %}
+        <h3>Últimos comentarios</h3>
+
+        <div class="ui very relaxed stackable grid">
+        {% for rating in last_ratings %}
+            <div class="eight wide column">
+                <div class="ui skill">
+                    <div class="header">
+                        <div class="container">
+                            <div class="project">
+                                {% if rating.project %}
+                                    {{ rating.project }}
+                                {% else %}
+                                    Proyecto desconocido
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="notes">
+                        {{ rating.notes }}
+                    </div>
+                    {% if rating.author %}
+                    <div class="author">
+                        {{ rating.author.contact.avatarImage('small')|raw }}
+                        <div class="name">
+                            {{ rating.author.contact }}
+                        </div>
+                        <div class="date">
+                            {{ rating.created|date('d/m/Y') }}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    {% endif %}
+
+    {% else %}
+        <h2 class="ui icon center aligned header">
+            <i class="info icon"></i>
+            <div class="content">
+                Sin valoraciones
+                <div class="sub header">
+                        Este proveedor todavía no tiene valoraciones
+                </div>
+            </div>
+        </h2>
+    {% endif %}
+</div>
+
+<div class="ui double action footer">
+    <a href="{{ url('providers') }}" class="back">
+        <img src="{{ asset('images/close-action.svg') }}">
+        Cerrar y ver la lista de proovedores
+    </a>
+    <a href="{{ url('provider_ratings', {'id': provider.id}) }}" class="ui basic button">
+        Ver todas las valoraciones
+    </a>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+var ratingInfo = JSON.parse('{{ rating_info|json_encode|raw }}');
+</script>
+
+{{ parent() }}
+{% endblock %}

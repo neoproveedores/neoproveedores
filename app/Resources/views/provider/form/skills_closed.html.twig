@@ -1,0 +1,23 @@
+{% extends 'provider/form/base.html.twig' %}
+
+{% block section %}
+    <div class="ui container">
+        <div class="ui hidden massive divider"></div>
+
+        <h1 class="ui icon center aligned header">
+            <i class="lock icon"></i>
+            <div class="content">
+                Habilidades cerradas
+
+                <div class="sub header">
+                    Tus habilidades están cerradas y por lo tanto ya no puedes modificarlas o añadir nuevas,<br />si necesitas volver a editar tus habilidades ponte en
+                    <a href="mailto:{{ contact_email }}">
+                        contacto con nosotros
+                    </a>
+                </div>
+            </div>
+        </h1>
+
+        <div class="ui hidden massive divider"></div>
+    </div>
+{% endblock %}

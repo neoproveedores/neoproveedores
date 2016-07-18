@@ -1,0 +1,124 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<div class="ui primary header">
+    <div class="ui container">
+        <h2>Proveedores</h2>
+
+        <a href="{{ url('providers') }}"
+           class="ui circular small basic button right floated">
+            <img src="{{ asset('images/close.svg') }}">
+        </a>
+    </div>
+</div>
+
+<div class="ui provider header">
+    <div class="ui container">
+        {% if next %}
+        <a href="{{ url('provider_' ~ section, {'id': next.id}) }}"
+           class="ui circular small basic button right floated">
+            <img src="{{ asset('images/arrow-right.svg') }}">
+        </a>
+        {% endif %}
+
+        {% if previous %}
+        <a href="{{ url('provider_' ~ section, {'id': previous.id}) }}"
+            class="ui circular small basic button right floated">
+            <img src="{{ asset('images/arrow-left.svg') }}">
+        </a>
+        {% endif %}
+
+        <div class="provider">
+            <div class="picture">
+                {{ provider.contact.getAvatarImage('huge')|raw }}
+            </div>
+            <div class="name">{{ provider.contact }}</div>
+            <div class="position">{{ provider.contact.position }}</div>
+            <div class="rating">
+                <div class="ui star rating"
+                     data-rating="{{ provider.metrics.averageRating }}">
+                 </div>
+            </div>
+        </div>
+
+        <div class="ui fluid {% if is_granted('ROLE_EDIT_PROVIDER') %}six{% else %}five{% endif %} item secondary pointing compactable menu">
+            <a href="{{ url('provider_preview', {'id': provider.id}) }}"
+               class="{% if section == 'preview' %}active {% endif %}item">
+                Vista previa
+            </a>
+            <a href="{{ url('provider_contacts', {'id': provider.id}) }}"
+               class="{% if section == 'contacts' %}active {% endif %}item">
+                Contactos
+            </a>
+            <a href="{{ url('provider_skills', {'id': provider.id}) }}"
+               class="{% if section == 'skills' %}active {% endif %}item">
+                Habilidades
+            </a>
+
+            <a href="{{ url('provider_projects', {'id': provider.id}) }}"
+               class="{% if section == 'projects' %}active {% endif %}item">
+                Proyectos
+            </a>
+            <a href="{{ url('provider_rating', {'id': provider.id}) }}"
+               class="{% if section == 'rating' %}active {% endif %}item">
+                Valoración
+            </a>
+
+            <div class="ui {% if not is_granted('ROLE_EDIT_PROVIDER') %}mobile only{% endif %} dropdown item">
+                <span class="moar">&bull;&bull;&bull;</span>
+                <div class="menu">
+                    <a href="{{ url('provider_preview', {'id': provider.id}) }}"
+                       class="item mobile only">
+                        Vista previa
+                    </a>
+                    <a href="{{ url('provider_contacts', {'id': provider.id}) }}"
+                       class="item mobile only">
+                        Contactos
+                    </a>
+                    <a href="{{ url('provider_skills', {'id': provider.id}) }}"
+                       class="item mobile only">
+                        Habilidades
+                    </a>
+                    <a href="{{ url('provider_projects', {'id': provider.id}) }}"
+                       class="item mobile only">
+                        Proyectos
+                    </a>
+                    <a href="{{ url('provider_rating', {'id': provider.id}) }}"
+                       class="item mobile only">
+                        Valoración
+                    </a>
+
+                    {% if is_granted('ROLE_EDIT_PROVIDER') %}
+                        <a href="{{ url('provider_edit_data', {'id': provider.id}) }}"
+                           class="item">
+                            Editar proveedor
+                        </a>
+                        <a href="{{ url('provider_edit_contacts', {'id': provider.id}) }}"
+                           class="item">
+                            Editar contactos
+                        </a>
+                        <a href="{{ url('provider_edit_skills', {'id': provider.id}) }}"
+                           class="item">
+                            Editar habilidades
+                        </a>
+                        <a href="{{ url('provider_edit_billing', {'id': provider.id}) }}"
+                           class="item">
+                            Datos administrativos
+                        </a>
+                    {% endif %}
+
+                    {% if is_granted('ROLE_REMOVE_PROVIDER') %}
+                    <div data-confirm="{{ url('remove_provider', {'id': provider.id}) }}" data-title="¿Seguro que quieres eliminar el proveedor?" data-message="También se borrarán todos los datos relacionados con el proveedor como presupuestos, mensajes, valoraciones, etc." class="item">
+                        Eliminar proveedor
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui divider"></div>
+</div>
+
+{% block section %}{% endblock %}
+{% endblock %}

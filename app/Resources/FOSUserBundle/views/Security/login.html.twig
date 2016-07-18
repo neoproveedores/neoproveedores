@@ -1,0 +1,40 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+<form class="ui form" action="{{ path("fos_user_security_check") }}" method="post">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+    <h2>Entra con tu cuenta</h2>
+
+    {% if error %}
+        <div class="ui red message">
+            {{ error.messageKey|trans(error.messageData, 'security') }}
+        </div>
+    {% endif %}
+
+    <div class="field">
+        <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" placeholder="Correo electrónico">
+    </div>
+
+    <div class="field">
+        <input type="password" id="password" name="_password" required="required" placeholder="{{ 'security.login.password'|trans }}">
+    </div>
+
+    <div class="field hide">
+        <div class="ui checkbox">
+            <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+            <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+        </div>
+    </div>
+
+    <input type="submit" class="ui large basic fluid button" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}">
+</form>
+
+<div class="ui basic segment">
+    <a href="{{ url('fos_user_resetting_request') }}">
+        ¿No recuerdas tu contraseña?
+    </a>
+</div>
+{% endblock fos_user_content %}

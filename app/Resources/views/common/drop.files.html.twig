@@ -1,0 +1,11 @@
+<div class="ui drop {% if class is defined %}{{ class }}{% endif %} files">
+    <img src="{{ asset('images/drop.svg') }}">
+    Arrastra el archivo adjunto
+    <a>o pulsa para seleccionar de tu ordenador</a>
+    <strong class="selected hide">
+        <span class="count">0</span>
+        <span class="singular hide">fichero seleccionado</span>
+        <span class="plural hide">ficheros seleccionados</span>
+    </strong>
+    <input type="file" name="{{ input }}">
+</div>

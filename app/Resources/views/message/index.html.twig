@@ -1,0 +1,56 @@
+{% if messages|length > 0 %}
+    <div class="ui divider"></div>
+
+    <div class="ui comments">
+        {% for message in messages %}
+        <div id="{{ message.id }}"
+             class="{% if message.author == app.user %}your {% endif %}comment">
+            <div class="ui container">
+                <a class="avatar">
+                    {{ message.getAvatarImage('big')|raw }}
+                </a>
+                <div class="content">
+                    {% if message.author == app.user %}
+                    <a class="author">Tú</a>
+                    {% else %}
+                    <a class="author">{{ message.getName() }}</a>
+                    {% endif %}
+                    <div class="metadata">
+                        <span class="date">
+                            {{ message.created|date('d/m/Y') }}
+                        </span>
+                    </div>
+                    <div class="text">
+                        {{ message.body }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<div class="ui divider"></div>
+
+<div class="ui container">
+    <form action="{{ app.request.uri }}"
+          method="post"
+          class="ui reply form"
+          data-async>
+        <button type="submit" class="ui image button">
+            <img src="{{ asset('images/send.svg') }}">
+        </button>
+        <div class="field">
+            {{ form_widget(form.body) }}
+            <div class="counter"
+                 data-behavior="count"
+                 data-target="message_body">
+                 0 / 500
+            </div>
+        </div>
+
+        {{ form_errors(form) }}
+
+        {{ form_widget(form._token) }}
+    </form>
+</div>

@@ -1,0 +1,251 @@
+{% extends 'project/base.html.twig' %}
+
+{% block section %}
+    <div class="ui content container">
+        <div class="ui briefing">
+            <h2>Briefing</h2>
+
+            {{ project.briefing|raw }}
+        </div>
+
+        {% include 'common/files.html.twig' with {'files': project.files} %}
+    </div>
+
+
+    {% if is_granted('ROLE_PROVIDER') %}
+    <div class="async container"
+         data-load="{{ url('messages_project', {'id': project.id}) }}">
+    </div>
+
+    {% if project_provider.hasStatus(constant('INVITED', project_provider)) %}
+    <div class="ui double action footer"
+         data-initial="modal"
+         data-target="invitation">
+        <a href="{{ url('projects') }}" class="back">
+            Me lo pienso y vuelvo en otro momento
+        </a>
+        <div class="ui large basic button"
+           data-trigger="modal"
+           data-target="invitation">
+            Aceptar o rechazar proyecto
+        </div>
+    </div>
+    {% endif %}
+
+    {% if project_provider.hasStatus(constant('ACCEPTED', project_provider)) %}
+    <div class="ui double action footer">
+        <a href="{{ url('projects') }}" class="back">
+            Me lo pienso y vuelvo en otro momento
+        </a>
+        <a href="{{ url('project_create_budget', {'id': project.id}) }}"
+           class="ui large green button">
+            Presupuestar proyecto
+        </a>
+    </div>
+    {% endif %}
+
+    {% if project_provider.hasStatus(constant('BUDGETED', project_provider)) %}
+    <div class="ui double action footer">
+        <a href="{{ url('projects') }}" class="back">
+            Volver a la lista de proyectos
+        </a>
+        <a href="{{ url('project_edit_budget', {'id': project.id}) }}"
+           class="ui large green button">
+            Consultar y/o modificar presupuesto
+        </a>
+    </div>
+    {% endif %}
+
+    {% if project_provider.hasStatus(constant('REJECTED', project_provider)) %}
+    <div class="ui signle action footer"
+         data-initial="modal"
+         data-target="already rejected">
+        <a href="{{ url('projects') }}" class="back">
+            Volver a la lista de proyectos
+        </a>
+    </div>
+    {% endif %}
+    {% endif %}
+
+    {% if is_granted('ROLE_EDIT_PROJECT') %}
+    <div class="ui double action footer">
+        <a href="{{ url('projects') }}" class="back">
+            <img src="{{ asset('images/back-action.svg') }}">
+            Volver a todos los proyectos
+        </a>
+
+        {% if project.editable %}
+            <a href="{{ url('project_edit', {'id': project.id}) }}"
+               class="ui large basic button">
+                Editar el proyecto
+            </a>
+        {% endif %}
+    </div>
+    {% endif %}
+{% endblock %}
+
+{% block modals %}
+    {% if is_granted('ROLE_SEND_BUDGET') %}
+    <div class="ui initial modal" data-modal="invitation">
+        <div class="header">
+            <img src="{{ asset('images/unlock.svg') }}">
+            ¿Te animas?
+        </div>
+        <div class="content">
+            <h3>{{ project.name }}</h3>
+
+            <div class="ui two column grid">
+                <div class="column">
+                    <h4>
+                        Fecha inicio:
+                        <em>{{ project.timing.start|date('d M Y') }}</em>
+                    </h4>
+                </div>
+                <div class="column">
+                    <h4>
+                        Fecha final:
+                        <em>{{ project.timing.end|date('d M Y') }}</em>
+                    </h4>
+                </div>
+            </div>
+
+            <div class="ui divider"></div>
+
+            <p>{{ project.description }}</p>
+        </div>
+        <div class="actions">
+            <div class="ui large basic deny button">Ver briefing completo</div>
+            <div class="ui deny large grey button"
+                 data-trigger="modal"
+                 data-target="rejection">
+                Rechazar proyecto
+            </div>
+            <a href="{{ url('project_accept', {'id': project.id}) }}"
+               class="ui positive large green button">
+                Aceptar proyecto
+            </a>
+        </div>
+    </div>
+
+    <form action="{{ url('project_reject', {'id': project.id}) }}"
+          method="post"
+          class="ui modal"
+          data-modal="rejection"
+          data-async>
+        <div class="header">
+            <img src="{{ asset('images/unhappy.svg') }}">
+            ¿Por qué no puedes hacer el proyecto?
+        </div>
+        <div class="content">
+            <div class="ui form">
+                <div class="field">
+                    <label>Tiempo</label>
+                    <div class="three fields">
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="rejection[reason]"
+                                       value="Tengo mucho trabajo">
+                                <label>Tengo mucho trabajo</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="rejection[reason]"
+                                       value="Fechas complicadas">
+                                <label>Fechas complicadas</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="rejection[reason]"
+                                       value="Timing muy ajustado">
+                                <label>Timing muy ajustado</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Briefing</label>
+                    <div class="three fields">
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="rejection[reason]"
+                                       value="El brief no está claro">
+                                <label>El brief no está claro</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="rejection[reason]"
+                                       value="No estoy capacitado<">
+                                <label>No estoy capacitado</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="rejection[reason]"
+                                       value="No es lo que busco">
+                                <label>No es lo que busco</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Notas</label>
+                    <textarea name="rejection[notes]"
+                              placeholder="Notas adicionales"></textarea>
+                    <div class="counter"
+                         data-behavior="count"
+                         data-target="rejection_notes">
+                         0 / 500
+                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <a href="#" class="deny back"
+               data-trigger="modal"
+               data-target="invitation">
+                <img src="{{ asset('images/back-modal.svg') }}">
+                Quiero volver y pensármelo
+            </a>
+            <button type="submit" class="ui large green button"
+                 data-success="modal"
+                 data-target="rejected">
+                Enviar comentarios
+            </button>
+        </div>
+    </form>
+
+    <div class="ui modal" data-modal="rejected">
+        <div class="header">
+            <img src="{{ asset('images/happy.svg') }}">
+            En otra ocasión será
+        </div>
+        <div class="actions">
+            <a href="{{ url('projects') }}" class="ui deny large grey button">
+                Volver a la lista de proyectos
+            </a>
+        </div>
+    </div>
+
+    <div class="ui modal" data-modal="already rejected">
+        <div class="header">
+            <img src="{{ asset('images/happy.svg') }}">
+            Ya rechazaste este proyecto
+        </div>
+        <div class="content">
+            <p>Hace unos días pasaste por aquí para decirnos que no podías hacer el proyecto y que preferías no entretenernos con presupuestos e historias, ¿te acuerdas?</p>
+            <p>Entiendes que desde ese momento nos pusimos a buscar y buscar gente que nos ayudase y que para ti es tarde, sólo para este proyecto, para otros seguro que contamos contigo.</p>
+            <p>Si crees que ha pasado algo y estas muy interesado escribe a hello@dominio.com nos lo cuentas y nosotros te damos respuesta.</p>
+        </div>
+        <div class="actions">
+            <a href="{{ url('projects') }}" class="ui deny large grey button">
+                Volver a la lista de proyectos
+            </a>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

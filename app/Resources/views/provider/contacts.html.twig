@@ -1,0 +1,52 @@
+{% extends 'provider/base.html.twig' %}
+
+{% set section = 'contacts' %}
+{% block section %}
+<div class="ui content container">
+    {% if provider.contacts|length > 0 %}
+        <h3>Contactos</h3>
+
+        <table class="ui contacts table">
+            <tbody>
+                {% for contact in provider.contacts %}
+                <tr>
+                    <td class="picture">
+                        {{ contact.getAvatarImage('big')|raw }}
+                    </td>
+                    <td class="person">
+                        <strong>{{ contact }}</strong>
+                        <em>{{ contact.position }}</em>
+                    </td>
+                    <td class="email">
+                        <a href="mailto:{{ contact.email }}">{{ contact.email }}</a>
+                    </td>
+                    <td class="phone">{{ contact.phone }}</td>
+                    <td class="phone">{{ contact.alternatePhone }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h2 class="ui icon center aligned header">
+            <i class="info icon"></i>
+            <div class="content">
+                Sin contactos
+                <div class="sub header">
+                    Este proveedor todavía no tiene contactos
+                </div>
+            </div>
+        </h2>
+    {% endif %}
+</div>
+
+<div class="ui double action footer">
+    <a href="{{ url('providers') }}" class="back">
+        <img src="{{ asset('images/close-action.svg') }}">
+        Cerrar y ver la lista de proovedores
+    </a>
+    <a href="{{ url('provider_edit_contacts', {'id': provider.id}) }}"
+       class="ui large basic button">
+        Editar contactos del proveedor
+    </a>
+</div>
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends 'project/base.html.twig' %}
+
+{% set section = 'budgets' %}
+{% block section %}
+{% if project.providersWithBudget|length > 0 %}
+    <div class="ui content container">
+        <h2>Presupuestos recibidos</h2>
+
+        <table class="ui budgets choices table">
+            <thead>
+                <tr>
+                    <th>
+                        {% if project.hasStatus(constant('RECEIVING', project)) %}
+                        <img src="{{ asset('images/choice.svg') }}">
+                        {% endif %}
+                    </th>
+                    <th colspan="2">
+                        Nombre
+                    </th>
+                    <th>Presupuesto</th>
+                    <th>Timing</th>
+                    <th>Valoración</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for pr in project.providers %}
+                {% if pr.budget %}
+                <tr href="{{ url('project_budget', {'id': project.id, 'provider': pr.provider.id}) }}"
+                    class="{{ pr.status }}">
+                    <td class="choice">
+                        {% if project.hasStatus(constant('RECEIVING', project)) %}
+                        <div class="ui checkbox">
+                            <input type="checkbox" name="provider" value="{{ pr.provider.id }}">
+                            <label></label>
+                        </div>
+                        {% endif %}
+
+                        {% if pr.hasStatus(constant('ASSIGNED', pr)) %}
+                        <i class="checkmark icon"></i>
+                        {% endif %}
+                    </td>
+                    <td class="picture">
+                        {{ pr.provider.contact.getAvatarImage('big')|raw }}
+                    </td>
+                    <td class="name">
+                        <strong>{{ pr.provider }}</strong>
+                        <a href="{{ url('provider_preview', {'id': pr.provider.id}) }}">
+                            Ver perfil
+                        </a>
+                    </td>
+                    <td class="amount">
+                        <big>{{ pr.budget.amount.value|number_format(0, ',' , '.') }}</big>
+                        <small>€/Proyecto</small>
+                    </td>
+                    <td class="timing">
+                        <div class="date">
+                            <big>{{ pr.budget.timing.start|date('d/m/Y') }}</big>
+                            <small>inicio</small>
+                        </div>
+                        <div class="date">
+                            <big>{{ pr.budget.timing.end|date('d/m/Y') }}</big>
+                            <small>fin</small>
+                        </div>
+                    </td>
+                    <td class="rating">
+                        <div class="ui star rating" data-rating="{{ pr.provider.metrics.averageRating }}"></div>
+                    </td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% if project.hasStatus(constant('RECEIVING', project)) %}
+    <div class="ui double action footer">
+        <a href="{{ url('projects') }}" class="back">
+            <img src="{{ asset('images/back-action.svg') }}">
+            Volver y adjudicar en otro momento
+        </a>
+        <a data-href="{{ url('project_assign', {'id': project.id, 'provider': 'id'}) }}"
+           class="ui large basic button hide"
+           data-trigger="assign">
+            Adjudicar al proveedor
+        </a>
+    </div>
+    {% endif %}
+
+    {% if project.hasStatus(constant('ASSIGNED', project)) %}
+    <div class="ui double action footer">
+        <a href="{{ url('projects') }}" class="back">
+            <img src="{{ asset('images/back-action.svg') }}">
+            Volver y valorar en otro momento
+        </a>
+        <a href="{{ url('project_rating', {'id': project.id}) }}"
+           class="ui large basic button">
+            Finalizar el proyecto y valorar
+        </a>
+    </div>
+    {% endif %}
+{% else %}
+    <div class="ui content container">
+        <h2 class="ui icon center aligned header">
+            <i class="info icon"></i>
+            <div class="content">
+                Sin presupuestos
+                <div class="sub header">
+                    Este proyecto todavía no ha recibido presupuesto
+                </div>
+            </div>
+        </h2>
+    </div>
+
+    <div class="ui single action footer">
+        <a href="{{ url('project_providers', {'id': project.id}) }}"
+           class="back">
+            Invitar a otros proveedores
+        </a>
+    </div>
+{% endif %}
+{% endblock %}

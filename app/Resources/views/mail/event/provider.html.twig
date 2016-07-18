@@ -1,0 +1,15 @@
+<p class="lead">
+    <strong>{{ event.user.name }}</strong>
+    ha creado el proveedor
+    <strong>{{ event.provider }}</strong>.
+</p>
+
+<table class="callout" bgcolor="#ECF8FF">
+    <tr>
+        <td>
+            <a href="{{ url('provider_preview', {'id': event.provider.id}) }}">
+                Ver proveedor
+            </a>
+        </td>
+    </tr>
+</table>

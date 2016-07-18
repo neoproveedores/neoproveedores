@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <title>{% block title %}Neo Gestión de proveedores{% endblock %}</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,500">
+        <link rel="stylesheet" href="{{ asset('styles/main.css') }}">
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        {% block body %}
+
+        {% if app.user %}
+        <div class="ui sidebar inverted vertical menu">
+            {% include 'menu.html.twig' %}
+        </div>
+        {% endif %}
+
+        <div class="pusher">
+            <div class="ui {{ area }} app">
+                <div class="ui top fixed inverted menu">
+                    <a href="{{ url('index') }}" class="header item">
+                        <img src="{{ asset('images/logo.png') }}" />
+                    </a>
+
+                    {% if app.user %}
+
+                    <div class="icon item" data-trigger="sidebar">
+                        <i class="sidebar icon"></i>
+                    </div>
+
+                    {% include 'menu.html.twig' %}
+
+                    <div class="right menu">
+                        <div data-load="{{ url('messages_unread') }}"
+                             data-reload="30">
+                        </div>
+
+                        {% if is_granted('ROLE_MANAGER') %}
+                        <div data-load="{{ url('unview_events') }}"
+                             data-reload="30">
+                        </div>
+                        {% endif %}
+
+                        <div class="ui top right dropdown item">
+                            {{ app.user.name }}
+                            <div class="menu">
+                                <a href="{{ url('update_profile') }}" class="item">
+                                    Editar perfil
+                                </a>
+                                <a href="{{ url('update_password') }}" class="item">
+                                    Cambiar contraseña
+                                </a>
+                                <a href="{{ url('manage_notifications') }}" class="item">
+                                    Gestionar notificaciones
+                                </a>
+                                <a href="{{ url('fos_user_security_logout') }}" class="item">
+                                    Cerrar sesión
+                                </a>
+                            </div>
+                        </div>
+
+                        {% else %}
+
+                            <div class="right menu">
+                                <a href="{{ url('fos_user_security_login') }}" class="item">
+                                    Iniciar sesión
+                                </a>
+                            </div>
+
+                        {% endif %}
+                    </div>
+                </div>
+
+                {% block content %}{% endblock %}
+
+                <div class="ui copyright">
+                    <div class="ui container">
+                        © 2016 Neo Labels Company, S. L.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        {% block modals %}{% endblock %}
+
+        {% endblock %}
+
+        {% block javascript %}
+        <script src="{{ asset('components/jquery/dist/jquery.js') }}"></script>
+        <script src="{{ asset('components/jquery-ui/jquery-ui.js') }}"></script>
+        <script src="{{ asset('components/semantic-ui/dist/semantic.js') }}"></script>
+        <script src="{{ asset('components/d3/d3.js') }}"></script>
+        <script src="{{ asset('components/quill/dist/quill.js') }}"></script>
+        <script src="{{ asset('components/quill-placeholder/placeholder.js') }}"></script>
+        <script src="{{ asset('components/pickadate/lib/picker.js') }}"></script>
+        <script src="{{ asset('components/pickadate/lib/picker.date.js') }}"></script>
+        <script src="{{ asset('components/pickadate/lib/picker.time.js') }}"></script>
+        <script src="{{ asset('components/pickadate/lib/translations/es_ES.js') }}"></script>
+        <script src="{{ asset('scripts/main.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>

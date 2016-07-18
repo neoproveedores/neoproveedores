@@ -1,0 +1,97 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% form_theme form _self %}
+
+{% block widget_attributes %}
+    {% if label is not same as(false) %}
+        {% if not compound %}
+            {% set label_attr = label_attr|merge({'for': id}) %}
+        {% endif %}
+        {% if required %}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+        {% endif %}
+        {% if label is empty %}
+            {% if label_format is not empty %}
+                {% set label = label_format|replace({
+                    '%name%': name,
+                    '%id%': id,
+                }) %}
+            {% else %}
+                {% set label = name|humanize %}
+            {% endif %}
+        {% endif %}
+    {% endif %}
+    {% set attr = attr|merge({'placeholder': label|trans({}, translation_domain)}) %}
+
+    name="{{ full_name }}"
+    {% if disabled %} disabled="disabled"{% endif %}
+    {% if required %} required="required"{% endif %}
+    {% for attrname, attrvalue in attr %}
+        {{- " " -}}
+        {% if attrname in ['placeholder', 'title'] %}
+            {{- attrname }}="{{ translation_domain is same as(false) ? attrvalue : attrvalue|trans({}, translation_domain) }}"
+        {% elseif attrvalue is same as(true) %}
+            {{- attrname }}="{{ attrname }}"
+        {% elseif attrvalue is not same as(false) %}
+            {{- attrname }}="{{ attrvalue }}"
+        {% endif %}
+    {% endfor %}
+
+    {%- if errors|length > 0 -%}
+        data-error="{{ errors[0].message }}"
+    {%- endif -%}
+{% endblock widget_attributes %}
+
+{% block fos_user_content %}
+<form class="ui user form" action="{{ path("fos_user_registration_register") }}" method="post">
+    <h2>Registrarse como proveedor</h2>
+
+    {% if not form.vars.valid %}
+        <div class="ui red message">
+            {{ form_errors(form) }}
+        </div>
+    {% endif %}
+
+    <div class="field">
+        {{ form_widget(form.provider.kind) }}
+    </div>
+
+    <div class="field" data-kind="freelance">
+        {{ form_widget(form.provider.contact.firstName) }}
+    </div>
+
+    <div class="field" data-kind="freelance">
+        {{ form_widget(form.provider.contact.lastName) }}
+    </div>
+
+    <div class="hide field" data-kind="company">
+        {{ form_widget(form.provider.contact.businessName) }}
+    </div>
+
+    <div class="field">
+        {{ form_widget(form.email) }}
+    </div>
+
+    <div class="field">
+        {{ form_widget(form.plainPassword.first) }}
+    </div>
+
+    <div class="field">
+        {{ form_widget(form.plainPassword.second) }}
+    </div>
+
+    {{ form_widget(form._token) }}
+
+    <button type="submit" class="ui large basic fluid button">
+        Registrarse
+    </button>
+</form>
+
+<div class="ui basic segment">
+    <a href="{{ url('fos_user_security_check') }}">
+        ¿Ya tienes cuenta?
+    </a>
+</div>
+{% endblock fos_user_content %}

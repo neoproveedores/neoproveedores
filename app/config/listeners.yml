@@ -1,0 +1,31 @@
+services:
+    app.listener.exception:
+        class: AppBundle\EventListener\ExceptionListener
+        arguments:
+            - @templating
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }
+
+    app.listener.ability_metrics:
+        class: AppBundle\EventListener\AbilityMetricsListener
+        tags:
+            - { name: doctrine_mongodb.odm.event_listener, event: postPersist }
+            - { name: doctrine_mongodb.odm.event_listener, event: postUpdate }
+
+    app.listener.async_request_authentication:
+        class: AppBundle\EventListener\AsyncRequestAuthenticationListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException, priority: 1000 }
+
+    app.listener.mail_notifications:
+        class: AppBundle\EventListener\NotificationsListener
+        arguments: [@app.mailer, @translator, @persistence.user_repository, @logger]
+        tags:
+            - { name: kernel.event_listener, event: app.user_action, method: onUserAction }
+
+    app.listener.registration:
+        class: AppBundle\EventListener\RegistrationListener
+        arguments: [@router]
+        tags:
+            - { name: kernel.event_listener, event: fos_user.registration.initialize, method: onRegistrationInitialize }
+            - { name: kernel.event_listener, event: fos_user.registration.completed, method: onRegistrationCompleted }

@@ -1,0 +1,4 @@
+services:
+    persistence.rating_factory:
+        class: Persistence\Factory\RatingFactory
+        arguments: [@persistence.competence_repository]

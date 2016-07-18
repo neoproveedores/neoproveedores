@@ -1,0 +1,53 @@
+
+<p class="lead">
+    <strong>{{ event.provider }}</strong>
+    ha presentado un presupuesto para
+    <strong>{{ event.project }}</strong>:
+</p>
+
+{% set budget = event.project.getBudget(event.provider) %}
+
+<table class="budget" bgcolor="#ebebeb">
+    <tr class="date">
+        <td>
+            <strong>Inicio</strong>:
+            {{ budget.timing.start|date('d/m/Y') }}
+        </td>
+        <td>
+            <strong>Fin</strong>:
+            {{ budget.timing.end|date('d/m/Y') }}
+        </td>
+    </tr>
+    <tr>
+        <td class="notes" colspan="2">
+            {{ budget.notes }}
+        </td>
+    </tr>
+    <tr>
+        <td class="price" colspan="2">
+            {{ budget.amount.value|number_format(0, ',' , '.') }} €
+        </td>
+    </tr>
+</table>
+
+<table class="callout" bgcolor="#ECF8FF">
+    <tr>
+        <td>
+            <a href="{{ url('project_budget', {'id': event.project.id, 'provider': event.provider.id}) }}">
+                Ver presupuesto
+            </a>
+        </td>
+
+        <td>
+            <a href="{{ url('project_briefing', {'id': event.project.id}) }}">
+                Ver proyecto
+            </a>
+        </td>
+
+        <td>
+            <a href="{{ url('provider_preview', {'id': event.provider.id}) }}">
+                Ver proveedor
+            </a>
+        </td>
+    </tr>
+</table>

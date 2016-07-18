@@ -1,0 +1,29 @@
+<p class="lead">
+    <strong>{{ event.message.name }}</strong>
+    ha añadido un nuevo mensaje en
+    <strong>{{ event.project }}</strong>:
+</p>
+
+<p class="message">{{ event.message.body }}</p>
+
+<table class="callout" bgcolor="#ECF8FF">
+    <tr>
+        <td>
+            <a href="{{ url('project_messages', {'id': event.project.id, 'provider': event.provider.id}) }}#{{ event.message.id }}">
+                Ver conversación
+            </a>
+        </td>
+
+        <td>
+            <a href="{{ url('project_briefing', {'id': event.project.id}) }}">
+                Ver proyecto
+            </a>
+        </td>
+
+        <td>
+            <a href="{{ url('provider_preview', {'id': event.provider.id}) }}">
+                Ver proveedor
+            </a>
+        </td>
+    </tr>
+</table>

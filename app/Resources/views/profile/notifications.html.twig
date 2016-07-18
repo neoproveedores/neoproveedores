@@ -1,0 +1,43 @@
+{% extends 'profile/base.html.twig' %}
+
+{% block section_title %}Gestionar notificaciones{% endblock %}
+
+{% block section %}
+<form class="ui form" method="post">
+    <div class="ui content container users">
+        {{ form_errors(form) }}
+
+        <div class="ui two column grid">
+            <div class="column">
+                <div class="field">
+                    <div class="ui checkbox">
+                        {{ form_widget(form.enabled) }}
+                        <label>Recibir notificaciones por email</label>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="grouped fields">
+                    <label>¿Que tipo de notificaciones quieres recibir?</label>
+                    {% for item in form.enabledEvents %}
+                    <div class="field">
+                        <div class="ui checkbox">
+                            {{ form_widget(item) }}
+                            <label>{{ item.vars.label }}</label>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui single action footer">
+        <button type="submit" class="ui large basic button">
+            Guardar
+        </button>
+    </div>
+
+    {{ form_widget(form._token) }}
+</form>
+{% endblock %}

@@ -1,0 +1,153 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<div class="ui primary header {{ project.status }}">
+    <div class="ui container">
+        <div class="ui stackable grid">
+            <div class="sixteen wide tablet eight wide computer column">
+                <h2>
+                    {{ project }}
+                    <small>{{ project.code }}</small>
+                </h2>
+            </div>
+            <div class="status sixteen wide tablet eight wide computer column">
+                <div class="ui three column grid">
+                    <div class="moment column">
+                        <div class="label">Inicio</div>
+                        <div class="date">
+                            {{ project.timing.start|date('d M Y') }}
+                        </div>
+                    </div>
+                    <div class="moment column">
+                        <div class="label">Fin</div>
+                        <div class="date">
+                            {{ project.timing.end|date('d M Y') }}
+                        </div>
+                    </div>
+
+                    {% if not project.hasStatus(constant('ASSIGNED', project)) %}
+                    <div class="moment column">
+                        <div class="label">Presentación presupuesto</div>
+                        <div class="date">{{ 'now'|date('d M Y') }}</div>
+                    </div>
+                    {% endif %}
+
+                    {% if project.hasStatus(constant('ASSIGNED', project)) %}
+                    <div class="column">
+                        <div class="ui transparent fluid button">
+                            Adjudicado
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if is_granted('ROLE_PROVIDER') %}
+                {% if project_provider.hasStatus(constant('ACCEPTED', project_provider)) %}
+                <a href="{{ url('project_create_budget', {'id': project.id}) }}"
+                   class="ui circular large green button right floated">
+                    <i class="euro icon"></i>
+                </a>
+                {% endif %}
+                {% if project_provider.hasStatus(constant('BUDGETED', project_provider)) %}
+                    <button class="ui circular large green button right floated">
+                        <i class="checkmark icon"></i>
+                    </button>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="ui project header">
+    <div class="ui container">
+        <p>{{ project.description }}</p>
+
+        <div class="ui skills">
+            {% for ability in project.abilities %}
+            <div class="skill">{{ ability }}</div>
+            {% endfor %}
+        </div>
+
+        {% if is_granted('ROLE_EDIT_PROJECT') %}
+        <div class="ui fluid {% if project.editable %}five{% else %}four{% endif %} item secondary pointing compactable menu">
+            <a href="{{ url('project_briefing', {'id': project.id}) }}"
+               class="{% if section == 'briefing' %}active {% endif %}item">
+                Briefing
+            </a>
+            <a href="{{ url('project_providers', {'id': project.id}) }}"
+               class="{% if section == 'providers' %}active {% endif %}item">
+                Proveedores
+            </a>
+            <a href="{{ url('project_budgets', {'id': project.id}) }}"
+               class="{% if section == 'budgets' %}active {% endif %}labeled item">
+                Presupuestos
+                {% if project.providersWithBudget|length > 0 %}
+                <span class="ui red circular mini label">
+                    {{ project.providersWithBudget|length }}
+                </span>
+                {% endif %}
+            </a>
+            <a href="{{ url('project_conversations', {'id': project.id}) }}"
+               class="{% if section == 'conversations' %}active {% endif %}labeled item">
+                Conversaciones
+                {% render url('project_messages_unread', {'id': project.id}) %}
+            </a>
+
+            <div class="ui {% if not project.editable %}mobile only{% endif %} dropdown item">
+                <span class="moar">&bull;&bull;&bull;</span>
+                <div class="menu">
+                    <a href="{{ url('project_briefing', {'id': project.id}) }}"
+                       class="item mobile only">
+                        Briefing
+                    </a>
+                    <a href="{{ url('project_providers', {'id': project.id}) }}"
+                       class="item mobile only">
+                        Proveedores
+                    </a>
+                    <a href="{{ url('project_budgets', {'id': project.id}) }}"
+                       class="labeled mobile only item">
+                        Presupuestos
+                        {% if project.providersWithBudget|length > 0 %}
+                        <span class="ui red circular mini label">
+                            {{ project.providersWithBudget|length }}
+                        </span>
+                        {% endif %}
+                    </a>
+                    <a href="{{ url('project_conversations', {'id': project.id}) }}"
+                       class="labeled mobile only item">
+                        Conversaciones
+                        {% render url('project_messages_unread', {'id': project.id}) %}
+                    </a>
+
+                    {% if is_granted('ROLE_EDIT_PROJECT') and project.editable %}
+                        <a href="{{ url('project_edit', {'id': project.id}) }}"
+                           class="item">
+                            Editar proyecto
+                        </a>
+                    {% endif %}
+
+                    {% if is_granted('ROLE_CLOSE_PROJECT') and project.editable %}
+                        <div data-confirm="{{ url('project_close', {'id': project.id}) }}" data-title="¿Seguro que quieres cerrar el proyecto?" data-message="No podrán enviar invitaciones, recibir presupuestos o valorar el trabajo del proveedor." class="item">
+                            Cerrar proyecto
+                        </div>
+                    {% endif %}
+
+                    {% if is_granted('ROLE_REMOVE_PROJECT') and project.removable %}
+                        <div data-confirm="{{ url('project_remove', {'id': project.id}) }}" data-title="¿Seguro que quieres eliminar el proyecto?" data-message="También se borrarán todos los datos relacionados con el proyecto como presupuestos, mensajes, valoraciones, etc." class="item">
+                            Eliminar proyecto
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    {% if is_granted('ROLE_MANAGER') %}
+    <div class="ui divider"></div>
+    {% endif %}
+</div>
+
+{% block section %}{% endblock %}
+{% endblock %}

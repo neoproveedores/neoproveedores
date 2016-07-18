@@ -1,0 +1,20 @@
+
+{{ event.user.contact.getAvatarImage()|raw }}
+
+<div class="moment">{{ event.created|ago }}</div>
+
+<div class="ui icon message">
+    <i class="suitcase left icon"></i>
+    <div class="content">
+        {{ event.user.name }}
+        ha <strong>creado</strong> el proyecto
+        {{ event.project }}
+    </div>
+    <i class="suitcase right icon"></i>
+</div>
+
+<div class="links">
+    <a href="{{ url('project_briefing', {'id': event.project.id}) }}">
+        Ver proyecto
+    </a>
+</div>

@@ -1,0 +1,35 @@
+{% extends 'project/base.html.twig' %}
+
+{% set section = 'conversations' %}
+{% block section %}
+<div class="ui content container">
+    <div class="ui provider navigation">
+        <a href="{{ url('project_conversations', {'id': project.id}) }}"
+           class="ui circular small basic button right floated">
+            <img src="{{ asset('images/close.svg') }}">
+        </a>
+
+        {% if previous %}
+        <a href="{{ url('project_messages', {'id': project.id, 'provider': previous.id}) }}"
+           class="ui circular small basic button left floated">
+            <img src="{{ asset('images/arrow-left.svg') }}">
+        </a>
+        {% endif %}
+
+        {% if next %}
+        <a href="{{ url('project_messages', {'id': project.id, 'provider': next.id}) }}"
+
+           class="ui circular small basic button left floated">
+            <img src="{{ asset('images/arrow-right.svg') }}">
+        </a>
+        {% endif %}
+
+        <div class="conversation">
+            {{ app.user.contact.avatarImage|raw }}
+            {{ provider.contact.avatarImage|raw }}
+        </div>
+    </div>
+</div>
+
+<div class="async container" data-load="{{ url('messages_provider', {'id': project.id, 'provider': provider.id}) }}"></div>
+{% endblock %}

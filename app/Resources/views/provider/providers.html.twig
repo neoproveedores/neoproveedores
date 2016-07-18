@@ -1,0 +1,57 @@
+{% for provider in pagination.items %}
+<tr href="{{ url('provider_preview', {'id': provider.id}) }}">
+    <td class="picture">
+        {{ provider.contact.getAvatarImage('big')|raw }}
+    </td>
+    <td class="name">
+        <strong>{{ provider }}</strong>
+        <a href="{{ url('provider_preview', {'id': provider.id}) }}">
+            Ver perfil
+        </a>
+    </td>
+    <td class="hour rate">
+        {% if provider.hourRate %}
+            <big>{{ provider.hourRate.value }}</big>
+            <small>€/Hora</small>
+        {% endif %}
+    </td>
+    <td class="skills">
+    {% for skill in provider.skills[0:2] %}
+        <div class="skill">{{ skill.ability }}</div>
+    {% endfor %}
+    {% if provider.skills|length > 2 %}
+        <div class="skill">+{{ provider.skills|length - 2 }}</div>
+    {% endif %}
+    </td>
+    <td class="rating">
+        <div class="ui star rating" data-rating="{{ provider.metrics.averageRating }}"></div>
+    </td>
+</tr>
+{% endfor %}
+
+{% if pagination.more %}
+<tr data-remove>
+    <td colspan="5" class="ui single action">
+        <a href="{{ next_url }}" class="ui grey button" data-async="append">
+            Mostrar {{ pagination.more }} más
+        </a>
+    </td>
+</tr>
+{% endif %}
+
+{% if not pagination.items|length %}
+<tr class="empty">
+    <td colspan="5">
+        <div class="ui hidden divider"></div>
+        <h2 class="ui center aligned icon header">
+            <i class="info icon"></i>
+            <div class="content">
+                No hay resultados
+                <div class="sub header">
+                    No se han encontrado proveedores con los criterios de búsqueda utilizados
+                </div>
+            </div>
+        </h2>
+    </td>
+</tr>
+{% endif %}

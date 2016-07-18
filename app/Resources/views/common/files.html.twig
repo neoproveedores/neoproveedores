@@ -1,0 +1,20 @@
+{% if files|length > 0 %}
+    <div class="ui {% if class is defined %}{{ class }}{% endif %} files">
+    {% for index, file in files %}
+        <div class="ui file">
+            <div class="name">
+                {{ file.name }}
+                {% if download_url is defined %}
+                    <a href="{{ download_url|replace({'index': index}) }}">
+                        <img src="{{ asset('images/download.svg') }}">
+                    </a>
+                {% endif %}
+            </div>
+            <div class="meta">
+                {{ file.created|date('m/d/Y') }}
+                ({{ file.size|file_size }})
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+{% endif %}

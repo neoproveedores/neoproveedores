@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<div class="ui primary header">
+    <div class="ui container">
+        <h2>Usuarios</h2>
+        <p>Todos los usuarios</p>
+
+        <a href="{{ url('user_create') }}"
+           class="ui circular large blue button right floated">
+            <img src="{{ asset('images/add.svg') }}">
+        </a>
+    </div>
+</div>
+
+<div class="ui content container">
+    <form>
+        <div class="ui search project">
+            <div class="ui transparent left icon input">
+                <input type="text"
+                       name="words"
+                       value="{{ app.request.get('words') }}"
+                       placeholder="Buscar Usuario">
+                <img class="icon" src="{{ asset('images/search.svg') }}">
+            </div>
+        </div>
+        <div class="ui filters">
+            <select class="ui dropdown" name="roles" multiple>
+                <option value="">Buscar por rol</option>
+                <option value="ROLE_MANAGER">Gestor</option>
+                <option value="ROLE_PROJECT_MANAGER">Gestor de proyectos</option>
+                <option value="ROLE_PROVIDER">Proveedor</option>
+            </select>
+        </div>
+    </form>
+
+    <table class="ui users table">
+        <thead>
+            <tr>
+                <th colspan="2">
+                    <a href="{{ sorter.generate('name') }}"
+                       class="sort {{ sorter.direction('name') }}"
+                       data-async>
+                        Usuario
+                        <img class="up"
+                             src="{{ asset('images/arrow-up.svg') }}">
+                        <img class="down"
+                             src="{{ asset('images/arrow-down.svg') }}">
+                    </a>
+                </th>
+                <th>Teléfonos</th>
+                <th>Rol</th>
+                <th>
+                    <a href="{{ sorter.generate('created') }}"
+                       class="sort {{ sorter.direction('created') }}"
+                       data-async>
+                        Fecha de alta
+                        <img class="up"
+                             src="{{ asset('images/arrow-up.svg') }}">
+                        <img class="down"
+                             src="{{ asset('images/arrow-down.svg') }}">
+                    </a>
+                </th>
+            </tr>
+        </thead>
+        <tbody class="async container">
+            {% include 'user/users.html.twig' %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

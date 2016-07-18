@@ -1,0 +1,138 @@
+{% extends 'provider/base.html.twig' %}
+
+{% set section = 'preview' %}
+{% block section %}
+<div class="ui content container">
+    {% if competences|length > 0 %}
+    <div class="ui huge rating evolution">
+        <h3>Evolución general de la valoración</h3>
+
+        <div class="chart" data="{{ competences|join(',') }}">
+            <div class="evolution value">0</div>
+        </div>
+    </div>
+    {% endif %}
+
+    <h3>Descripción</h3>
+
+    <div class="ui stackable grid">
+        <div class="ten wide column">
+            <p>{{ provider.notes }}</p>
+        </div>
+
+        <div class="six wide column">
+            <div class="metrics">
+                {% if provider.hourRate %}
+                    <div class="hour rate">
+                        <big>{{ provider.hourRate.value }}</big>
+                        <small>€/Hora</small>
+                    </div>
+                {% endif %}
+
+                <div class="metric">
+                    <big>{{ provider.metrics.projectsInvited }}</big>
+                    <small>invitado</small>
+                </div>
+                <div class="metric">
+                    <big>{{ provider.metrics.projectsAccepted }}</big>
+                    <small>aceptado</small>
+                </div>
+                <div class="metric">
+                    <big>{{ provider.metrics.projectsCompleted }}</big>
+                    <small>finalizado</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3>Principales habilidades</h3>
+    <div class="ui very relaxed stackable grid">
+        {% for skill in provider.skills[0:4] %}
+        <div class="four wide {% if is_granted('ROLE_VIEW_BANNED_SKILLS') and skill.banned %}banned{% endif %} rating column">
+            <div class="value" data-rating="{{ skill.rating }}">{{ skill.rating }}</div>
+            <div class="ui skill rating" data-rating="{{ skill.rating }}"></div>
+            <div class="competence">{{ skill.ability }}</div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% if last_message %}
+    <div class="ui comments">
+        <h3>Último comentario</h3>
+
+        <div class="comment">
+            <a class="avatar">
+                {{ last_message.provider.getAvatar('big')|raw }}
+            </a>
+            <div class="content">
+                <a class="author">{{ last_message.name }}</a>
+                <div class="metadata">
+                    <div class="date">
+                        {{ last_message.created|date('d/m/Y') }}
+                    </div>
+                </div>
+                <div class="text">
+                    {{ last_message.body }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<div class="ui info">
+    <div class="ui container">
+        <div class="ui contact grid">
+            <div class="doubling four column row">
+                <div class="column">
+                    <div class="person">
+                        <strong>{{ provider.contact }}</strong>
+                        <em>{{ provider.contact.position }}</em>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="phone">
+                        <strong>{{ provider.contact.phone }}</strong>
+                        <em>{{ provider.contact.alternatePhone }}</em>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="email">
+                        <a href="#">{{ provider.contact.email }}</a>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="address">
+                        <strong>{{ provider.address.street }}.</strong>
+                        <em>
+                            {{ provider.address.city }}.
+                            {{ provider.address.region }}.
+                            {{ provider.address.postalCode }}.
+                            {{ provider.address.country }}.
+                        </em>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ui double action footer">
+    <a href="{{ url('providers') }}" class="back">
+        <img src="{{ asset('images/close-action.svg') }}">
+        Cerrar y ver la lista de proovedores
+    </a>
+    <a href="{{ url('provider_edit_data', {'id': provider.id}) }}"
+       class="ui large basic button">
+       Editar este proveedor
+   </a>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+var ratingInfo = JSON.parse('{{ rating_info|json_encode|raw }}');
+</script>
+
+{{ parent() }}
+{% endblock %}

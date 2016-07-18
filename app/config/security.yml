@@ -1,0 +1,72 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/book/security.html
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: bcrypt
+
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username_email
+
+    firewalls:
+        main:
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: security.csrf.token_manager
+                default_target_path: /timeline
+            logout:
+                target: /login
+            anonymous:    true
+
+    role_hierarchy:
+        ROLE_MANAGER:
+            - ROLE_USER
+            - ROLE_VIEW_PROVIDERS
+            - ROLE_VIEW_PROJECTS
+            - ROLE_VIEW_BUDGETS
+            - ROLE_CREATE_PROJECT
+            - ROLE_CREATE_PROVIDER
+            - ROLE_EDIT_PROJECT
+            - ROLE_EDIT_PROVIDER
+            - ROLE_SEND_INVITATIONS
+            - ROLE_ASSIGN_PROJECT
+            - ROLE_RATE_PROJECT
+            - ROLE_VIEW_CONVERSATIONS
+            - ROLE_VIEW_MESSAGES
+            - ROLE_CREATE_MESSAGE
+            - ROLE_VIEW_USERS
+            - ROLE_CREATE_USER
+            - ROLE_EDIT_USER
+            - ROLE_VIEW_EVENTS
+            - ROLE_REMOVE_PROVIDER
+            - ROLE_REMOVE_PROJECT
+            - ROLE_CLOSE_PROJECT
+            - ROLE_BAN_SKILL
+            - ROLE_VIEW_BANNED_SKILLS
+            - ROLE_CLOSE_SKILLS
+        ROLE_PROJECT_MANAGER:
+            - ROLE_USER
+            - ROLE_VIEW_PROVIDERS
+            - ROLE_VIEW_PROJECTS
+            - ROLE_VIEW_BUDGETS
+            - ROLE_CREATE_PROJECT
+            - ROLE_EDIT_PROJECT
+            - ROLE_SEND_INVITATIONS
+            - ROLE_ASSIGN_PROJECT
+            - ROLE_RATE_PROJECT
+            - ROLE_VIEW_CONVERSATIONS
+            - ROLE_VIEW_MESSAGES
+            - ROLE_CREATE_MESSAGE
+            - ROLE_REMOVE_PROJECT
+            - ROLE_CLOSE_PROJECT
+        ROLE_PROVIDER:
+            - ROLE_USER
+            - ROLE_EDIT_PROVIDER
+            - ROLE_VIEW_PROJECTS
+            - ROLE_ACCEPT_PROJECT
+            - ROLE_REJECT_PROJECT
+            - ROLE_SEND_BUDGET
+            - ROLE_EDIT_BUDGET
+            - ROLE_VIEW_MESSAGES
+            - ROLE_CREATE_MESSAGE

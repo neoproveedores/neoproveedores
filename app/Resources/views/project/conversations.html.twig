@@ -1,0 +1,81 @@
+{% extends 'project/base.html.twig' %}
+
+{% set section = 'conversations' %}
+{% block section %}
+{% if conversations|length == 0 and without_conversation|length == 0 %}
+    <div class="ui content container">
+        <h2 class="ui icon center aligned header">
+            <i class="info icon"></i>
+            <div class="content">
+                Sin conversaciones
+                <div class="sub header">
+                    Este proyecto todavía no ha recibido mensajes
+                </div>
+            </div>
+        </h2>
+
+        <div class="ui massive hidden divider"></div>
+    </div>
+{% else %}
+    <div class="ui content container">
+        <h2>Conversaciones</h2>
+
+        <table class="ui conversations table">
+            <thead>
+                <tr>
+                    <th colspan="2">Nombre</th>
+                    <th>Mensajes
+                    </th>
+                    <th>Último mensaje</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for conversation in conversations %}
+                <tr>
+                    <td class="picture">
+                        {{ conversation.provider.getAvatar('big')|raw }}
+                    </td>
+                    <td class="name">
+                        <strong>{{ conversation.provider }}</strong>
+                        <a href="{{ url('provider_preview', {'id': conversation.provider.id}) }}">Ver perfil</a>
+                    </td>
+                    <td class="counter">{{ conversation.count }}</td>
+                    <td class="message">
+                        {{ conversation.last.body }}
+                    </td>
+                    <td class="center">
+                        <a href="{{ url('project_messages', {'id': project.id, 'provider': conversation.provider.id}) }}"
+                           class="ui circular small basic button">
+                            <img src="{{ asset('images/arrow-right.svg') }}">
+                        </button>
+                    </td>
+                </tr>
+                {% endfor %}
+
+                {% for provider in without_conversation %}
+                <tr>
+                    <td class="picture">
+                        {{ provider.getAvatar('big')|raw }}
+                    </td>
+                    <td class="name">
+                        <strong>{{ provider }}</strong>
+                        <a href="{{ url('provider_preview', {'id': provider.id}) }}">Ver perfil</a>
+                    </td>
+                    <td class="counter">0</td>
+                    <td class="message">
+
+                    </td>
+                    <td class="center">
+                        <a href="{{ url('project_messages', {'id': project.id, 'provider': provider.id}) }}"
+                           class="ui circular small basic button">
+                            <img src="{{ asset('images/arrow-right.svg') }}">
+                        </button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endif %}
+{% endblock %}

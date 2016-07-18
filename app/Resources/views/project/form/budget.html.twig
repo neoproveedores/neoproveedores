@@ -1,0 +1,128 @@
+{% extends 'project/base.html.twig' %}
+
+{% block section %}
+<form method="post" enctype="multipart/form-data">
+    <div class="ui content container">
+        <div class="ui form">
+            {% if budget is defined %}
+                <h2>Consulta y/o modifica tu presupuesto</h2>
+            {% else %}
+                <h2>Presenta tu presupuesto</h2>
+            {% endif %}
+
+            <div class="three fields">
+                {% if form.amount.value.vars.errors|length > 0 %}
+                <div class="field error"
+                     data-content="{{ form.amount.value.vars.errors }}">
+                {% else %}
+                <div class="field">
+                {% endif %}
+                    <label>Presupuesto</label>
+                    <div class="ui right labeled input">
+                        {{ form_widget(form.amount.value) }}
+                        <div class="ui basic label">
+                            <strong>€</strong>
+                        </div>
+                    </div>
+                </div>
+
+                {% if form.timing.start.vars.errors|length > 0 %}
+                <div class="field error"
+                     data-content="{{ form.timing.start.vars.errors }}">
+                {% else %}
+                <div class="field">
+                {% endif %}
+                    <label>Fecha inicio</label>
+                    <div class="ui right labeled date input">
+                        <input type="text"
+                               name="budget[timing][start]"
+                               placeholder="Selecciona fecha"
+                               data-value="{{ form.timing.start.vars.value }}">
+                        <div class="ui basic label">
+                            <img src="{{ asset('images/calendar.svg') }}">
+                        </div>
+                    </div>
+                </div>
+
+                {% if form.timing.end.vars.errors|length > 0 %}
+                <div class="field error"
+                     data-content="{{ form.timing.end.vars.errors }}">
+                {% else %}
+                <div class="field">
+                {% endif %}
+                    <label>Fecha final</label>
+                    <div class="ui right labeled date input">
+                        <input type="text"
+                               name="budget[timing][end]"
+                               placeholder="Selecciona fecha"
+                               data-value="{{ form.timing.end.vars.value }}">
+                        <div class="ui basic label">
+                            <img src="{{ asset('images/calendar.svg') }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% if form.notes.vars.errors|length > 0 %}
+            <div class="field error"
+                 data-content="{{ form.notes.vars.errors }}">
+            {% else %}
+            <div class="field">
+            {% endif %}
+                <label>Notas</label>
+                {{ form_widget(form.notes) }}
+                <div class="counter"
+                     data-behavior="count"
+                     data-target="budget_notes">
+                     0 / 500
+                 </div>
+            </div>
+
+            {% include 'common/drop.files.html.twig' with {
+                'class': 'large',
+                'input': 'budget[files][0][upload]'
+            } %}
+        </div>
+    </div>
+
+    {% if budget is defined %}
+        <div class="ui double action footer">
+            <a href="{{ url('project_briefing', {'id': project.id}) }}" class="back">
+                Volver al proyecto
+            </a>
+            <button type="submit" class="ui large green button"
+                 data-success="modal"
+                 data-target="budget">
+                Actualizar presupuesto
+            </button>
+        </div>
+    {% else %}
+        <div class="ui double action footer">
+            <a href="{{ url('projects') }}" class="back">
+                Me lo pienso y vuelvo en otro momento
+            </a>
+            <button type="submit" class="ui large green button"
+                 data-success="modal"
+                 data-target="budget">
+                Presupuestar proyecto
+            </button>
+        </div>
+    {% endif %}
+
+    {{ form_widget(form._token) }}
+</form>
+{% endblock %}
+
+{% block modals %}
+    <div class="ui modal" data-modal="budget">
+        <div class="header">
+            <img src="{{ asset('images/budget.svg') }}">
+            Ya tenemos tu presupuesto
+        </div>
+        <div class="actions">
+            <a href="{{ url('projects') }}" class="ui large grey deny button">
+                Volver a la lista de proyectos
+            </a>
+        </div>
+    </div>
+{% endblock %}

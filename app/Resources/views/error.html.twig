@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="ui container">
+        <div class="ui hidden massive divider"></div>
+
+        <h1 class="ui icon center aligned header">
+            <i class="remove circle icon"></i>
+            <div class="content">
+                Error {{ exception.statusCode }}
+
+                <div class="sub header">
+                    {% if exception.statusCode == 403 %}
+                        No tienes acceso a este recurso
+                    {% endif %}
+
+                    {% if exception.statusCode == 400 %}
+                        {{ exception.message }}
+                    {% endif %}
+                </div>
+            </div>
+        </h1>
+
+        {% if exception.groups is defined %}
+            <h2 class="ui header">Errores de validación</h2>
+
+            {% for group in exception.groups %}
+                {% if group.errors|length %}
+                    <div class="ui divider"></div>
+
+                    <div class="ui list">
+                        {% for error in group.errors %}
+                            <div class="item">
+                                <i class="warning sign icon"></i>
+                                <div class="content">
+                                    <strong>
+                                        {{ error.propertyPath|trans }}
+                                    </strong>
+                                    : {{ error.message }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <a href="{{ group.url }}" class="ui grey button">
+                        Corregir errores
+                    </a>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        <div class="ui hidden massive divider"></div>
+    </div>
+{% endblock %}

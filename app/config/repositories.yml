@@ -1,0 +1,49 @@
+services:
+    persistence.ability_repository:
+        class: Persistence\Repository\AbilityRepository
+        factory_service: doctrine.odm.mongodb.document_manager
+        factory_method: getRepository
+        arguments: [Persistence\Model\Ability]
+
+    persistence.provider_repository:
+        class: Persistence\Repository\ProviderRepository
+        factory_service: doctrine.odm.mongodb.document_manager
+        factory_method: getRepository
+        arguments: [Persistence\Model\Provider]
+
+    persistence.project_repository:
+        class: Persistence\Repository\ProjectRepository
+        factory_service: doctrine.odm.mongodb.document_manager
+        factory_method: getRepository
+        arguments: [Persistence\Model\Project]
+
+    persistence.rating_repository:
+        class: Persistence\Repository\RatingRepository
+        factory_service: doctrine.odm.mongodb.document_manager
+        factory_method: getRepository
+        arguments: [Persistence\Model\Rating]
+
+
+    persistence.competence_repository:
+        class: Persistence\Repository\CompetenceRepository
+        factory_service: doctrine.odm.mongodb.document_manager
+        factory_method: getRepository
+        arguments: [Persistence\Model\Competence]
+
+    persistence.message_repository:
+        class: Persistence\Repository\MessageRepository
+        factory_service: doctrine.odm.mongodb.document_manager
+        factory_method: getRepository
+        arguments: [Persistence\Model\Message]
+
+    persistence.user_repository:
+        class: Persistence\Repository\UserRepository
+        factory_service: doctrine.odm.mongodb.document_manager
+        factory_method: getRepository
+        arguments: [Persistence\Model\User]
+
+    persistence.event_repository:
+        class: Persistence\Repository\EventRepository
+        factory_service: doctrine.odm.mongodb.document_manager
+        factory_method: getRepository
+        arguments: [Persistence\Model\Event]

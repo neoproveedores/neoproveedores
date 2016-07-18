@@ -1,0 +1,33 @@
+{% extends 'mail/base.html.twig' %}
+
+{% block header %}
+    <h6 class="collapse">
+        Confirmación
+    </h6>
+{% endblock %}
+
+{% block content %}
+    <table>
+        <tr>
+            <td>
+                <h3>Hola, {{ user.name }}</h3>
+
+                <p class="lead">
+                    Has sido registrado como proveedor.
+                </p>
+
+                <p class="message">
+                    Usuario: {{ user.email }}<br />
+                    Contraseña: {{ password }}
+                </p>
+
+                <p class="callout">
+                    <a href="{{ url('fos_user_security_login') }}">
+                        Iniciar sesión
+                    </a>
+                </p>
+
+            </td>
+        </tr>
+    </table>
+{% endblock %}

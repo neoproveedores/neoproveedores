@@ -1,0 +1,15 @@
+<p class="lead">
+    <strong>{{ event.user.name }}</strong>
+    ha creado el proyecto
+    <strong>{{ event.project }}</strong>.
+</p>
+
+<table class="callout" bgcolor="#ECF8FF">
+    <tr>
+        <td>
+            <a href="{{ url('project_briefing', {'id': event.project.id}) }}">
+                Ver proyecto
+            </a>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,22 @@
+
+{{ event.provider.contact.getAvatarImage()|raw }}
+
+<div class="moment">{{ event.created|ago }}</div>
+
+<div class="ui icon message">
+    <i class="checkmark left icon"></i>
+    <div class="content">
+        Enviada <strong>invitación</strong> a
+        {{ event.provider }} para {{ event.project }}
+    </div>
+    <i class="checkmark right icon"></i>
+</div>
+
+<div class="links">
+    <a href="{{ url('project_briefing', {'id': event.project.id}) }}">
+        Ver proyecto
+    </a>
+    <a href="{{ url('provider_preview', {'id': event.provider.id}) }}">
+        Ver proveedor
+    </a>
+</div>

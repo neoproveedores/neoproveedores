@@ -1,0 +1,62 @@
+{% extends 'project/base.html.twig' %}
+
+{% block section %}
+<form method="post">
+    <div class="ui content container">
+        <div class="ui grid">
+            <div class="two wide column">
+                <div class="picture">
+                    <img src="http://lorempixel.com/99/99/people/">
+                </div>
+            </div>
+
+            <div class="fourteen wide column">
+                <div class="ui header">
+                    <div class="provider">
+                        <div class="name">Bruce Wayne</div>
+                        <div class="position">Art Director</div>
+                    </div>
+                </div>
+
+                <div class="ui form">
+                    {% for competences in [form.competences[0:4], form.competences[4:8]] %}
+                    <div class="four fields">
+                        {% for competence in competences %}
+                        <div class="field">
+                            <label>
+                                {{ competence.vars.value.competence }}
+                            </label>
+                            <div class="ui huge star interactive rating"></div>
+                            {{ form_widget(competence.rating) }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+
+                    <div class="field">
+                        <label>Comentarios</label>
+                        {{ form_widget(form.notes) }}
+                        <div class="counter"
+                             data-behavior="count"
+                             data-target="rating_notes">
+                             0 / 500
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui double action footer">
+        <a href="{{ url('projects') }}" class="back">
+            <img src="{{ asset('images/back-action.svg') }}">
+            Cancelar y valorar más tarde
+        </a>
+        <button type="submit" class="ui large basic button">
+            Valorar el trabajo del proveedor
+        </button>
+    </div>
+
+    {{ form_widget(form._token) }}
+</form>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'profile/base.html.twig' %}
+
+{% block section_title %}Editar perfil{% endblock %}
+
+{% block section %}
+<form class="ui form" method="post" enctype="multipart/form-data">
+    <div class="ui content container users">
+        {{ form_errors(form) }}
+
+        <div class="ui grid">
+            <div class="two wide column">
+                <div class="ui circular huge upload picture icon button {% if user.contact.avatar %}uploaded" style="background-image:url('{{ user.contact.avatarUrl }}')"{% else %}"{% endif %}>
+                    <img src="{{ asset('images/upload.svg') }}">
+                </div>
+                {{ form_widget(form.contact.avatar.upload) }}
+            </div>
+
+            <div class="fourteen wide column">
+                <div class="two fields">
+                    <div class="twelve wide field" >
+                        <label>Nombre y apellidos</label>
+                        <div class="two fields">
+                            <div class="six wide field">
+                                {{ form_widget(form.contact.firstName) }}
+                            </div>
+                            <div class="ten wide field">
+                                {{ form_widget(form.contact.lastName) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="twelve wide field first hide">
+                        <label>Razón social</label>
+                        <div class="field">
+                            {{ form_widget(form.contact.businessName) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="three fields">
+                        <div class="eight wide field">
+                            {{ form_widget(form.email) }}
+                        </div>
+                        <div class="four wide field">
+                            {{ form_widget(form.contact.phone) }}
+                        </div>
+                        <div class="four wide field">
+                            {{ form_widget(form.contact.alternatePhone) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui single action footer">
+        <button type="submit" class="ui large basic button">
+            Guardar
+        </button>
+    </div>
+
+    {{ form_widget(form._token) }}
+</form>
+{% endblock %}

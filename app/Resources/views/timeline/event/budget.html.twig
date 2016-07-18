@@ -1,0 +1,28 @@
+
+{{ event.provider.contact.getAvatarImage()|raw }}
+
+<div class="moment">{{ event.created|ago }}</div>
+
+<div class="ui icon message">
+    <i class="euro left icon"></i>
+    <div class="content">
+        {{ event.provider }}
+        ha presentado un <strong>presupuesto</strong> para
+        {{ event.project }} de
+        {% set value = event.project.getBudget(event.provider).amount.value %}
+        {{ value|number_format(0, ',' , '.') }} €
+    </div>
+    <i class="euro right icon"></i>
+</div>
+
+<div class="links">
+    <a href="{{ url('project_budget', {'id': event.project.id, 'provider': event.provider.id}) }}">
+        Ver presupuesto
+    </a>
+    <a href="{{ url('project_briefing', {'id': event.project.id}) }}">
+        Ver proyecto
+    </a>
+    <a href="{{ url('provider_preview', {'id': event.provider.id}) }}">
+        Ver proveedor
+    </a>
+</div>

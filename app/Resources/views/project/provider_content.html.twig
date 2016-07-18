@@ -1,0 +1,107 @@
+<div class="ui content container">
+    <div class="ui provider navigation">
+        <a href="{{ url('project_providers', {'id': project.id}) }}"
+           class="ui close circular small basic button right floated">
+            <img src="{{ asset('images/close.svg') }}">
+        </a>
+
+        {% if previous %}
+        <a href="{{ url('project_provider', {'id': project.id, 'provider': previous.id}) }}"
+            class="ui circular small basic button left floated">
+            <img src="{{ asset('images/arrow-left.svg') }}">
+        </a>
+        {% endif %}
+
+        {% if next %}
+        <a href="{{ url('project_provider', {'id': project.id, 'provider': next.id}) }}"
+           class="ui circular small basic button left floated">
+            <img src="{{ asset('images/arrow-right.svg') }}">
+        </a>
+        {% endif %}
+    </div>
+
+    <div class="ui header">
+        <div class="provider">
+            <div class="picture">
+                {{ provider.contact.getAvatarImage('huge')|raw }}
+            </div>
+            <div class="name">{{ provider.contact }}</div>
+            <div class="position">{{ provider.contact.position }}</div>
+            <div class="rating">
+                <div class="ui star rating" data-rating="{{ provider.metrics.averageRating }}"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui stackable grid">
+        <div class="ten wide column">
+            <p>{{ provider.notes }}</p>
+        </div>
+
+        <div class="six wide column">
+            <div class="metrics">
+                <div class="hour rate">
+                    <big>{{ provider.hourRate.value }}</big>
+                    <small>€/Hora</small>
+                </div>
+                <div class="metric">
+                    <big>{{ provider.metrics.projectsInvited }}</big>
+                    <small>invitado</small>
+                </div>
+                <div class="metric">
+                    <big>{{ provider.metrics.projectsAccepted }}</big>
+                    <small>aceptado</small>
+                </div>
+                <div class="metric">
+                    <big>{{ provider.metrics.projectsCompleted }}</big>
+                    <small>finalizado</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui very relaxed stackable grid">
+        {% for skill in provider.skills[0:4] %}
+        <div class="four wide {% if is_granted('ROLE_VIEW_BANNED_SKILLS') and skill.banned %}banned{% endif %} rating column">
+            <div class="value" data-rating="{{ skill.rating }}">{{ skill.rating }}</div>
+            <div class="ui skill rating" data-rating="{{ skill.rating }}"></div>
+            <div class="competence">{{ skill.ability }}</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="ui info">
+    <div class="ui container">
+        <div class="ui contact stackable grid">
+            <div class="four wide column">
+                <div class="person">
+                    <strong>{{ provider.contact }}</strong>
+                    <em>{{ provider.contact.position }}</em>
+                </div>
+            </div>
+            <div class="four wide column">
+                <div class="phone">
+                    <strong>{{ provider.contact.phone }}</strong>
+                    <em>{{ provider.contact.alternatePhone }}</em>
+                </div>
+            </div>
+            <div class="four wide column">
+                <div class="email">
+                    <a href="#">{{ provider.contact.email }}</a>
+                </div>
+            </div>
+            <div class="four wide column">
+                <div class="address">
+                    <strong>{{ provider.address.street }}.</strong>
+                    <em>
+                        {{ provider.address.city }}.
+                        {{ provider.address.region }}.
+                        {{ provider.address.postalCode }}.
+                        {{ provider.address.country }}.
+                    </em>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

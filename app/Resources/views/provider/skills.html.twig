@@ -1,0 +1,91 @@
+{% extends 'provider/base.html.twig' %}
+
+{% set section = 'skills' %}
+{% block section %}
+<div class="ui content container">
+    {% if provider.skills|length > 0 %}
+        <h3>Habilidades</h3>
+
+        {% for skill in provider.skills %}
+        <div class="ui skill">
+            <div class="header">
+                <div class="container">
+                    <div class="name">{{ skill.ability }}</div>
+                    <div class="rating">
+                        <div class="ui star rating"
+                             data-rating="{{ skill.rating }}">
+                         </div>
+                    </div>
+                    <div class="hour rate">
+                        <big>{{ skill.hourRate.value }}</big>
+                        <small>€/Hora</small>
+                    </div>
+                    <div class="first metric">
+                        <big>{{ skill.metrics.projectsInvited }}</big>
+                        <small>invitado</small>
+                    </div>
+                    <div class="metric">
+                        <big>{{ skill.metrics.projectsAccepted }}</big>
+                        <small>aceptado</small>
+                    </div>
+                    <div class="metric">
+                        <big>{{ skill.metrics.projectsCompleted }}</big>
+                        <small>finalizado</small>
+                    </div>
+                </div>
+            </div>
+            <div class="notes">
+                {{ skill.notes }}
+            </div>
+
+
+            {% if skill.files|length > 0 %}
+                {% set download_url = url('download_skill', {
+                    'id': provider.id,
+                    'ability': skill.ability.name,
+                    'index': 'index'
+                }) %}
+                {% include 'common/files.html.twig' with {
+                    'class': 'lite hide',
+                    'files': skill.files
+                } %}
+            {% endif %}
+
+            <div class="author">
+                {% if is_granted('ROLE_VIEW_BANNED_SKILLS') and skill.banned %}
+                    <div class="banned">
+                        <i class="ban icon"></i>
+                        Habilidad vetada
+                    </div>
+                {% endif %}
+
+                {% if skill.files|length > 0 %}
+                <a href="#" class="files">Archivos ({{ skill.files|length }})</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <h2 class="ui icon center aligned header">
+            <i class="info icon"></i>
+            <div class="content">
+                Sin Habilidades
+                <div class="sub header">
+                    Este proveedor todavía no tiene Habilidades
+                </div>
+            </div>
+        </h2>
+    {% endif %}
+</div>
+
+<div class="ui double action footer">
+    <a href="{{ url('providers') }}" class="back">
+        <img src="{{ asset('images/close-action.svg') }}">
+        Cerrar y ver la lista de proovedores
+    </a>
+    <a href="{{ url('provider_edit_skills', {'id': provider.id}) }}"
+       class="ui large basic button">
+        Editar habilidades del proveedor
+    </a>
+</div>
+{% endblock %}

@@ -1,0 +1,138 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="ui primary header">
+        <div class="ui container">
+            <h2>Proyectos</h2>
+            <p>Todos los proyectos</p>
+
+            {% if is_granted('ROLE_CREATE_PROJECT') %}
+                <a href="{{ url('project_create') }}"
+                   class="ui circular large blue button right floated">
+                    <img src="{{ asset('images/add.svg') }}">
+                </a>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if pagination.items|length > 0 %}
+    <div class="ui content container">
+        <form data-async>
+            <div class="ui search project">
+                <div class="ui transparent left icon input">
+                    <input type="text"
+                           name="keywords"
+                           value="{{ app.request.get('words') }}"
+                           placeholder="Buscar proyecto"
+                           data-search="{{ url('search_projects') }}"
+                           autocomplete="off">
+                    <img class="icon" src="{{ asset('images/search.svg') }}">
+                    <div class="ui divided relaxed remote list"></div>
+                </div>
+            </div>
+
+            <div class="ui two filters">
+                <select class="ui dropdown" name="abilities[]" multiple>
+                    <option value="">Habilidades</option>
+                    {% for ability in abilities %}
+                    <option value="{{ ability.id }}" {% if ability.id in app.request.get('abilities') %}selected{% endif %}>{{ ability.name }}</option>
+                    {% endfor %}
+                </select>
+
+                <select class="ui dropdown" name="status">
+                    <option value="">Estados</option>
+                    {% for option in status %}
+                    {% set status_key = 'project.status.' ~ option %}
+                    <option value="{{ option }}" {% if option == app.request.get('status') %}selected{% endif %}>{{ status_key|trans }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </form>
+    </div>
+
+    <div class="ui content container">
+        <table class="ui projects table">
+            <thead>
+                <tr>
+                    <th>
+                        <a href="{{ sorter.generate('name') }}"
+                           class="sort {{ sorter.direction('name') }}"
+                           data-async>
+                            Proyecto
+                            <img class="up"
+                                 src="{{ asset('images/arrow-up.svg') }}">
+                            <img class="down"
+                                 src="{{ asset('images/arrow-down.svg') }}">
+                        </a>
+                    </th>
+                    <th>Habilidades</th>
+                    <th>
+                        <a href="{{ sorter.generate('budgetAmount') }}"
+                           class="sort {{ sorter.direction('budgetAmount') }}"
+                           data-async>
+                            Presupuesto
+                            <img class="up"
+                                 src="{{ asset('images/arrow-up.svg') }}">
+                            <img class="down"
+                                 src="{{ asset('images/arrow-down.svg') }}">
+                        </a>
+                    </th>
+                    <th>
+                        <a href="{{ sorter.generate('status') }}"
+                           class="sort {{ sorter.direction('status') }}"
+                           data-async>
+                            Estado
+                            <img class="up"
+                                 src="{{ asset('images/arrow-up.svg') }}">
+                            <img class="down"
+                                 src="{{ asset('images/arrow-down.svg') }}">
+                        </a>
+                    </th>
+                    <th>
+                        <a href="{{ sorter.generate('timing.end') }}"
+                           class="sort {{ sorter.direction('timing.end') }}"
+                           data-async>
+                            Límite
+                            <img class="up"
+                                 src="{{ asset('images/arrow-up.svg') }}">
+                            <img class="down"
+                                 src="{{ asset('images/arrow-down.svg') }}">
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="async container">
+                {% include 'project/projects.html.twig' %}
+            </tbody>
+        </table>
+    </div>
+
+    {% else %}
+
+    <div class="ui empty content container">
+        <div class="ui hidden divider"></div>
+        <i class="frown icon"></i>
+        {% if is_granted('ROLE_PROVIDER') %}
+            <h3>Todavía no hay proyectos para ti</h3>
+            <p>Huy, parece que todavía no has sido invitado a ningún proyecto y por eso no hay nada en esta pantalla, pero este espacio lo tenemos reservado para que puedas ver los proyectos a los que te hemos invitado, los que has presupuestado y todo lo relacionado con ellos.</p>
+            <p>Te aconsejamos que mantengas tu perfil actualizado y no desesperes que alguna propuesta te llegará para presupuestar.</p>
+            <p>¡Gracias!</p>
+        {% else %}
+            {% if is_granted('ROLE_PROJECT_MANAGER') %}
+                <h3>Todavía no tienes proyectos propios</h3>
+            {% else %}
+                <h3>Todavía no hay proyectos</h3>
+            {% endif %}
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {% if is_granted('ROLE_CREATE_PROJECT') %}
+    <div class="ui single action footer">
+        <a href="{{ url('project_create') }}"
+           class="ui large blue button">
+            Añadir un nuevo proyecto
+        </a>
+    </div>
+    {% endif %}
+{% endblock %}

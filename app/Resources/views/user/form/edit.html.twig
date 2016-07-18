@@ -1,0 +1,119 @@
+{% extends 'user/form/base.html.twig' %}
+
+{% block section %}
+{{ user.__construct }}
+<form class="ui form" method="post" enctype="multipart/form-data">
+    <div class="ui content container users" >
+        <div class="ui user header">
+            <h3>Datos del usuario</h3>
+            <div class="ui top right pointing dropdown">
+                <i class="ellipsis horizontal icon"></i>
+                <div class="menu">
+                    <a href="{{ url('change_password', {'id':user.id}) }}" class="item">
+                        Cambiar constraseña
+                    </a>
+                    {% if user.provider %}
+                    <a href="{{ url('provider_edit_data', {'id': user.provider.id}) }}" class="item">
+                        Editar datos de proveedor
+                    </a>
+                    <a href="{{ url('provider_edit_contacts', {'id': user.provider.id}) }}" class="item">
+                        Editar contactos de proveedor
+                    </a>
+                    <a href="{{ url('provider_edit_billing', {'id': user.provider.id}) }}" class="item">
+                        Editar datos administrativos de proveedor
+                    </a>
+                    <a href="{{ url('provider_edit_skills', {'id': user.provider.id}) }}" class="item">
+                        Editar habilidades de proveedor
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        {{ form_errors(form) }}
+
+        <div class="ui stackable grid">
+            <div class="two wide column">
+                <div class="ui circular huge upload picture icon button" {% if user.contact.avatar %}style="background-image:url('{{ user.contact.avatarUrl }}')"{% endif %}>
+                    <img src="{{ asset('images/upload.svg') }}">
+                </div>
+                {{ form_widget(form.contact.avatar.upload) }}
+            </div>
+
+            <div class="fourteen wide column">
+                <div class="two fields">
+                    <div class="twelve wide field" >
+                        <label>Nombre y apellidos</label>
+                        <div class="two fields">
+                            <div class="six wide field">
+                                {{ form_widget(form.contact.firstName) }}
+                            </div>
+                            <div class="ten wide field">
+                                {{ form_widget(form.contact.lastName) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="twelve wide field first hide">
+                        <label>Razón social</label>
+                        <div class="field">
+                            {{ form_widget(form.contact.businessName) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="three fields">
+                        <div class="eight wide field">
+                            {{ form_widget(form.email) }}
+                        </div>
+                        <div class="four wide field">
+                            {{ form_widget(form.contact.phone) }}
+                        </div>
+                        <div class="four wide field">
+                            {{ form_widget(form.contact.alternatePhone) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="six wide field">
+                    <label>Rol</label>
+                    {{ form_widget(form.role) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui double action footer">
+        <a href="{{ url('users') }}" class="back">
+            <img src="{{ asset('images/back-action.svg') }}">
+            Cancelar edición de usuario
+        </a>
+        <button type="submit" class="ui large basic button">
+            Guardar
+        </button>
+    </div>
+
+    {{ form_widget(form._token) }}
+</form>
+<div class="ui modal" data-modal="delete">
+    <i class="close icon"></i>
+    <div class="header">
+        <i class="warning sign icon"></i>
+        Seguro que quieres eliminar al usuario
+    </div>
+
+    <div class="actions">
+        <div class="two fluid ui  buttons">
+            <div class="ui red basic  button">
+                <i class="remove icon"></i>
+                No
+            </div>
+            <div class="ui green basic  button">
+                <i class="checkmark icon"></i>
+                <a href="{{ url('delete_user',{'id':user.id}) }}">Sí</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

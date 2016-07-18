@@ -1,0 +1,202 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<div class="ui primary header">
+    <div class="ui container">
+        <h2>Proveedores</h2>
+        <p>Todos los proveedores</p>
+
+        <a href="{{ url('provider_create') }}"
+           class="ui circular large blue button right floated">
+            <img src="{{ asset('images/add.svg') }}">
+        </a>
+    </div>
+</div>
+
+{% if pagination.items|length > 0 %}
+<div class="ui content container">
+    <form data-async>
+        <div class="ui search provider">
+            <div class="ui transparent left icon input">
+                <input type="text"
+                       name="keywords"
+                       value="{{ app.request.get('words') }}"
+                       placeholder="Buscar proveedor"
+                       data-search="{{ url('search_providers') }}"
+                       autocomplete="off">
+                <img class="icon" src="{{ asset('images/search.svg') }}">
+                <div class="ui divided relaxed remote list"></div>
+            </div>
+
+            <a class="open" href="#">
+                Buscador avanzado
+                <i class="angle down icon"></i>
+                <i class="angle up icon"></i>
+            </a>
+        </div>
+
+        <div class="ui advanced search provider form">
+            <div class="fields">
+                <div class="ten wide field">
+                    <label>Habilidades</label>
+                    <select class="ui search fluid dropdown" name="abilities[]" multiple>
+                        <option value="">Escribe para seleccionar habilidades</option>
+                        {% for ability in abilities %}
+                        <option value="{{ ability.id }}" {% if ability.id in app.request.get('abilities') %}selected{% endif %}>{{ ability.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="six wide field">
+                    <label>Más usadas</label>
+                    <div class="ui top abilities grid">
+                        {% for documents in [abilities[0:3], abilities[3:6]] %}
+                        <div class="three columns row">
+                            {% for ability in documents %}
+                                <div class="column">
+                                    <a href="#" data-id="{{ ability.id }}">
+                                        {{ ability }}
+                                        {% if ability.metrics %}
+                                        ({{ ability.metrics.providersUsed }})
+                                        {% else %}
+                                        (0)
+                                        {% endif %}
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="fields">
+                <div class="ten wide field">
+                    <label>Tarifa</label>
+                    <div class="hide slider value">
+                        Entre <span data-range="min">
+                            {{ app.request.get('rate_min') }}
+                        </span> €/h y
+                        <span data-range="max">
+                            {{ app.request.get('rate_max') }}
+                        </span> €/h
+                    </div>
+                    <div class="ui hour rate range"
+                         data-min="0"
+                         data-min="300">
+                    </div>
+                    <input type="hidden"
+                           name="rate_min"
+                           value="{{ app.request.get('rate_min')}}"
+                           data-range="min">
+                    <input type="hidden"
+                           name="rate_max"
+                           value="{{ app.request.get('rate_max')}}"
+                           data-range="max">
+                </div>
+                <div class="six wide field">
+                    <label>Valoración</label>
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="ratings[]" value="0" {% if 0 in app.request.get('ratings') %}checked{% endif %}>
+                        <label>0</label>
+                    </div>
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="ratings[]" value="1" {% if 1 in app.request.get('ratings') %}checked{% endif %}>
+                        <label>1</label>
+                    </div>
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="ratings[]" value="2" {% if 2 in app.request.get('ratings') %}checked{% endif %}>
+                        <label>2</label>
+                    </div>
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="ratings[]" value="3" {% if 3 in app.request.get('ratings') %}checked{% endif %}>
+                        <label>3</label>
+                    </div>
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="ratings[]" value="4" {% if 4 in app.request.get('ratings') %}checked{% endif %}>
+                        <label>4</label>
+                    </div>
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="ratings[]" value="5" {% if 5 in app.request.get('ratings') %}checked{% endif %}>
+                        <label>5</label>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <button type="submit" class="ui grey button">Buscar</button>
+                <a class="close" href="{{ url('providers') }}" data-async>
+                    <i class="close icon"></i>
+                    Limpiar filtros
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="ui content container">
+    <table class="ui providers table">
+        <thead>
+            <tr>
+                <th colspan="2">
+                    <a href="{{ sorter.generate('name') }}"
+                       class="sort {{ sorter.direction('name') }}"
+                       data-async>
+                        Nombre
+                        <img class="up"
+                             src="{{ asset('images/arrow-up.svg') }}">
+                        <img class="down"
+                             src="{{ asset('images/arrow-down.svg') }}">
+                    </a>
+                </th>
+                <th>
+                    <a href="{{ sorter.generate('hourRate.value') }}"
+                       class="sort {{ sorter.direction('hourRate.value') }}"
+                       data-async>
+                        Tarifa
+                        <img class="up"
+                             src="{{ asset('images/arrow-up.svg') }}">
+                        <img class="down"
+                             src="{{ asset('images/arrow-down.svg') }}">
+                    </a>
+                </th>
+                <th>Habilidades</th>
+                <th>
+                    <a href="{{ sorter.generate('metrics.averageRating') }}"
+                       class="sort {{ sorter.direction('metrics.averageRating') }}"
+                       data-async>
+                        Valoración
+                        <img class="up"
+                             src="{{ asset('images/arrow-up.svg') }}">
+                        <img class="down"
+                             src="{{ asset('images/arrow-down.svg') }}">
+                    </a>
+                </th>
+            </tr>
+        </thead>
+        <tbody class="async container">
+            {% include 'provider/providers.html.twig' %}
+        </tbody>
+    </table>
+</div>
+
+{% else %}
+
+<div class="ui empty content container">
+    <div class="ui hidden divider"></div>
+    <i class="frown icon"></i>
+    <h3>Todavía no hay proveedores</h3>
+</div>
+{% endif %}
+
+{% if pending|length > 0 %}
+<div class="ui double action footer">
+    <a href="{{ url('pending_providers') }}" class="back">
+        Ver proveedores pendientes
+    </a>
+{% else %}
+<div class="ui single action footer">
+{% endif %}
+    <a href="{{ url('provider_create') }}"
+       class="ui large blue button">
+       Añadir un nuevo proveedor
+   </a>
+</div>
+{% endblock %}

@@ -1,0 +1,259 @@
+{% extends 'provider/form/base.html.twig' %}
+
+{% block section %}
+<form class="ui form" method="post" enctype="multipart/form-data">
+    <div class="ui content container">
+        <div class="ui header">
+            <h3>Habilidades</h3>
+
+            {% if is_granted('ROLE_CLOSE_SKILLS') %}
+                <div class="ui long checkbox">
+                    {{ form_widget(form.skillsClosed) }}
+                    <label>
+                        <strong>Cerrar habilidades</strong><br />
+                        Un proveedor con las habilidades cerradas no podrá modificar sus habilidades o añadir nuevas.
+                    </label>
+                </div>
+            {% endif %}
+        </div>
+
+        {% if is_granted('ROLE_PROVIDER') %}
+            <p>
+                Gestiona aquí las habilidades que destacan en tu trabajo o el trabajo de tu equipo, de forma que podamos invitarte a proyectos en los que se requieran dichas habilidades.
+            </p>
+            <div class="ui divider"></div>
+        {% endif %}
+
+        {% if not form.vars.valid %}
+        <div class="ui red message">
+            <i class="close icon"></i>
+            <div class="header">Revisa los campos del formulario, tienen errores.</div>
+            {{ form_errors(form) }}
+        </div>
+        {% endif %}
+
+        {% for index, skill in form.skills %}
+        <div class="ui four column stackable grid" data-index="{{ index }}" data-remove>
+            <div class="two column row">
+                <div class="column">
+                    {% if is_granted('ROLE_BAN_SKILL') %}
+                        <div class="ui checkbox">
+                            {{ form_widget(skill.banned) }}
+                            <label>
+                                <strong>Vetar habilidad</strong><br />
+                                Una habilidad vetada se ignora al ordenar los proveedores para los proyectos.
+                            </label>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="column">
+                    <div class="ui button floated right"
+                         data-trigger="remove">
+                        Eliminar habilidad
+                    </div>
+                </div>
+            </div>
+
+            <div class="one column row">
+                <div class="column">
+                    {% if skill.ability.vars.errors|length > 0 %}
+                    <div class="field error"
+                         data-content="{{ skill.ability.vars.errors }}">
+                    {% else %}
+                    <div class="field">
+                    {% endif %}
+                        <label class="notopmargin">Habilidad</label>
+                        {{ form_widget(skill.ability) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="eight wide column">
+                    {% if skill.rating.vars.errors|length > 0 %}
+                    <div class="field error"
+                         data-content="{{ skill.rating.vars.errors }}">
+                    {% else %}
+                    <div class="field">
+                    {% endif %}
+                        <label>Valoración</label>
+                        <div class="ui huge interactive star rating" data-rating="{{ skill.rating.vars.value }}"></div>
+                        {{ form_widget(skill.rating) }}
+                    </div>
+                </div>
+                <div class="eight wide column">
+                    {% if skill.hourRate.value.vars.errors|length > 0 %}
+                    <div class="field error"
+                         data-content="{{ skill.hourRate.value.vars.errors }}">
+                    {% else %}
+                    <div class="field">
+                    {% endif %}
+                        <label>Tarifa</label>
+                        <div class="ui right labeled input">
+                            {{ form_widget(skill.hourRate.value) }}
+                            <div class="ui basic label">
+                                <strong>€/</strong>hora
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="one column row">
+                <div class="column">
+                    {% if skill.notes.vars.errors|length > 0 %}
+                    <div class="field error"
+                         data-content="{{ skill.notes.vars.errors }}">
+                    {% else %}
+                    <div class="field">
+                    {% endif %}
+                        <label>Notas</label>
+                        {{ form_widget(skill.notes) }}
+                        <div class="counter"
+                             data-behavior="count"
+                             data-target="provider_skills_skills_{{ index }}_notes">
+                             {{ skill.notes.vars.value|length }} / 500
+                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="one column row">
+                <div class="column">
+                    <div class="field">
+                        <label>Documentos adjuntos</label>
+
+                        {% include 'common/files.html.twig' with {
+                            'class': 'lite',
+                            'files': skill.vars.value.files
+                        } %}
+
+                        {% include 'common/drop.files.html.twig' with {
+                            'input': "provider_skills[skills][#{index }][files][#{skill.vars.value.files|length}][upload]"
+                        } %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui divider"></div>
+        {% endfor %}
+
+        <div class="ui grid">
+            <div class="sixteen wide column">
+                <div class="ui grey button floated right"
+                     data-trigger="prototype"
+                     data-target="skill">
+                    Añadir otra habilidad
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if provider.status == constant('DRAFT', provider) %}
+    <div class="ui double action footer">
+        <a href="{{ url('provider_edit_billing', {'id': provider.id}) }}"
+           class="back">
+            <img src="{{ asset('images/back-action.svg') }}">
+            Volver y editar los datos administrativos
+        </a>
+        <button type="submit" class="ui large basic button">
+            {% if is_granted('ROLE_CREATE_PROVIDER') %}
+            Continuar a notas
+            {% else %}
+            Guardar habilidades
+            {% endif %}
+        </button>
+    </div>
+    {% else %}
+    <div class="ui single action footer">
+        <button type="submit" class="ui large basic button">
+            Guardar habilidades
+        </button>
+    </div>
+    {% endif %}
+
+    {{ form_widget(form._token) }}
+</form>
+
+<div data-prototype="skill">
+    <div class="ui four column stackable grid" data-index data-remove>
+        <div class="two column row">
+            <div class="column">
+                {% if is_granted('ROLE_BAN_SKILL') %}
+                    <div class="ui checkbox">
+                        {{ form_widget(form.skills.vars.prototype.banned) }}
+                        <label>
+                            <strong>Vetar habilidad</strong><br />
+                            Una habilidad vetada se ignora al ordenar los proveedores para los proyectos.
+                        </label>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="column">
+                <div class="ui button floated right" data-trigger="remove">
+                    Eliminar habilidad
+                </div>
+            </div>
+        </div>
+
+        <div class="one column row">
+            <div class="column">
+                <div class="field">
+                    <label class="notopmargin">Habilidad</label>
+                    {{ form_widget(form.skills.vars.prototype.ability) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="eight wide column">
+                <div class="field">
+                    <label>Valoración</label>
+                    <div class="ui huge interactive star rating"></div>
+                    {{ form_widget(form.skills.vars.prototype.rating) }}
+                </div>
+            </div>
+            <div class="eight wide column">
+                <div class="field">
+                    <label>Tarifa</label>
+                    <div class="ui right labeled input">
+                        {{ form_widget(form.skills.vars.prototype.hourRate.value) }}
+                        <div class="ui basic label">
+                            <strong>€/</strong>hora
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="one column row">
+            <div class="column">
+                <div class="field">
+                    <label>Notas</label>
+                    {{ form_widget(form.skills.vars.prototype.notes) }}
+                    <div class="counter"
+                         data-behavior="count"
+                         data-target="provider_skills_skills__name__notes">
+                         0 / 500
+                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="one column row">
+            <div class="column">
+                <div class="field">
+                    <label>Documentos adjuntos</label>
+
+                    {% include 'common/drop.files.html.twig' with {
+                        'input': "provider_skills[skills][__name__][files][0][upload]"
+                    } %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui divider"></div>
+</div>
+{% endblock %}

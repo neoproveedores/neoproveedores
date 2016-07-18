@@ -1,0 +1,33 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+<form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="ui form">
+    {{ form_widget(form._token) }}
+
+    <h2>Restablece tu contraseña</h2>
+
+    {% if not form.vars.valid %}
+    <div class="ui red message">
+        {{ form_errors(form) }}
+    </div>
+    {% endif %}
+
+    <div class="field">
+        <input type="password" name="fos_user_resetting_form[plainPassword][first]" required="required" placeholder="Nueva contraseña">
+    </div>
+
+    <div class="field">
+        <input type="password" name="fos_user_resetting_form[plainPassword][second]" required="required" placeholder="Repita la contraseña">
+    </div>
+
+    <input type="submit" class="ui large basic fluid button" value="{{ 'resetting.reset.submit'|trans }}" />
+</form>
+
+<div class="ui basic segment">
+    <a href="{{ url('fos_user_security_login') }}">
+        Ir a la página de entrada
+    </a>
+</div>
+{% endblock fos_user_content %}

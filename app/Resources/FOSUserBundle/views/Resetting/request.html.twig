@@ -1,0 +1,27 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+<form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="ui form">
+    <h2>Recuerda tu contraseña</h2>
+
+    {% if invalid_username is defined %}
+        <div class="ui red message">
+            {{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}
+        </div>
+    {% endif %}
+
+    <div class="field">
+        <input type="text" id="username" name="username" required="required" placeholder="Correo electrónico">
+    </div>
+
+    <input type="submit" class="ui large basic fluid button" value="{{ 'resetting.request.submit'|trans }}" />
+</form>
+
+<div class="ui basic segment">
+    <a href="{{ url('fos_user_security_login') }}">
+        Volver a la página de entrada
+    </a>
+</div>
+{% endblock fos_user_content %}

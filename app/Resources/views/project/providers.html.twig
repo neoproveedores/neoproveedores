@@ -1,0 +1,159 @@
+{% extends 'project/base.html.twig' %}
+
+{% block section %}
+{% if project.providers|length > 0 %}
+    <div class="ui content container">
+        <h2>Proveedores seleccionados</h2>
+
+        <table class="ui providers table">
+            <thead>
+                <tr>
+                    <th colspan="2">Nombre</th>
+                    <th>Estado</th>
+                    <th>Valoración</th>
+                </tr>
+            </thead>
+            <tbody class="container">
+            {% for pr in project.providers %}
+                {% set provider = pr.provider %}
+                <tr href="{{ url('project_provider', {'id': project.id, 'provider': provider.id}) }}">
+                    <td class="picture">
+                        {{ provider.contact.getAvatarImage('big')|raw }}
+                    </td>
+                    <td class="name">
+                        <strong>{{ provider }}</strong>
+                        <a href="{{ url('provider_preview', {'id': provider.id}) }}">
+                            Ver perfil
+                        </a>
+                    </td>
+                    <td class="status">
+                        {% set key = 'project_provider.status.' ~ pr.status %}
+                        {{ key|trans }}
+                    </td>
+                    <td class="rating">
+                        <div class="ui star rating" data-rating="{{ provider.metrics.averageRating }}"></div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        {% if project.status != constant('CLOSED', project) %}
+            <div class="ui divider"></div>
+        {% endif %}
+    </div>
+{% endif %}
+
+
+{% if project.status != constant('CLOSED', project) and project.status != constant('ASSIGNED', project) %}
+<form class="ui content container" data-async>
+    <div class="ui search">
+        <div class="ui fluid transparent left icon input">
+            <input type="text" name="keywords" placeholder="Buscar proveedor">
+            <img class="icon" src="{{ asset('images/search.svg') }}">
+        </div>
+    </div>
+</form>
+
+<form action="{{ url('project_invite', {'id': project.id}) }}" data-async>
+    <div class="ui content container">
+        <h2>Estos proveedores pueden ayudarte</h2>
+
+        <table class="ui providers multiple choices table">
+            <thead>
+                <tr>
+                    <th>
+                        <img src="{{ asset('images/choice.svg') }}">
+                    </th>
+                    <th colspan="2">
+                        <a href="{{ sorter.generate('name') }}"
+                           class="sort {{ sorter.direction('name') }}"
+                           data-async>
+                            Nombre
+                            <img class="up"
+                                 src="{{ asset('images/arrow-up.svg') }}">
+                            <img class="down"
+                                 src="{{ asset('images/arrow-down.svg') }}">
+                        </a>
+                    </th>
+                    <th>
+                        <a href="{{ sorter.generate('hourRate.value') }}"
+                           class="sort {{ sorter.direction('hourRate.value') }}"
+                           data-async>
+                            Tarifa
+                            <img class="up"
+                                 src="{{ asset('images/arrow-up.svg') }}">
+                            <img class="down"
+                                 src="{{ asset('images/arrow-down.svg') }}">
+                        </a>
+                    </th>
+                    <th>Proyectos</th>
+                    <th>
+                        <a href="{{ sorter.generate('metrics.averageRating') }}"
+                           class="sort {{ sorter.direction('metrics.averageRating') }}"
+                           data-async>
+                            Valoración
+                            <img class="up"
+                                 src="{{ asset('images/arrow-up.svg') }}">
+                            <img class="down"
+                                 src="{{ asset('images/arrow-down.svg') }}">
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="async container">
+                {% include 'project/providers_list.html.twig' %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="ui double action footer">
+        <a href="{{ url('project_edit', {'id': project.id}) }}" class="back">
+            <img src="{{ asset('images/back-action.svg') }}">
+            Volver y editar briefing
+        </a>
+        <button type="submit" class="ui large basic button hide"
+             data-success="modal"
+             data-target="invitations">
+            Enviar invitaciones
+            <a class="ui blue circular label">0</a>
+        </button>
+    </div>
+    {% else %}
+    <div class="ui single action footer">
+        <a href="{{ url('project_briefing', {'id': project.id}) }}" class="back">
+            <img src="{{ asset('images/back-action.svg') }}">
+            Volver al briefing
+        </a>
+    </div>
+    {% endif %}
+</form>
+{% endblock %}
+
+{% block modals %}
+    <div class="ui modal" data-modal="invitations">
+        <div class="header">
+            <img src="{{ asset('images/envelope.svg') }}">
+            Proveedor creado. Notificando en 3, 2, 1...
+        </div>
+        <div class="content">
+            <p>Hemos enviado una notificación a los proveedores que has seleccionado en el proyecto <strong>{{ project }}</strong>.</p>
+
+            <p>No olvides comprobar que han aceptado la invitación y están en proceso de revisar el briefing para enviarte un presupuesto y comentarios.</p>
+
+            <p>Si deseas enviar la invitación a otros proveedores puedes volver a la lista de proveedores y seleccionar alguna otra opción.</p>
+
+            <div class="contacts"></div>
+        </div>
+        <div class="actions">
+            <div class="ui large grey deny button">
+                <img src="{{ asset('images/back-action.svg') }}">
+                Volver a la lista de proveedores
+            </div>
+        </div>
+    </div>
+
+    <div class="ui provider modal" data-modal="provider">
+        <div class="content"></div>
+    </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% if unview|length > 0 %}
+    <div class="ui top right dropdown labeled item">
+        <div class="ui red circular mini label">{{ unview|length }}</div>
+        <img src="{{ asset('images/notifications.svg') }}" class="ui">
+        <div class="notifications menu">
+            {% for event in unview %}
+            <a href="{{ url('timeline') }}#{{ event.id }}" class="item">
+                <i class="{{ event.icon }} icon"></i>
+                <div class="title">
+                    {{ event }}
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

@@ -1,0 +1,91 @@
+{% extends 'provider/form/base.html.twig' %}
+
+{% block section %}
+<form class="ui form" method="post">
+    <div class="ui content container">
+        <div class="ui header">
+            <h3>Notas</h3>
+        </div>
+
+        {{ form_errors(form) }}
+
+        <div class="ui four column stackable grid">
+            <div class="one column row">
+                <div class="column">
+                    {% if form.notes.vars.errors|length > 0 %}
+                    <div class="field error"
+                         data-content="{{ form.notes.vars.errors }}">
+                    {% else %}
+                    <div class="field">
+                    {% endif %}
+                        <label>Notas</label>
+                        {{ form_widget(form.notes) }}
+                        <div class="counter"
+                             data-behavior="count"
+                             data-target="provider_notes_notes">
+                             {{ form.notes.vars.value|length }} / 500
+                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="eight wide column">
+                    <div class="field">
+                        <label>Fecha alta</label>
+                        <div class="ui right labeled date input">
+                            <input type="text"
+                                   name="provider_notes[timing][start]"
+                                   {% if provider.timing %}
+                                   data-value="{{ provider.timing.start|date('Y-m-d') }}"
+                                   {% endif %}
+                                   placeholder="Selecciona fecha">
+                            <div class="ui basic label">
+                                <img src="{{ asset('images/calendar.svg') }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="eight wide column">
+                    <div class="field">
+                        <label>Válido hasta</label>
+                        <div class="ui right labeled date input">
+                            <input type="text"
+                                   name="provider_notes[timing][end]"
+                                   {% if provider.timing %}
+                                   data-value="{{ provider.timing.end|date('Y-m-d') }}"
+                                   {% endif %}
+                                   placeholder="Selecciona fecha">
+                            <div class="ui basic label">
+                                <img src="{{ asset('images/calendar.svg') }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if provider.status == constant('DRAFT', provider) %}
+    <div class="ui double action footer">
+        <a href="{{ url('provider_edit_skills', {'id': provider.id}) }}"
+           class="back">
+            <img src="{{ asset('images/back-action.svg') }}">
+            Volver y editar las habilidades
+        </a>
+        <button type="submit" class="ui large basic button">
+            Crear proveedor
+        </button>
+    </div>
+    {% else %}
+    <div class="ui single action footer">
+        <button type="submit" class="ui large basic button">
+            Guardar notas
+        </button>
+    </div>
+    {% endif%}
+
+    {{ form_widget(form._token) }}
+</form>
+{% endblock %}

@@ -1,0 +1,214 @@
+{% extends 'provider/form/base.html.twig' %}
+
+{% block section %}
+<form class="ui form" method="post" enctype="multipart/form-data">
+    <div class="ui content container">
+        <div class="ui header">
+            <h3>Datos de contacto</h3>
+
+            {% if provider.status == constant('DRAFT', provider) %}
+                {% if provider.kind == constant('FREELANCE', provider) %}
+                <div class="ui checkbox">
+                    {{ form_widget(form.freelanceContact) }}
+                    <label>El contacto es el propio autónomo</label>
+                </div>
+                {% endif %}
+            {% endif %}
+        </div>
+
+        {% if is_granted('ROLE_PROVIDER') %}
+            <p>
+                Aquí puedes gestionar tus datos de contacto así como los de tu equipo para que podamos contactar contigo en el momento en el que lo necesitemos.
+            </p>
+            <div class="ui divider"></div>
+        {% endif %}
+
+        {% if not form.vars.valid %}
+        <div class="ui red message">
+            <i class="close icon"></i>
+            <div class="header">Revisa los campos del formulario, tienen errores.</div>
+            {{ form_errors(form) }}
+        </div>
+        {% endif %}
+
+        {% for index, contact in form.contacts %}
+        <div class="ui stackable grid" data-index="{{ index }}" data-remove>
+            <div class="two wide column">
+                <div class="ui circular huge upload picture icon button" {% if contact.avatar.vars.value %}style="background-image:url('{{ contact.vars.value.avatarUrl }}')"{% endif %}>
+                    <img src="{{ asset('images/upload.svg') }}">
+                </div>
+                {{ form_widget(contact.avatar.upload) }}
+            </div>
+
+            <div class="fourteen wide first column">
+                <div class="two fields">
+                    <div class="twelve wide field">
+                        <label>Nombre y apellidos</label>
+                        <div class="two fields">
+                            {% if contact.firstName.vars.errors|length > 0 %}
+                            <div class="six wide field error"
+                                 data-content="{{ contact.firstName.vars.errors }}">
+                            {% else %}
+                            <div class="six wide field">
+                            {% endif %}
+                                {{ form_widget(contact.firstName) }}
+                            </div>
+
+                            {% if contact.lastName.vars.errors|length > 0 %}
+                            <div class="ten wide field error"
+                                 data-content="{{ contact.lastName.vars.errors }}">
+                            {% else %}
+                            <div class="ten wide field">
+                            {% endif %}
+                                {{ form_widget(contact.lastName) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    {% if contact.position.vars.errors|length > 0 %}
+                    <div class="four wide field error"
+                         data-content="{{ contact.position.vars.errors }}">
+                    {% else %}
+                    <div class="four wide field">
+                    {% endif %}
+                        <label>Puesto</label>
+                        {{ form_widget(contact.position) }}
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Contacto</label>
+                    <div class="three fields">
+                        {% if contact.email.vars.errors|length > 0 %}
+                        <div class="eight wide field error"
+                             data-content="{{ contact.email.vars.errors }}">
+                        {% else %}
+                        <div class="eight wide field">
+                        {% endif %}
+                            {{ form_widget(contact.email) }}
+                        </div>
+
+                        {% if contact.phone.vars.errors|length > 0 %}
+                        <div class="four wide field error"
+                             data-content="{{ contact.phone.vars.errors }}">
+                        {% else %}
+                        <div class="four wide field">
+                        {% endif %}
+                            {{ form_widget(contact.phone) }}
+                        </div>
+
+                        {% if contact.alternatePhone.vars.errors|length > 0 %}
+                        <div class="four wide field error"
+                             data-content="{{ contact.alternatePhone.vars.errors }}">
+                        {% else %}
+                        <div class="four wide field">
+                        {% endif %}
+                            {{ form_widget(contact.alternatePhone) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="column">
+                    <div class="ui button floated right"
+                         data-trigger="remove">
+                        Eliminar contacto
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui divider"></div>
+        {% endfor %}
+
+        <div class="ui grid">
+            <div class="sixteen wide column">
+                <div class="ui grey button floated right"
+                     data-trigger="prototype"
+                     data-target="contact">
+                    Añadir otro contacto
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if provider.status == constant('DRAFT', provider) %}
+    <div class="ui double action footer">
+        <a href="{{ url('provider_edit_data', {'id': provider.id}) }}"
+           class="back">
+            <img src="{{ asset('images/back-action.svg') }}">
+            Volver y editar los datos del proveedor
+        </a>
+        <button type="submit" class="ui large basic button">
+            Continuar a datos administrativos
+        </button>
+    </div>
+    {% else %}
+    <div class="ui single action footer">
+        <button type="submit" class="ui large basic button">
+            Guardar contactos
+        </button>
+    </div>
+    {% endif %}
+
+    {{ form_widget(form._token) }}
+</form>
+
+<div data-prototype="contact">
+    <div class="ui stackable grid" data-index="__name__" data-remove>
+        <div class="two wide column">
+            <div class="ui circular huge upload picture icon button">
+                <img src="{{ asset('images/upload.svg') }}">
+            </div>
+            {{ form_widget(form.contacts.vars.prototype.avatar.upload) }}
+        </div>
+
+        <div class="fourteen wide first column">
+            <div class="two fields">
+                <div class="twelve wide field">
+                    <label>Nombre y apellidos</label>
+                    <div class="two fields">
+                        <div class="six wide field">
+                            {{ form_widget(form.contacts.vars.prototype.firstName) }}
+                        </div>
+                        <div class="ten wide field">
+                            {{ form_widget(form.contacts.vars.prototype.lastName) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="four wide field">
+                    <label>Puesto</label>
+                    {{ form_widget(form.contacts.vars.prototype.position) }}
+                </div>
+            </div>
+
+            <div class="field">
+                <label>Contacto</label>
+                <div class="three fields">
+                    <div class="eight wide field">
+                        {{ form_widget(form.contacts.vars.prototype.email) }}
+                    </div>
+                    <div class="four wide field">
+                        {{ form_widget(form.contacts.vars.prototype.phone) }}
+                    </div>
+                    <div class="four wide field">
+                        {{ form_widget(form.contacts.vars.prototype.alternatePhone) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="column">
+                <div class="ui button floated right"
+                     data-trigger="remove">
+                    Eliminar contacto
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui divider"></div>
+</div>
+{% endblock %}

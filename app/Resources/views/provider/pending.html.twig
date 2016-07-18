@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<div class="ui primary header">
+    <div class="ui container">
+        <h2>Proveedores pendientes</h2>
+    </div>
+</div>
+
+<div class="ui content container">
+    <table class="ui providers table">
+        <thead>
+            <tr>
+                <th colspan="2">
+                    <a href="{{ sorter.generate('name') }}"
+                       class="sort {{ sorter.direction('name') }}"
+                       data-async>
+                        Nombre
+                        <img class="up"
+                             src="{{ asset('images/arrow-up.svg') }}">
+                        <img class="down"
+                             src="{{ asset('images/arrow-down.svg') }}">
+                    </a>
+                </th>
+                <th>
+                    <a href="{{ sorter.generate('hourRate.value') }}"
+                       class="sort {{ sorter.direction('hourRate.value') }}"
+                       data-async>
+                        Tarifa
+                        <img class="up"
+                             src="{{ asset('images/arrow-up.svg') }}">
+                        <img class="down"
+                             src="{{ asset('images/arrow-down.svg') }}">
+                    </a>
+                </th>
+                <th>Habilidades</th>
+                <th>
+                    <a href="{{ sorter.generate('metrics.averageRating') }}"
+                       class="sort {{ sorter.direction('metrics.averageRating') }}"
+                       data-async>
+                        Valoración
+                        <img class="up"
+                             src="{{ asset('images/arrow-up.svg') }}">
+                        <img class="down"
+                             src="{{ asset('images/arrow-down.svg') }}">
+                    </a>
+                </th>
+            </tr>
+        </thead>
+        <tbody class="async container">
+            {% include 'provider/providers.html.twig' %}
+        </tbody>
+    </table>
+</div>
+
+<div class="ui single action footer">
+    <a href="{{ url('users') }}" class="back">
+        <img src="{{ asset('images/back-action.svg') }}">
+        Volver a la lista de proveedores
+    </a>
+</div>
+{% endblock %}

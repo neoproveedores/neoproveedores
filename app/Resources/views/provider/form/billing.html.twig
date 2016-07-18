@@ -1,0 +1,228 @@
+{% extends 'provider/form/base.html.twig' %}
+
+{% block section %}
+<form class="ui form" method="post" enctype="multipart/form-data">
+    <div class="ui content container">
+        <div class="ui header">
+            <h3>Datos administrativos</h3>
+        </div>
+
+        {% if is_granted('ROLE_PROVIDER') %}
+            <p>
+                Es importante que mantengas los datos administrativos actualizados para evitar incidencias en la gestión de los proyectos. Gestiónalos en esta sección.
+            </p>
+            <div class="ui divider"></div>
+        {% endif %}
+
+        {{ form_errors(form) }}
+
+        <div class="ui grid">
+            <div class="sixteen wide column">
+                {% if form.billing.notes.vars.errors|length > 0 %}
+                <div class="field error"
+                     data-content="{{ form.billing.notes.vars.errors }}">
+                {% else %}
+                <div class="field">
+                {% endif %}
+                    <label>Notas</label>
+                    {{ form_widget(form.billing.notes) }}
+                    <div class="counter"
+                         data-behavior="count"
+                         data-target="provider_billing_billing_notes">
+                         {{ form.billing.notes.vars.value|length }} / 500
+                     </div>
+                </div>
+
+                <div class="field">
+                    <label>Datos bancarios</label>
+                    {% if form.billing.bankAccount.vars.errors|length > 0 %}
+                    <div class="field error"
+                         data-content="{{ form.billing.bankAccount.vars.errors }}">
+                    {% else %}
+                    <div class="field">
+                    {% endif %}
+                        {{ form_widget(form.billing.bankAccount) }}
+                    </div>
+
+                    {% if form.billing.bankAccountCode.vars.errors|length > 0 %}
+                    <div class="field error"
+                         data-content="{{ form.billing.bankAccountCode.vars.errors }}">
+                    {% else %}
+                    <div class="field">
+                    {% endif %}
+                        {{ form_widget(form.billing.bankAccountCode) }}
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Documentos adjuntos</label>
+
+                    <div class="ui lite files">
+                        {% if form.billing.taxIdentFile.upload.vars.errors|length > 0 %}
+                        <div class="ui drop error file">
+                        {% else %}
+                        <div class="ui drop required file">
+                        {% endif %}
+                            <label>
+                                {% if provider.kind == constant('FREELANCE', provider) %}
+                                    DNI
+                                {% else %}
+                                    CIF
+                                {% endif %}
+                            </label>
+
+                            <img src="{{ asset('images/drop.svg') }}">
+                            Arrastra <a>o selecciona un archivo</a>
+
+                            <strong class="selected hide">
+                                1 fichero seleccionado
+                            </strong>
+                            {{ form_widget(form.billing.taxIdentFile.upload) }}
+                        </div>
+                        {% if original.billing.taxIdentFile %}
+                        {% set file = original.billing.taxIdentFile %}
+                        <div class="ui file">
+                            <div class="name">
+                                <a href="{{ url('download_billing_type', {'id': provider.id, 'type': 'taxIdent'}) }}">
+                                    {{ file.name }}
+                                    <img src="{{ asset('images/download.svg') }}">
+                                </a>
+                            </div>
+                            <div class="meta">
+                                {{ file.created|date('m/d/Y') }}
+                                ({{ file.size|file_size }})
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <div class="ui drop required file">
+                            <label>
+                                {% if provider.kind == constant('FREELANCE', provider) %}
+                                    Alta de autónomos
+                                {% else %}
+                                    DNI administrador
+                                {% endif %}
+                            </label>
+
+                            <img src="{{ asset('images/drop.svg') }}">
+                            Arrastra <a>o selecciona un archivo</a>
+
+                            <strong class="selected hide">
+                                1 fichero seleccionado
+                            </strong>
+                            {{ form_widget(form.billing.taxIdentAdditionalFile.upload) }}
+                        </div>
+                        {% if original.billing.taxIdentAdditionalFile %}
+                        {% set file = original.billing.taxIdentAdditionalFile %}
+                        <div class="ui file">
+                            <div class="name">
+                                <a href="{{ url('download_billing_type', {'id': provider.id, 'type': 'taxIdentAdditional'}) }}">
+                                    {{ file.name }}
+                                    <img src="{{ asset('images/download.svg') }}">
+                                </a>
+                            </div>
+                            <div class="meta">
+                                {{ file.created|date('m/d/Y') }}
+                                ({{ file.size|file_size }})
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <div class="ui drop required file">
+                            <label>
+                                Certificado de status en Agencia Tributaria
+                            </label>
+
+                            <img src="{{ asset('images/drop.svg') }}">
+                            Arrastra <a>o selecciona un archivo</a>
+
+                            <strong class="selected hide">
+                                1 fichero seleccionado
+                            </strong>
+                            {{ form_widget(form.billing.taxCertificateFile.upload) }}
+                        </div>
+                        {% if original.billing.taxCertificateFile %}
+                        {% set file = original.billing.taxCertificateFile %}
+                        <div class="ui file">
+                            <div class="name">
+                                <a href="{{ url('download_billing_type', {'id': provider.id, 'type': 'taxCertificate'}) }}">
+                                    {{ file.name }}
+                                    <img src="{{ asset('images/download.svg') }}">
+                                </a>
+                            </div>
+                            <div class="meta">
+                                {{ file.created|date('m/d/Y') }}
+                                ({{ file.size|file_size }})
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <div class="ui drop required file">
+                            <label>
+                                Certificado de status en Seguridad Social
+                            </label>
+
+                            <img src="{{ asset('images/drop.svg') }}">
+                            Arrastra <a>o selecciona un archivo</a>
+
+                            <strong class="selected hide">
+                                1 fichero seleccionado
+                            </strong>
+                            {{ form_widget(form.billing.socialSecurityCertificateFile.upload) }}
+                        </div>
+                        {% if original.billing.socialSecurityCertificateFile %}
+                        {% set file = original.billing.socialSecurityCertificateFile %}
+                        <div class="ui file">
+                            <div class="name">
+                                <a href="{{ url('download_billing_type', {'id': provider.id, 'type': 'socialSecurityCertificate'}) }}">
+                                    {{ file.name }}
+                                    <img src="{{ asset('images/download.svg') }}">
+                                </a>
+                            </div>
+                            <div class="meta">
+                                {{ file.created|date('m/d/Y') }}
+                                ({{ file.size|file_size }})
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                {% set download_url = url('download_billing', {
+                    'id': provider.id,
+                    'index': 'index'
+                }) %}
+                {% include 'common/files.html.twig' with {
+                    'class': 'lite',
+                    'files': form.billing.vars.value.files
+                } %}
+
+                {% include 'common/drop.files.html.twig' with {
+                    'input': "provider_billing[billing][files][#{form.billing.vars.value.files|length}][upload]"
+                } %}
+            </div>
+        </div>
+    </div>
+
+    {% if provider.status == constant('DRAFT', provider) %}
+    <div class="ui double action footer">
+        <a href="{{ url('provider_edit_contacts', {'id': provider.id}) }}"
+           class="back">
+            <img src="{{ asset('images/back-action.svg') }}">
+            Volver y editar los datos de contacto
+        </a>
+        <button type="submit" class="ui large basic button">
+            Continuar a habilidades
+        </button>
+    </div>
+    {% else %}
+    <div class="ui single action footer">
+        <button type="submit" class="ui large basic button">
+            Guardar datos administrativos
+        </button>
+    </div>
+    {% endif %}
+
+    {{ form_widget(form._token) }}
+</form>
+{% endblock %}

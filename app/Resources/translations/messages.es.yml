@@ -1,0 +1,30 @@
+
+ROLE_MANAGER: Gestor
+ROLE_PROJECT_MANAGER: Gestor de proyectos
+ROLE_PROVIDER: Proveedor
+
+project:
+    status:
+        draft: Borrador
+        sent: Briefing
+        receiving: Recibiendo propuestas
+        assigned: Adjudicado
+        closed: Finalizado
+
+project_provider:
+    status:
+        invited: Invitación enviada
+        rejected: Proyecto rechazado
+        accepted: Proyecto aceptado
+        budgeted: Presupuesto recibido
+        assigned: Proveedor asignado
+
+mail:
+    event:
+        provider: Proveedor creado
+        project: Projecto creado
+        invite: Nueva invitación
+        accept: Projecto aprobado
+        reject: Projecto rechazado
+        bidget: Nuevo presupuesto
+        message: Nuevo mensaje

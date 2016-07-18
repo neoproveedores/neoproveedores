@@ -1,0 +1,24 @@
+{% if unread|length > 0 %}
+    <div class="ui top right dropdown labeled item">
+        <div class="ui red circular mini label">{{ unread|length }}</div>
+        <i class="mail icon"></i>
+        <div class="notifications menu">
+            {% for message in unread %}
+                {% if is_granted('ROLE_VIEW_CONVERSATIONS') %}
+                <a href="{{ url('project_messages', {'id': message.project.id, 'provider': message.provider.id}) }}#{{ message.id }}" class="item">
+                {% else %}
+                <a href="{{ url('project_briefing', {'id': message.project.id}) }}#{{ message.id }}" class="item">
+                {% endif %}
+                    <i class="mail icon"></i>
+                    <div class="title">
+                        {{ message.project }}
+                    </div>
+                    <div class="description">
+                        <strong>Matt</strong> escribió:
+                        <em>{{ message.body|e[0:48] }}...</em>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

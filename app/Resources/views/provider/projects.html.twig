@@ -1,0 +1,97 @@
+{% extends 'provider/base.html.twig' %}
+
+{% block section %}
+<div class="ui content container">
+    {% if pagination.items|length > 0 %}
+        <h3>Proyectos</h3>
+
+        <form data-async>
+            <div class="ui search provider">
+                <div class="ui transparent left icon input">
+                    <input type="text" name="keywords" placeholder="Buscar proyecto">
+                    <img class="icon" src="{{ asset('images/search.svg') }}">
+                </div>
+            </div>
+
+            <div class="ui two filters">
+                <select class="ui dropdown" name="abilities[]" multiple>
+                    <option value="">Habilidades</option>
+                    {% for ability in abilities %}
+                    <option value="{{ ability.id }}">{{ ability.name }}</option>
+                    {% endfor %}
+                </select>
+
+                <select class="ui dropdown" name="status">
+                    <option value="">Estados</option>
+                    {% for option in status %}
+                    {% set status_key = 'project.status.' ~ option %}
+                    <option value="{{ option }}">{{ status_key|trans }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </form>
+
+        <table class="ui projects table">
+            <thead>
+                <th>
+                    <a href="{{ sorter.generate('name') }}"
+                       class="sort {{ sorter.direction('name') }}"
+                       data-async>
+                        Nombre
+                        <img class="up"
+                             src="{{ asset('images/arrow-up.svg') }}">
+                        <img class="down"
+                             src="{{ asset('images/arrow-down.svg') }}">
+                    </a>
+                </th>
+                <th>Disciplina</th>
+                <th>
+                    <a href="{{ sorter.generate('timing.start') }}"
+                       class="sort {{ sorter.direction('timing.start') }}"
+                       data-async>
+                        Inicio proyecto
+                        <img class="up"
+                             src="{{ asset('images/arrow-up.svg') }}">
+                        <img class="down"
+                             src="{{ asset('images/arrow-down.svg') }}">
+                    </a>
+                </th>
+                <th>
+                    <a href="{{ sorter.generate('timing.end') }}"
+                       class="sort {{ sorter.direction('timing.end') }}"
+                       data-async>
+                        Fin proyecto
+                        <img class="up"
+                             src="{{ asset('images/arrow-up.svg') }}">
+                        <img class="down"
+                             src="{{ asset('images/arrow-down.svg') }}">
+                    </a>
+                </th>
+            </thead>
+            <tbody class="async container">
+                {% include 'provider/projects_list.html.twig' %}
+            </tbody>
+        </table>
+    {% else %}
+        <h2 class="ui icon center aligned header">
+            <i class="info icon"></i>
+            <div class="content">
+                Sin proyectos
+                <div class="sub header">
+                    Este proveedor todavía no tiene proyectos
+                </div>
+            </div>
+        </h2>
+    {% endif %}
+</div>
+
+<div class="ui double action footer">
+    <a href="{{ url('providers') }}" class="back">
+        <img src="{{ asset('images/close-action.svg') }}">
+        Cerrar y ver la lista de proovedores
+    </a>
+    <a href="{{ url('project_create') }}" class="ui large basic button">
+        Añadir un nuevo proyecto
+    </a>
+</div>
+{% endblock %}

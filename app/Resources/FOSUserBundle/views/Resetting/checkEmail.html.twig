@@ -1,0 +1,11 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+<h2>Recuerda tu contraseña</h2>
+
+<div class="ui olive inverted segment">
+    {{ 'resetting.check_email'|trans({'%email%': email}) }}
+</div>
+{% endblock %}
