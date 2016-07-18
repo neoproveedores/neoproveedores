@@ -1,20 +1,8 @@
 ## Información legal
 
-El código de la aplicación se distribuye con licencia **GPLv2**
+El código de la aplicación se distribuye con licencia **AGPLv3**
 
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or (at
-    your option) any later version.
-
-    This program is distributed in the hope that it will be useful, but
-    WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
-    or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
-    for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program as the file LICENSE.txt; if not, please see
-    http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
+    https://www.gnu.org/licenses/agpl.html
 
 El diseño e imágenes de la aplicación se distribuyen con licencia **Creative Commons Attribution**.
 
