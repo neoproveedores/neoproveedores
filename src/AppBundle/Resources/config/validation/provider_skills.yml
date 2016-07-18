@@ -1,0 +1,27 @@
+
+Persistence\Model\Provider:
+    properties:
+        skills:
+            - Valid: ~
+            - Count:
+                min: 1
+                groups: [provider_skills]
+                minMessage: 'Introduce como mínimo {{ limit }} habilidad'
+
+Persistence\Model\Skill:
+    properties:
+        ability:
+            - NotBlank:
+                groups: [provider_skills]
+        rating:
+            - Range:
+                min: 0
+                max: 5
+            - NotBlank:
+                groups: [provider_skills]
+        hourRate:
+            - Persistence\Validator\Constraints\ValidAmount:
+                groups: [provider_skills]
+        notes:
+            - NotBlank:
+                groups: [provider_skills]

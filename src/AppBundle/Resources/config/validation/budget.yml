@@ -1,0 +1,9 @@
+
+Persistence\Model\Budget:
+    properties:
+        amount:
+            - Persistence\Validator\Constraints\ValidAmount: ~
+        timing:
+            - Persistence\Validator\Constraints\ValidTiming: ~
+        notes:
+            - NotBlank: ~

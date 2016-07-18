@@ -1,0 +1,32 @@
+
+Persistence\Model\Provider:
+    properties:
+        billing:
+            - Valid: ~
+
+
+Persistence\Model\Billing:
+    properties:
+        bankAccount:
+            - Iban: ~
+            - NotBlank:
+                groups: [provider_billing]
+        bankAccountCode:
+            - NotBlank:
+                groups: [provider_billing]
+        taxIdentFile:
+            - NotBlank:
+                message: Falta un fichero por subir
+                groups: [provider_billing]
+        taxIdentAdditionalFile:
+            - NotBlank:
+                message: Falta un fichero por subir
+                groups: [provider_billing]
+        taxCertificateFile:
+            - NotBlank:
+                message: Falta un fichero por subir
+                groups: [provider_billing]
+        socialSecurityCertificateFile:
+            - NotBlank:
+                message: Falta un fichero por subir
+                groups: [provider_billing]

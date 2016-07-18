@@ -1,0 +1,5 @@
+Persistence\Model\Message:
+    properties:
+        body:
+            - NotBlank:
+                groups: [message]

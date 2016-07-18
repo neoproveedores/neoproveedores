@@ -1,0 +1,6 @@
+
+Persistence\Model\Provider:
+    properties:
+        notes:
+            - NotBlank:
+                groups: [provider_notes]

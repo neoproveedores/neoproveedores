@@ -1,0 +1,23 @@
+
+Persistence\Model\Provider:
+    constraints:
+        - Callback:
+            methods: [validateContacts]
+            groups: [provider_contacts]
+    properties:
+        contacts:
+            - Valid: ~
+
+Persistence\Model\Contact:
+    constraints:
+        - Callback:
+            methods: [validatePerson]
+            groups: [provider_contacts]
+    properties:
+        email:
+            - Email: ~
+            - NotBlank:
+                groups: [provider_contacts]
+        phone:
+            - NotBlank:
+                groups: [provider_contacts]

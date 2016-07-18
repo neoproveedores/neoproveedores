@@ -1,0 +1,64 @@
+
+Persistence\Model\Provider:
+    constraints:
+        - Callback:
+            methods: [validateName]
+            groups: [provider_data]
+    properties:
+        kind:
+            - NotBlank:
+                groups: [provider_data]
+            - Choice:
+                choices: [freelance, company]
+                groups: [provider_data]
+        contact:
+            - Valid: ~
+        address:
+            - Valid: ~
+        billing:
+            - Valid: ~
+        hourRate:
+            - Persistence\Validator\Constraints\ValidAmount:
+                groups: [provider_data]
+
+Persistence\Model\Contact:
+    properties:
+        email:
+            - Email: ~
+            - NotBlank:
+                groups: [provider_data]
+        phone:
+            - NotBlank:
+                groups: [provider_data]
+        web:
+            - Url: ~
+        twitter:
+            - Url: ~
+        facebook:
+            - Url: ~
+
+Persistence\Model\Address:
+    properties:
+        street:
+            - NotBlank:
+                groups: [provider_data]
+        postalCode:
+            - NotBlank:
+                groups: [provider_data]
+        city:
+            - NotBlank:
+                groups: [provider_data]
+        region:
+            - NotBlank:
+                groups: [provider_data]
+        country:
+            - NotBlank:
+                groups: [provider_data]
+
+Persistence\Model\Billing:
+    properties:
+        taxIdent:
+            - NotBlank:
+                groups: [provider_data]
+            - Persistence\Validator\Constraints\ValidIdentificationDocument:
+                groups: [provider_data]

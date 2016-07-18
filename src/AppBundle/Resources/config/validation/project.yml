@@ -1,0 +1,17 @@
+
+Persistence\Model\Project:
+    properties:
+        name:
+            - NotBlank: ~
+        code:
+            - NotBlank: ~
+        description:
+            - NotBlank: ~
+        abilities:
+            - Count:
+                min: 1
+                minMessage: 'Introduce como mínimo {{ limit }} habilidad'
+        timing:
+            - Persistence\Validator\Constraints\ValidTiming: ~
+        briefing:
+            - NotBlank: ~
